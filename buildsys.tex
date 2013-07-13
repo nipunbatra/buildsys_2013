@@ -80,22 +80,43 @@ and \texttt{bibtex} to directly produce a pdf document.
 \item Why buildings must be targeted for energy \cite{evans09}
 \item Importance of feedback \cite{darby}
 \item Why we need deployments
+\item Deployments- Residential, Office \cite{yuvraj_ipsn, batra}
 \item Previous such residential deployments, some of which were presented in Buildsys itself \cite{hitchhiker_residential,hitchhiker_wsn,scale_wsn}
 \item Some applications-NILM\cite{hart,survey1}, Fixture Finder \cite{fixturefinder}
 \item Specific learnings from our deployment, some of them complement the ones given earlier \cite{hitchhiker_residential}
 \begin{itemize}
-\item Glowing LED in night
+\item Glowing LED in night 
 \item Deployments should be transparent
 \item Noisy server owing to dust (specific to developing countries)
 \item Electricity failure- as a consequence all systems should be capable to restart upon resumption of electricity
 \item Unreliable internet -Forcing to use Sense-Store-Upload paradigm
 \item Normalization -Voltage fluctuation, different measurement by different instruments
 
+
 \end{itemize}
 \end{itemize}
+Also deployment was maintained as an open source project. Shows how we faced issues and tackled them. Also contains metadata log provided by the end user.
 
 \section{Deployment}
 In this section we describe about our deployment. \figref{fig:overall} shows overall home deployment.
+\begin{table}
+\caption{Deployment}
+
+\label{tab:deployment}
+\begin{tabular}{|c|c|c|}
+\hline
+Sensor&Quantity&Sampling\\
+&&Frequency(Hz)\\
+\hline
+
+Electric Meter&1&1\\
+Water Meter&2&5\\
+\hline
+
+\end{tabular}
+
+
+\end{table}
 Following computation resources (SBC/Servers were used)
 \begin{itemize}
 \item X RPi
@@ -163,7 +184,7 @@ Even at researchers home, had asked the researcher to take notes. But even his e
 
 \item Aesthetics matter
 \begin{itemize}
-\item LED in night
+\item LED in night \figref{fig:led}
 \item Noise- Noisy SMPS due to dust. Unique to our setting. Figure from FunF showing sound level before and after cleaning.
 \end{itemize}
 
@@ -178,6 +199,7 @@ Figure showing power consumption of ref. after repair
 Figure showing different measurements for same appliance
 Figure showing voltage fluctuations
 
+\item Non availability of sensors
 
 \end{itemize}
 \begin{figure}     
@@ -201,8 +223,9 @@ Figure showing voltage fluctuations
 
 \section{Case Studies}
 In this section we present some case studies from the data collected in this deployment.
-\subsection{Correlating Events}
+\subsection{Correlating Events and Activity Detection}
 In this section we show how multi-modal data can be used for activity recognition. Following plots show the same.
+
 
 \subsection{Water-Energy Nexus}
 \subsubsection{Water Filter}
@@ -212,8 +235,13 @@ In this section we find out the effective cost of 1 litre of water. RO is known 
 Another unique aspect of our setting is the use of electric motor to pump water. Figure showing 1 litre events before motor was turned on and figure showing 1 litre events after motor is turned on.
 Figure showing power consumption incurred by the use of motor.
 
-\subsubsection{NILM}
-In this section we see the scope of NILM. Might not do this section as it will get very tricky to do NILM on Indian dataset due to variety of reasons.
+\subsection{Energy conscious habits}
+Figure showing how i turn the AC at 16 degrees and turn it off before going to sleep.
+
+Running the ref. in least cool cooling mode and the impact it has.
+
+\subsection{NILM}
+Will be tough to do in timeframe.
 
 To highlight any thing or add new stuff write like this in red
 
