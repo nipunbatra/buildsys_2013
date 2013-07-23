@@ -104,12 +104,20 @@ For our sensing, we took a ``leave no stone unturned'' approach, where  we chose
 
 \noindent\textbf{Electricity monitoring:} A typical home electricity setup involves a meter which is installed by utility companies and measures overall electricity usage. Further electric cabling is divided into various Miniature Circuit Breakers (MCB's) which control separate circuits. Typical installations involve putting separate MCB's for heavier loads such as air conditioners and clubbing various lights, fans and other smaller loads into separate MCB. Further each individual appliance is controlled via a switch. There are two types of appliances- i) plug loads like refrigerator and electric iron, which need to be physically ``plugged" into the sockets; ii) loads like lights and fans, which do not need to be ``plugged" in by the user. We highlight the above described home electricity distribution in \figref{fig:overall}. We have 3 different resolutions at which electricity can be monitored:
 \begin{enumerate}
-\item \textbf{Meter level:} We use Schneider Electric EM6400\footnote{\url{To put}} smart meter to instrument the main power supply. This meter provides
+\item \textbf{Meter level:} We use Schneider Electric EM6400\footnote{\url{To put}} smart meter to instrument the main power supply. While cheaper variants from the same company were available, we chose to use EM6400 since, in addition to real power, it also provides reactive power. This additional information has been known to be useful for NILM applications\cite{hart}. \figref{fig:em6400} shows EM6400 smart meter deployed in the electricity panel.
 
-\item \textbf{Circuit level:} 
+\item \textbf{Circuit level:} We used our in-house developed Current transformer (CT) based monitoring circuits which can be clamped to individual MCB's. \redcolor{Manoj write 1-2 lines about this circuit}. CT deployment is shown in \figref{fig:ct}.
 
-\item \textbf{Appliance level:}
+\item \textbf{Appliance level:} We used jPlug\footnote{A variant of nPlug\cite{nplug}} to measure individual appliance power consumption for 9 plug-load type appliances. We also used Current Cost based CT to measure the power consumption for electric motor (used to pump water), which is not a plug-load, yet has significant power consumption. jPlug and Current Cost CT deployment are shown in \figref{fig:jplug} and \figref{fig:cc} respectively.
 \end{enumerate}
+More details regarding sensors used for electricity monitoring are provided in \tabref{tab:sensing}.
+
+\noindent \textbf{Water monitoring:} There are few differences in water distribution in India and US. In India, there are separate water lines for drinkable and non-drinkable water. Also, overhead water tanks (typically 1000 liters capacity) are used to store water. Electric motors are used to push water against gravity to be stored in the tank. Thus, the flow can be summarized as follows: 1) Water from utility comes to the home; 2) Electric motor is used to pump the water up to the tank; 3) Water flows downward from the tank when ever water is consumed. Thus, we put a water meter at the inlet (coming from the utility) and the outlet from the water tank (flowing downwards). 
+
+
+\noindent Digital water meters are very expensive. Thus, we chose to use in-line water meters, which measure water volume flowing through them. These water meters have a 400 ma current loop \redcolor{Manoj: Add details} and send a pulse every few liters. The precision is based on the quality of the sensor and the diameter of the water pipe. The water meter we used for overhead tank gives a pulse every 10 liters, whereas the one used for inlet supply from utility gives a pulse every 1 liter. These pulses can be measured using the circuit diagram for 400 ma loop shown in ... \figref{fig:water_meter} shows the water meter deployed inline at the overhead tank.
+
+\noindent \textbf{Ambient conditions monitoring:} 
 
 
 
@@ -117,7 +125,7 @@ For our sensing, we took a ``leave no stone unturned'' approach, where  we chose
 \begin{table*}
 \caption{Deployment}
 
-\label{tab:deployment}
+\label{tab:sensing}
 \tabcolsep=0.02cm
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
@@ -162,21 +170,36 @@ Apart from this following soft-sensor streams were collected.
 \item CPU, Memory usage for all computing resources. This was to serve as preventive measure.
 \item Weather streams
 \end{itemize}
-\begin{figure*}     
-    \includegraphics[scale=0.4]{./figures/overall_deployment.jpg}    
+\begin{figure}     
+    \includegraphics[scale=0.2]{./figures/overall_deployment.jpg}    
     \caption{Schematic showing overall home deployment}   
     \label{fig:overall}
    
-\end{figure*}
+\end{figure}
 
 
 \begin{figure*} 
     
     \subfloat[\scriptsize EM6400 Smart Meter]{
-    \includegraphics[scale=0.04]{./figures/electric_meter_2.jpg}}
+    \label{fig:em6400}
+    \includegraphics[scale=0.03]{./figures/electric_meter_2.jpg}}
+     \subfloat[\scriptsize In house CT monitoring system]{
+        \label{fig:ct}
+        \includegraphics[scale=0.03]{./figures/mcb.jpg}}
+     \subfloat[\scriptsize Appliance level monitoring using jPlug]{
+             \label{fig:jplug}
+             \includegraphics[scale=0.03]{./figures/jplug.JPG}}
+          \subfloat[\scriptsize Appliance level monitoring using Current Cost CT]{
+                  \label{fig:cc}
+                  \includegraphics[scale=0.03]{./figures/cc.JPG}}
     %\hspace{0.02\columnwidth}
+    \newline
     \subfloat[\scriptsize Water Meter]{
-        \includegraphics[scale=0.04]{./figures/water_meter.JPG}}
+    \label{fig:water_meter}
+        \includegraphics[scale=0.03]{./figures/water_meter.JPG}}
+     \subfloat[\scriptsize Android phone and Homeseer Zwave multisensor used to measure ambient parameters]{
+        \label{fig:ambient}
+            \includegraphics[scale=0.03]{./figures/ambient.JPG}}
 
     \caption{Deployment Pictures}
 
