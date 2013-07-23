@@ -43,7 +43,7 @@
     \email{bob@example.se}
 }
 
-\title{Buildsys}
+\title{Its Different: Hitchiker’s Tryst with Energy Consumption Patterns in India}
 
 \crdata{978-1-4503-1169-4}
 \conferenceinfo{SenSys'13,} {November 11--15, 2013, Rome, Italy.}
@@ -97,26 +97,50 @@ and \texttt{bibtex} to directly produce a pdf document.
 \end{itemize}
 Also deployment was maintained as an open source project. Shows how we faced issues and tackled them. Also contains metadata log provided by the end user.
 
-\section{Deployment}
-In this section we describe about our deployment. \figref{fig:overall} shows overall home deployment.
-\begin{table}
+\section{Deployment Overview}
+Over the past year, we have deployed sensors across 22 homes. While 20 of these homes have been instrumented only with smart electricity meters, 2 homes have been extensively instrumented with upto 32 sensors measuring electricity, water and ambient parameter. \figref{fig:overall} shows the deployment in a 3 storey home where 32 sensors, 5 single board computers and 3 routers were used. 
+\subsection{Sensing Infrastructure}
+For our sensing, we took a ``leave no stone unturned'' approach, where  we chose to monitor as many physical parameters (such as ambient conditions, electricity usage, water usage) and non-physical parameters(such as network strength etc.). However, it must be noted, that we chose to deploy sensors in a way that home users can continue their regular routine without getting affected. We describe the various sensors to monitor electricity, water and ambient conditions below:
+
+\noindent\textbf{Electricity monitoring:} A typical home electricity setup involves a meter which is installed by utility companies and measures overall electricity usage. Further electric cabling is divided into various Miniature Circuit Breakers (MCB's) which control separate circuits. Typical installations involve putting separate MCB's for heavier loads such as air conditioners and clubbing various lights, fans and other smaller loads into separate MCB. Further each individual appliance is controlled via a switch. There are two types of appliances- i) plug loads like refrigerator and electric iron, which need to be physically ``plugged" into the sockets; ii) loads like lights and fans, which do not need to be ``plugged" in by the user. We highlight the above described home electricity distribution in \figref{fig:overall}. We have 3 different resolutions at which electricity can be monitored:
+\begin{enumerate}
+\item \textbf{Meter level:} We use Schneider Electric EM6400\footnote{\url{To put}} smart meter to instrument the main power supply. This meter provides
+
+\item \textbf{Circuit level:} 
+
+\item \textbf{Appliance level:}
+\end{enumerate}
+
+
+
+
+\begin{table*}
 \caption{Deployment}
 
 \label{tab:deployment}
-\begin{tabular}{|c|c|c|}
+\tabcolsep=0.02cm
+\begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
-Sensor&Quantity&Sampling\\
-&&Frequency(Hz)\\
+Sensor&Sensor&Sampling&Resolution&Quantity&Commun-&Observed\\
+name&type&frequency&&&ication&parameters\\
+&&(Hz)&&&&\\
 \hline
 
-Electric Meter&1&1\\
-Water Meter&2&5\\
+EM6400&Electric Meter&1&Home&1&RS 485, WiFi&Voltage, Current, Frequency\\
+Analog&Water Meter&5&Main supply and tank&2&\\
+Homeseer HSM-100&Ambient multisensors&1 (for light, temperature) and polling for PIR&Room &6&ZWave&Light, temperature and motion\\
+Android phones&Ambient multisensors& check from funf&Room&5&Manual\\
+Prototype CT&Current Transformers&20&MCB&8&WiFi\\
+jPlug&Appliance electric meter & 1 &Appliance&9&WiFi\\
+Current Cost&Appliance CT&0.1&Appliance&1&Proprietary\\
 \hline
 
 \end{tabular}
 
 
-\end{table}
+\end{table*}
+
+\subsection{Communication and Computation Infrastructure}
 Following computation resources (SBC/Servers were used)
 \begin{itemize}
 \item X RPi
@@ -149,7 +173,7 @@ Apart from this following soft-sensor streams were collected.
 \begin{figure*} 
     
     \subfloat[\scriptsize EM6400 Smart Meter]{
-    \includegraphics[scale=0.04]{./figures/electric_meter.JPG}}
+    \includegraphics[scale=0.04]{./figures/electric_meter_2.jpg}}
     %\hspace{0.02\columnwidth}
     \subfloat[\scriptsize Water Meter]{
         \includegraphics[scale=0.04]{./figures/water_meter.JPG}}
