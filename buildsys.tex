@@ -126,21 +126,23 @@ More details regarding sensors used for electricity monitoring are provided in \
 \caption{Deployment}
 
 \label{tab:sensing}
-\tabcolsep=0.02cm
-\begin{tabular}{|c|c|c|c|c|c|c|}
+\tabcolsep=0.015cm
+\begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-Sensor&Sensor&Sampling&Resolution&Quantity&Commun-&Observed\\
-name&type&frequency&&&ication&parameters\\
+Sensor&Sensor&Sampling&Resolution&Qua-&Commu-&Observed\\
+name&type&frequency&&ntity&nication&parameters\\
 &&(Hz)&&&&\\
 \hline
 
-EM6400&Electric Meter&1&Home&1&RS 485, WiFi&Voltage, Current, Frequency\\
-Analog&Water Meter&5&Main supply and tank&2&\\
-Homeseer HSM-100&Ambient multisensors&1 (for light, temperature) and polling for PIR&Room &6&ZWave&Light, temperature and motion\\
-Android phones&Ambient multisensors& check from funf&Room&5&Manual\\
-Prototype CT&Current Transformers&20&MCB&8&WiFi\\
-jPlug&Appliance electric meter & 1 &Appliance&9&WiFi\\
-Current Cost&Appliance CT&0.1&Appliance&1&Proprietary\\
+EM6400&Electric Meter&1&Home&1&RS 485, WiFi&Voltage, Current,\\ 
+&&&&&&Frequency\\ \hline
+Analog&Water Meter&5&Main supply and tank&2&\\ \hline
+Homeseer HSM-100&Ambient multisensors&1 (for light, temperature)&Room &6&ZWave&Light, temperature\\ 
+                &&and polling for PIR&&&& and motion\\ \hline
+Android phones&Ambient multisensors& check from funf&Room&5&Manual\\ \hline
+Prototype CT&Current Transformers&20&MCB&8&WiFi\\ \hline
+jPlug&Appliance electric meter & 1 &Appliance&9&WiFi\\ \hline
+Current Cost&Appliance CT&0.1&Appliance&1&Proprietary\\ \hline
 \hline
 
 \end{tabular}
