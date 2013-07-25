@@ -260,10 +260,10 @@ Web applications running on the server allowed a home user to locally visualize 
 
 \section{How is this deployment different?}
 \label{sec:learning}
-In this section we discuss the learning from previous work in similar domains and present unique aspects which came up in our deployment.
+In this section we discuss unique aspects brought forward from our deployment. Some of the key aspects are as follows:
 \begin{itemize}
 
-\item Homes are not power panacea. We have a very special case of electricity failure. Add figure
+\item \textbf{Unreliable grid is commonplace:} Load shedding or rolling blackout are common in developing countries, owing to several reasons such as improper infrastructure management, high demand and low electricity production. Power cuts are more common in summers when load is higher due to usage of air conditioners. As a result, voltage fluctuations are also common. Previous work \cite{nplug} has hypothesized that frequency and voltage indicate load on the grid. 
 for electricity number of hours failure, failure by n'th hour, hist of failure hours
 \item Homes have poor connectivity. This forced us to develop a different paradigm which we call Sense-Store-Transfer. This is shown in \figref{fig:network}
 
@@ -302,17 +302,37 @@ Figure showing voltage fluctuations
 \item Non availability of sensors in local markets
 
 \end{itemize}
-\begin{figure}     
-    \includegraphics[scale=0.30]{./figures/electricity.png}    
-    \caption{Electricity failure in hours}   
-    \label{fig:failure_hours}   
-\end{figure}
+\begin{figure*} 
+    
+    \subfloat[\scriptsize Electricity failure vs Time]{
+    \label{fig:failure_time}
+    \includegraphics[scale=0.15]{./figures/electricity.png}}
+    \hspace{1mm}
+     \subfloat[\scriptsize Electricity failure durations ]{
+        \label{fig:failure_duration}
+        \includegraphics[scale=0.15]{./figures/failure_durations.png}}
+       \hspace{1mm}
+     \subfloat[\scriptsize Electricity failure by hour of day]{
+             \label{fig:failure_hour}
+             \includegraphics[scale=0.15]{./figures/failure_by_hour}}
+              \vspace{-4mm}
+             \newline
+            
+          \subfloat[\scriptsize Voltage fluctuations in a typical day]{
+                  \label{fig:voltage}
+                  \includegraphics[scale=0.15]{./figures/voltage.png}}
+          \subfloat[\scriptsize Frequency fluctuations in a typical day]{
+                            \label{fig:frequency}
+                            \includegraphics[scale=0.15]{./figures/frequency.png}}
+          \subfloat[\scriptsize \% internet packet drop]{
+                            \label{fig:network}
+                            \includegraphics[scale=0.15]{./figures/network.png}}
+   
+    \caption{Unreliable internet and grid}
 
-\begin{figure}     
-    \includegraphics[scale=0.30]{./figures/network.png}    
-    \caption{Overall packet drop while accessing internet}   
-    \label{fig:network}   
-\end{figure}
+    \label{fig:unreliable}
+
+\end{figure*}
 
 \begin{figure}     
     \includegraphics[scale=0.04]{./figures/led.JPG}    
