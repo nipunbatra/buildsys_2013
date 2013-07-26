@@ -282,7 +282,17 @@ Homes have poor connectivity. This forced us to develop a different paradigm whi
 \section{Hitchiker's guide revisited}
 In this section, we discuss similarities between our deployment and those explained in previous work. We further explain how we tackled these issues. Some prominent similarities are:
 
-\noindent \textbf{Homes are hazardous environments:} We observed that one of our multisensor would fail after power outage. Initially, we felt that the sensor was faulty, but when other sensors showed the same behaviour in the same location. We figured that this behaviour was due to the fact that this multisensor was put on inverter point (battery backup) and would not go down even on power outage. Thus, when power resumed, ZWave controller was not able to add this multisensor to its network. We resolved this by putting the multisensor at a non-inverter point. 
+\noindent \textbf{Homes are hazardous environments:} We observed that one of our multisensor would fail after power outage. Initially, we felt that the sensor was faulty, but when other sensors showed the same behaviour in the same location. We figured that this behaviour was due to the fact that this multisensor was put on inverter point (battery backup) and would not go down even on power outage. Thus, when power resumed, ZWave controller was not able to add this multisensor to its network. We resolved this by putting the multisensor at a non-inverter point. We also observed that one of the multisensor always indicated motion. We were able to solve this problem primarily by replacing its power supply. However, within a week this problem resurfaced. We believe it is due to faulty power supply in that room. The home occupants did not allow a thorough investigation of that electrical socket and we had to do away with that data.
+
+\noindent Although we took caution of using zip-ties to prevent hanging wires, we observed data loss in one of our multisensor and Android phones, which went out of power due to wire snag. This is shown in \figref{fig:snag}. Further, even after 1 month rigorous testing in lab, we found that 60 new issues (service complaints) were registered when we moved the deployment to the first home. This is only a testimony that homes present a unique scenario which can not be emulated well in laboratory settings.
+
+\noindent \textbf{Aesthetics matter:} As stated in previous work, sensor LED's can be bothersome to home occupants, particularly in the night. Our 33 sensor deployment had introduced more than 50 LED's in the home. \figref{fig:led} shows our sensor LED's blinking in the night. For our current deployment, choosing appropriate sensor location sufficed. However, for future such deployments, we intend to build better casing. Also, the home occupants complained of buzz like sound coming from the desktop server that we had put. We figured that this noise was due to the fact that its CPU was clogged due to dust. This is another unique aspect introduced in the Indian setting. Thus, any long lived deployment should have routine maintenance.
+
+\noindent \textbf{Homes are not designed for sensing:} We observed that the data collected from our ground floor MCB's (5 in number) was noisy. This was due to the fact that the MCB's are very close to each other and this causes interference in our CT monitoring circuit. However, on the 3 MCB's on the first floor, there was adequate gap amongst MCB's and data was of good quality. We thus believe that homes are not designed for sensing and one should be prepared to lose some data quality due to that.
+
+\noindent \textbf{Redundancy-Accounting for sensor failure:} During our deployment 3 jPlugs and 1 multisensor stopped functioning properly. Fortunately, we had accounted for such failure and had additional sensors ready. We believe that one should beforehand  account for sensor failure in residential deployments.
+
+\noindent \textbf{Homes have poor connectivity:}
 
 \begin{figure}
 \subfloat[\scriptsize Before repair]{
@@ -299,21 +309,6 @@ In this section, we discuss similarities between our deployment and those explai
 
 \end{figure}
 
-Homes are hazardous environments
-\begin{itemize}
-\item Multi failed when put on inverter point
-\item Node in one room will always fail
-\item Wire snag and how it led to data loss of node 4
-\end{itemize}
-
-Homes are remote environments:
-We had to raise ~60 new issues on Github. We first did deployment in researchers home which had full access to all nodes.
-We also provided alerting mechanisms.
-
-User participation
-Even at researchers home, had asked the researcher to take notes. But even his engagement was not 100 \%.
-
-Aesthetics matter
 \begin{itemize}
 \item LED in night \figref{fig:led}
 \item Noise- Noisy SMPS due to dust. Unique to our setting. Figure from FunF showing sound level before and after cleaning.
