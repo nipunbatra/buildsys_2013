@@ -209,10 +209,16 @@ Various middleware systems such as sMAP\cite{smap}, Building Depot\cite{building
     \label{fig:architecture}   
 \end{figure}
 
-\begin{figure}     
-    \includegraphics[scale=0.15]{./figures/electricity_distribution.jpg}    
-    \caption{Different resolutions of measuring electricity consumption in home}   
-    \label{fig:electricity_distribution}   
+\begin{figure}  
+\subfloat[\scriptsize Different resolutions of measuring electricity consumption in home]{
+	 \label{fig:electricity_distribution}
+    \includegraphics[scale=0.14]{./figures/electricity_distribution.jpg}}
+    \hspace{1mm}
+    \subfloat[\scriptsize Different resolutions of measuring water consumption in home]{
+    	 \label{fig:water_distribution}
+        \includegraphics[scale=0.14]{./figures/water_distribution.jpg}}
+    \caption{Different resolutions of measuring electricity and water consumption in home}   
+      
 \end{figure}
 
 Web applications running on the server allowed a home user to locally visualize his data from multiple streams. Further, data from the server can be copied to cloud based servers such as Dropbox where applications such as analytics, alerts can be done, allowing outside users and specifically researchers to keep an eye on the deployment sitting in their labs. \figref{fig:architecture} explains \paradigms architecture. The salient features of our architecture are as follows:
