@@ -292,7 +292,7 @@ In this section, we discuss similarities between our deployment and those explai
 
 \noindent \textbf{Redundancy-Accounting for sensor failure:} During our deployment 3 jPlugs and 1 multisensor stopped functioning properly. Fortunately, we had accounted for such failure and had additional sensors ready. We believe that one should beforehand  account for sensor failure in residential deployments.
 
-\noindent \textbf{Homes have poor connectivity:}
+\noindent \textbf{Homes have poor connectivity:} 
 
 \begin{figure}
 \subfloat[\scriptsize Before repair]{
@@ -362,9 +362,19 @@ Non availability of sensors in local markets
 \end{figure*}
 
 \begin{figure}     
-    \includegraphics[scale=0.02]{./figures/led.JPG}    
-    \caption{LED glowing in the night}   
-    \label{fig:led}
+    \subfloat[\scriptsize Glowing LED's in night]{
+        \label{fig:led}
+        \includegraphics[scale=0.018]{./figures/led.jpg}}
+        \hspace{0.1mm}
+         \subfloat[\scriptsize Wire snag leading to data loss ]{
+            \label{fig:snag}
+            \includegraphics[scale=0.018]{./figures/snag.jpg}}
+%                    \hspace{0.1mm}
+        \subfloat[\scriptsize Closely placed MCB's causing interference in CT monitroing circuit ]{
+                    \label{fig:ct_interference}
+                    \includegraphics[scale=0.018]{./figures/ct_interference.jpg}}
+    \caption{Common problems in residential deployments}   
+    \label{fig:home}
    
 \end{figure}
 
