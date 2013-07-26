@@ -263,21 +263,23 @@ Web applications running on the server allowed a home user to locally visualize 
 In this section we discuss unique aspects brought forward from our deployment. Some of the key aspects are as follows:
 
 
-\noindent \textbf{Unreliable grid is commonplace:} Load shedding or rolling blackout are common in developing countries, owing to several reasons such as improper infrastructure management, high demand and low electricity production. Power cuts are more common in summers when load is higher due to usage of air conditioners. As a result, voltage fluctuations or brownouts are also common. \figref{fig:failure_duration} shows power cut in number of hours per day during a two month period in summer of 2013. Electricity outage for upto 12 hours has been reported on some days. \figref{fig:failure_duration} shows the duration in minutes of power outages. 107 power outages were found in 61 day period from May to July. While the average power outage lasted about 1 hours, there were outages lasting upto 9 hours. \figref{fig:failure_hour} shows the power outage distribution by hour of the day. It can be seen that there are maximum outages around 10 AM in the morning and around midnight. These times correspond to office time and night time when air conditioners in home are on. We believe that this indicates heavy load on the grid. \figref{fig:voltage} shows the voltage fluctuations in a typical day. We can observe that voltage drops during peak load hours. This is in consonance with previous work\cite{nplug}, which hypothesized that frequency and voltage indicate load on the grid. \figref{fig:frequency} shows fluctuation in frequency in a typical day.
+\noindent \textbf{Unreliable grid is commonplace:} Load shedding or rolling blackout are common in developing countries, owing to several reasons such as improper infrastructure management, high demand and low electricity production. Power cuts are more common in summers when load is higher due to usage of air conditioners. As a result, voltage fluctuations or brownouts are also common. \figref{fig:failure_duration} shows power cut in number of hours per day during a two month period in summer of 2013. Electricity outage for upto 12 hours has been reported on some days. \figref{fig:failure_duration} shows the duration in minutes of power outages. 107 power outages were found in 61 day period from May to July. While the average power outage lasted about 1 hours, there were outages lasting upto 9 hours. \figref{fig:failure_hour} shows the power outage distribution by hour of the day. It can be seen that there are maximum outages around 10 AM in the morning and around midnight. These times correspond to office time and night time when air conditioners in home are on. We believe that this indicates heavy load on the grid. \figref{fig:voltage} shows the voltage fluctuations in a typical day, where it can be seen that voltage is fluctuating from 180 to 250 Volts. We can observe that voltage drops during peak load hours. This is in consonance with previous work\cite{nplug}, which hypothesized that frequency and voltage indicate load on the grid. \figref{fig:frequency} shows fluctuation in frequency in a typical day.
 
 \noindent Due to unreliable nature of grid, we ensured that all our systems were capable of automatically starting after a power outage. We put our scripts for data collection and upload in Linux startup script. This provided us another advantage. If we observed that a system was down, we could just ask the home occupant to repower the system again. This ensured that there was minimal data loss till the time our researchers could visit the site and repair the fault.
 
+
+\noindent \textbf{Unreliable internet connectivity:} During our prototype deployment, where we used cloud based 
 Homes have poor connectivity. This forced us to develop a different paradigm which we call Sense-Store-Transfer. This is shown in \figref{fig:network}
 	
-\textbf{Importance of meta data collection:}
+\noindent \textbf{Importance of meta data collection:} We collected metadata associated with electrical appliances throughout our deployment. We collected parameters such as appliance name, age, mode of usage (for instance air conditioner set temperature). We believe this detailed metadata can enhance NILM and can provide useful insights for conserving electricity. For instance, in one of the home refrigerator was sent for repairing on 2$^{nd}$ July. \figref{fig:before_repair} and \figref{fig:after_repair} show the active power consumption before and after repair. We found that after repair the refrigerator was configured in coolest mode (lowest temperature), while before repairing, it was configured in least coolest mode (highest temperature). After repair the refrigerator was found to be consuming 1KWh more. Moreover, its duty cycle pattern was modified significantly. This metadata can be useful to NILM approaches which model appliance usage duration as one of their parameters.
 
 \begin{figure}
 \subfloat[\scriptsize Before repair]{
     \label{fig:before_repair}
-    \includegraphics[scale=0.13]{./figures/before_repair.png}}
+    \includegraphics[scale=0.12]{./figures/before_repair.png}}
      \subfloat[\scriptsize Electricity failure durations ]{
         \label{fig:after_repair}
-        \includegraphics[scale=0.13]{./figures/after_repair.png}}
+        \includegraphics[scale=0.12]{./figures/after_repair.png}}
        
    
     \caption{Refrigerator power consumption}
@@ -323,24 +325,24 @@ Non availability of sensors in local markets
 
 \begin{figure*} 
     
-    \subfloat[\scriptsize Electricity failure vs Time]{
+    \subfloat[\scriptsize Power outage vs Time]{
     \label{fig:failure_time}
     \includegraphics[scale=0.15]{./figures/electricity.png}}
     \hspace{1mm}
-     \subfloat[\scriptsize Electricity failure durations ]{
+     \subfloat[\scriptsize Power outage durations ]{
         \label{fig:failure_duration}
         \includegraphics[scale=0.15]{./figures/failure_durations.png}}
        \hspace{1mm}
-     \subfloat[\scriptsize Electricity failure by hour of day]{
+     \subfloat[\scriptsize Power outage by hour of day]{
              \label{fig:failure_hour}
              \includegraphics[scale=0.15]{./figures/outage_by_hour.png}}
               \vspace{-4mm}
              \newline
             
-          \subfloat[\scriptsize Voltage fluctuations in a typical day]{
+          \subfloat[\scriptsize Voltage fluctuations in a typical day. Rated voltage is 230 V]{
                   \label{fig:voltage}
                   \includegraphics[scale=0.15]{./figures/voltage.png}}
-          \subfloat[\scriptsize Frequency fluctuations in a typical day]{
+          \subfloat[\scriptsize Frequency fluctuations in a typical day. Rated frequency is 50 Hz]{
                             \label{fig:frequency}
                             \includegraphics[scale=0.15]{./figures/frequency.png}}
           \subfloat[\scriptsize \% internet packet drop]{
