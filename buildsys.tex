@@ -284,6 +284,22 @@ In this section we discuss unique aspects brought forward from our deployment. S
 
 \noindent \textbf{Unreliable internet connectivity:} During our prototype deployment, where we used cloud based 
 Homes have poor connectivity. This forced us to develop a different paradigm which we call Sense-Store-Transfer. This is shown in \figref{fig:network}
+
+
+\begin{figure}
+\subfloat[\scriptsize Before repair]{
+    \label{fig:before_repair}
+    \includegraphics[scale=0.12]{./figures/before_repair.png}}
+     \subfloat[\scriptsize After repair ]{
+        \label{fig:after_repair}
+        \includegraphics[scale=0.12]{./figures/after_repair.png}}
+       
+   
+    \caption{Refrigerator power consumption}
+
+    \label{fig:metadata}
+
+\end{figure}
 	
 \noindent \textbf{Importance of meta data collection:} We collected metadata associated with electrical appliances throughout our deployment. We collected parameters such as appliance name, age, mode of usage (for instance air conditioner set temperature). We believe this detailed metadata can enhance NILM and can provide useful insights for conserving electricity. For instance, in one of the home refrigerator was sent for repairing on 2$^{nd}$ July. \figref{fig:before_repair} and \figref{fig:after_repair} show the active power consumption before and after repair. We found that after repair the refrigerator was configured in coolest mode (lowest temperature), while before repairing, it was configured in least coolest mode (highest temperature). After repair the refrigerator was found to be consuming 1KWh more. Moreover, its duty cycle pattern was modified significantly. This metadata can be useful to NILM approaches which model appliance usage duration as one of their parameters.
 
@@ -307,42 +323,30 @@ In this section, we discuss similarities between our deployment and those explai
 
 \noindent \textbf{Redundancy-Accounting for sensor failure:} During our deployment 3 jPlugs and 1 multisensor stopped functioning properly. Fortunately, we had accounted for such failure and had additional sensors ready. We believe that one should beforehand  account for sensor failure in residential deployments.
 
-\noindent \textbf{Homes have poor connectivity:} 
+\noindent \textbf{Homes have poor connectivity:} During the preliminary phase of our deployment, we tried to work with existing networking infrastructure in the homes. The WiFi router was placed on the first floor and signal strength on ground and second floor was poor. \figref{fig:ground_without_router} and \figref{fig:second_without_router} show the WiFi heatmap produced wrt the router placed on first floor. We observed that a lot of regions show poor signal strength. We bridged an additional router on the ground and the second floor with the existing first floor router. \figref{fig:ground_with_router} and \figref{fig:second_with_router} show the corresponding WiFi heatmaps produced wrt newly introduced bridged routers. We can observe the improvement in signal strength with the introduction of additional hardware. 
+
+\noindent Another important facet of deployments is that additional sensors introduced inside a home may choke up the bandwidth. We observed this when we tried using imported WiFi based microcontrollers for sensing ambient conditions. Home users complained of low bandwidth available for their personal usage and thus, we decided to use ZWave based multisensors for measuring ambient parameters. Since ZWave based sensors worked on a different frequency when compared to WiFi, they did not cause interference. Thus, in our experience, a careful mix of sensors working on different frequencies should be used to avoid interference issues.
 
 \begin{figure}  
 \subfloat[\scriptsize Ground floor WiFi Heatmap without additional router]{
 	 \label{fig:ground_without_router}
-    \includegraphics[scale=0.1]{./figures/ground_without_router.png}}
+    \includegraphics[scale=0.11]{./figures/ground_without_router.png}}
     \hspace{1mm}
     \subfloat[\scriptsize Ground floor WiFi Heatmap with additional router]{
     	 \label{fig:ground_with_router}
-        \includegraphics[scale=0.1]{./figures/ground_with_router.png}}
+        \includegraphics[scale=0.11]{./figures/ground_with_router.png}}
        \newline
       \subfloat[\scriptsize Second floor WiFi Heatmap without additional router]{
       	 \label{fig:second_without_router}
-          \includegraphics[scale=0.1]{./figures/without_.png}}
+          \includegraphics[scale=0.11]{./figures/without_.png}}
           \hspace{1mm}
           \subfloat[\scriptsize Second floor WiFi Heatmap with additional router]{
           	 \label{fig:second_with_router}
-              \includegraphics[scale=0.1]{./figures/with_.png}} 
+              \includegraphics[scale=0.11]{./figures/with_.png}} 
     \caption{WiFi signal without placing additional routers on different floors is poor. The greener the region, the better the signal strength for the heatmap.}   
       
 \end{figure}
 
-\begin{figure}
-\subfloat[\scriptsize Before repair]{
-    \label{fig:before_repair}
-    \includegraphics[scale=0.12]{./figures/before_repair.png}}
-     \subfloat[\scriptsize After repair ]{
-        \label{fig:after_repair}
-        \includegraphics[scale=0.12]{./figures/after_repair.png}}
-       
-   
-    \caption{Refrigerator power consumption}
-
-    \label{fig:metadata}
-
-\end{figure}
 
 
 
