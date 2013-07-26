@@ -261,13 +261,15 @@ Web applications running on the server allowed a home user to locally visualize 
 \section{How is this deployment different?}
 \label{sec:learning}
 In this section we discuss unique aspects brought forward from our deployment. Some of the key aspects are as follows:
-\begin{itemize}
 
-\item \textbf{Unreliable grid is commonplace:} Load shedding or rolling blackout are common in developing countries, owing to several reasons such as improper infrastructure management, high demand and low electricity production. Power cuts are more common in summers when load is higher due to usage of air conditioners. As a result, voltage fluctuations are also common. Previous work \cite{nplug} has hypothesized that frequency and voltage indicate load on the grid. 
-for electricity number of hours failure, failure by n'th hour, hist of failure hours
-\item Homes have poor connectivity. This forced us to develop a different paradigm which we call Sense-Store-Transfer. This is shown in \figref{fig:network}
 
-\item \textbf{Importance of meta data collection:}
+\noindent \textbf{Unreliable grid is commonplace:} Load shedding or rolling blackout are common in developing countries, owing to several reasons such as improper infrastructure management, high demand and low electricity production. Power cuts are more common in summers when load is higher due to usage of air conditioners. As a result, voltage fluctuations or brownouts are also common. \figref{fig:failure_duration} shows power cut in number of hours per day during a two month period in summer of 2013. Electricity outage for upto 12 hours has been reported on some days. \figref{fig:failure_duration} shows the duration in minutes of power outages. 107 power outages were found in 61 day period from May to July. While the average power outage lasted about 1 hours, there were outages lasting upto 9 hours. \figref{fig:failure_hour} shows the power outage distribution by hour of the day. It can be seen that there are maximum outages around 10 AM in the morning and around midnight. These times correspond to office time and night time when air conditioners in home are on. We believe that this indicates heavy load on the grid. \figref{fig:voltage} shows the voltage fluctuations in a typical day. We can observe that voltage drops during peak load hours. This is in consonance with previous work\cite{nplug}, which hypothesized that frequency and voltage indicate load on the grid. \figref{fig:frequency} shows fluctuation in frequency in a typical day.
+
+\noindent Due to unreliable nature of grid, we ensured that all our systems were capable of automatically starting after a power outage. We put our scripts for data collection and upload in Linux startup script. This provided us another advantage. If we observed that a system was down, we could just ask the home occupant to repower the system again. This ensured that there was minimal data loss till the time our researchers could visit the site and repair the fault.
+
+Homes have poor connectivity. This forced us to develop a different paradigm which we call Sense-Store-Transfer. This is shown in \figref{fig:network}
+	
+\textbf{Importance of meta data collection:}
 
 \begin{figure}
 \subfloat[\scriptsize Before repair]{
@@ -284,41 +286,41 @@ for electricity number of hours failure, failure by n'th hour, hist of failure h
 
 \end{figure}
 
-\item Homes are hazardous environments
+Homes are hazardous environments
 \begin{itemize}
 \item Multi failed when put on inverter point
 \item Node in one room will always fail
 \item Wire snag and how it led to data loss of node 4
 \end{itemize}
 
-\item Homes are remote environments:
+Homes are remote environments:
 We had to raise ~60 new issues on Github. We first did deployment in researchers home which had full access to all nodes.
 We also provided alerting mechanisms.
 
-\item User participation
+User participation
 Even at researchers home, had asked the researcher to take notes. But even his engagement was not 100 \%.
 
-\item Aesthetics matter
+Aesthetics matter
 \begin{itemize}
 \item LED in night \figref{fig:led}
 \item Noise- Noisy SMPS due to dust. Unique to our setting. Figure from FunF showing sound level before and after cleaning.
 \end{itemize}
 
-\item Simplify the architecture
+Simplify the architecture
 We used Load-Store-Forward. Describe this in more detail and relate to earlier n/w connectivity.
 Also when number of systems is so large, simple CSV uploading is the best mechanism.
 
 Wherever possible use Ethernet with repeaters. Also, RPi are known to have problems with WiFi.
 
-\item Importance of meta data and calibration
+Importance of meta data and calibration
 Figure showing power consumption of ref. after repair
 Figure showing different measurements for same appliance
 Figure showing voltage fluctuations
 
-\item Provision for more sensors than actual number required. x jplug, y multisensor failed due to ..
-\item Non availability of sensors in local markets
+Provision for more sensors than actual number required. x jplug, y multisensor failed due to ..
+Non availability of sensors in local markets
 
-\end{itemize}
+
 \begin{figure*} 
     
     \subfloat[\scriptsize Electricity failure vs Time]{
@@ -331,7 +333,7 @@ Figure showing voltage fluctuations
        \hspace{1mm}
      \subfloat[\scriptsize Electricity failure by hour of day]{
              \label{fig:failure_hour}
-             \includegraphics[scale=0.15]{./figures/failure_by_hour}}
+             \includegraphics[scale=0.15]{./figures/outage_by_hour.png}}
               \vspace{-4mm}
              \newline
             
