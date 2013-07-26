@@ -102,7 +102,7 @@ and \texttt{bibtex} to directly produce a pdf document.
 Also deployment was maintained as an open source project. Shows how we faced issues and tackled them. Also contains metadata log provided by the end user.
 
 \section{Deployment Overview}
-Over the past year, we have deployed sensors across 22 homes. While 20 of these homes have been instrumented only with smart electricity meters, 2 homes have been extensively instrumented with upto 33 sensors measuring electricity, water and ambient parameters. \figref{fig:overall} shows the deployment in a 3 storey home where 33 sensors, 5 single board computers and 3 routers were used. 
+Over the past year, we have deployed sensors across 22 homes. While 20 of these homes have been instrumented only with smart electricity meters, 2 homes have been extensively instrumented with upto 33 sensors measuring electricity, water and ambient parameters. \figref{fig:overall} shows the deployment in a 3 storey home where 33 sensors, 5 single board computers and 3 routers were used. Detailed description of the deployment is given below.
 \begin{figure}     
     \includegraphics[scale=0.2]{./figures/overall_deployment.jpg}    
     \caption{Schematic showing overall home deployment}   
@@ -111,13 +111,13 @@ Over the past year, we have deployed sensors across 22 homes. While 20 of these 
 \end{figure}
 \subsection{Sensing Infrastructure}
 \label{sec:sensing}
-For our sensing, we took a ``leave no stone unturned'' approach, where  we chose to monitor as many physical parameters (such as ambient conditions, electricity usage, water usage) and non-physical parameters (such as network strength etc.). However, it must be noted, that we chose to deploy sensors in a way that home users can continue their regular routine without getting affected. We describe the various sensors used in our deployments below:
+For our sensing, we took a ``leave no stone unturned'' approach, where  we chose to monitor as many physical parameters (such as ambient conditions, electricity usage, water usage) and non-physical parameters (such as network strength etc.). However, it must be noted, that we chose to deploy sensors in a way that home users can continue their daily routines without getting affected. We describe the various sensors used in our deployments below:
 
-\noindent\textbf{Electricity monitoring:} A typical home electricity setup involves a meter which is installed by utility companies and measures overall electricity usage. Further electric cabling is divided into various Miniature Circuit Breakers (MCB's) which control separate circuits. Typical installations involve putting separate MCB's for heavier loads such as air conditioners and clubbing various lights, fans and other smaller loads into separate MCB. Further each individual appliance is controlled via a switch. There are two types of appliances- i) plug loads like refrigerator and electric iron, which need to be physically ``plugged" into the sockets; ii) loads like lights and fans, which do not need to be ``plugged" in by the user. We highlight the above described home electricity distribution in \figref{fig:overall}. We have 3 different resolutions at which electricity can be monitored:
+\noindent\textbf{Electricity monitoring:} A typical home electricity setup involves a meter which is installed by utility companies and measures overall electricity usage. Further electric cabling is divided into various Miniature Circuit Breakers (MCB's) which control separate circuits. Typical installations involve putting separate MCB's for heavier loads such as air conditioners and clubbing various lights, fans and other smaller loads into separate MCB. Further each individual appliance is controlled via a switch. There are two types of appliances- i) plug loads like refrigerator and electric iron, which need to be physically ``plugged" into the sockets; ii) loads like lights and fans, which do not need to be ``plugged" in by the user and can directly be switched on or off. We highlight the above described home electricity distribution in \figref{fig:overall}. We have 3 different resolutions at which electricity can be monitored:
 \begin{enumerate}
-\item \textbf{Meter level:} We use Schneider Electric EM6400\footnote{\url{www.goo.gl/01edPS}} smart meter to instrument the main power supply. While cheaper variants from the same company were available, we chose to use EM6400 as it also provides reactive power. This additional information has been known to be useful for NILM applications\cite{hart}. \figref{fig:em6400} shows EM6400 smart meter deployed in the electricity panel. We had to put 30:1 ratio CT on the power mains coming from the grid to ensure that the load current was transformed to be within EM6400's permissible limits. EM6400 allows reading various registers to measure more than 40 parameters including: voltage, current, phase, power (apparent, real, reactive) and various other parameters, using Modbus over RS485 serial link.
+\item \textbf{Meter level:} We use Schneider Electric EM6400\footnote{\url{www.goo.gl/01edPS}} smart meter to instrument the main power supply. While cheaper variants from the same company were available, we chose to use EM6400 as it also provides reactive power. This additional information has been known to be useful for NILM applications\cite{hart}. \figref{fig:em6400} shows EM6400 smart meter deployed in the electricity panel. We had to put 30:5 ratio CT on the power mains coming from the grid to ensure that the load current was transformed to be within EM6400's permissible limits (5 A). EM6400 allows reading various registers to measure more than 40 parameters including: voltage, current, phase, power (apparent, real, reactive) and various other parameters, using Modbus over RS485-serial link.
 
-\item \textbf{Circuit level:} We used our in-house developed Current transformer (CT) based monitoring circuits which can be clamped to individual MCB's. \redcolor{Manoj write 1-2 lines about this circuit}. CT deployment is shown in \figref{fig:ct}. These CT's provide information about a circuit's current usage. We exposed a serial interface to log this current data.
+\item \textbf{Circuit level:} We used our indigenously developed Current transformer (CT) monitor having split core CT's, which can be clamped to indiviual MCB's for monitoring circuit current. This device consists of ADC connected to a low cost microcontroller for sensing max. 8 analog channels simultaneously and pushing computed numerical  values of current from each CT over serial. CT deployment is shown in \figref{fig:ct}.
 
 \item \textbf{Appliance level:} We used jPlug\footnote{A variant of nPlug\cite{nplug}} to measure individual appliance power consumption for 9 plug-load type appliances. We also used Current Cost based CT to measure the power consumption for electric motor (used to pump water), which is not a plug-load, yet has significant power consumption (approx. 700 Watts). jPlug and Current Cost CT deployment are shown in \figref{fig:jplug} and \figref{fig:cc} respectively. jPlug makes a HTTP POST connection to log data. Current Cost exposes apparent power data over the serial port.
 \end{enumerate}
@@ -126,7 +126,7 @@ More details regarding sensors used for electricity monitoring are provided in \
 \noindent \textbf{Water monitoring:} There are few differences in home water distribution in India when compared to developed countries. In India, there are separate water lines for drinkable and non-drinkable water. Also, overhead water tanks (typically 1000 liters capacity) are used to store water. Electric motors are used to push water against gravity to be stored in the tank. Thus, the flow can be summarized as follows: 1) Water from utility comes to the home; 2) Electric motor is used to aid in pumping the water up to the tank; 3) Water flows downward from the tank whenever water is consumed. Thus, we put a water meter at the inlet (coming from the utility) and the outlet from the water tank (flowing downwards) to capture the incoming (from utility) and outgoing (from tank) water consumption. 
 
 
-Digital water meters are very expensive and are not easily available in India. Thus, we chose to use Zenner Aquamter's multijet\footnote{\url{www.aquametwatermeters.com/multijet.html}}, which are analog in-line water meters, which measure water volume flowing through them. These water meters have a 4 ma current loop \redcolor{Manoj: Add details} and send a pulse every few liters. The precision is based on the quality of the sensor and the diameter of the water pipe. The water meter we used for overhead tank gives a pulse every 10 liters, whereas the one used for inlet supply from utility gives a pulse every 1 liter. These pulses can be measured using the circuit diagram for 4 ma loop shown in ... \figref{fig:water_meter} shows the water meter deployed inline at the overhead tank.
+Digital water meters are very expensive and are not easily available in India. Thus, we chose to use Zenner Aquamter's multijet\footnote{\url{www.aquametwatermeters.com/multijet.html}}, which are pulse output based water meters, which measure water volume flowing through them. These water meters have a 4 ma current loop \redcolor{Manoj: Add details} and send a pulse every few liters. The precision is based on the quality of the sensor and the diameter of the water pipe. The water meter we used for overhead tank gives a pulse every 10 liters, whereas the one used for inlet supply from utility gives a pulse every 1 liter. These pulses can be measured using the circuit diagram for 4 ma loop shown in ... \figref{fig:water_meter} shows the water meter deployed inline at the overhead tank.
 
 \noindent \textbf{Ambient conditions monitoring:} We used HomeSeer HSM100\footnote{\url{www.homeseer.com/pdfs/guides/HSM100_Release_Notes.pdf}} based multisensors for monitoring motion, light and temperature. While motion is reported in event-driven fashion (i.e. whenever there is change in motion status, reading is reported), temperature and light are polled at 1 Hz. This multisensor uses the well known ZWave\footnote{\url{http://en.wikipedia.org/wiki/Z-Wave}} protocol for communication. We also place Android phones at fixed locations and ran FunF journal\footnote{\url{http://www.funf.org/journal.html}} to log ambient parameters such as light and  sound level.
 
@@ -170,7 +170,7 @@ Current Cost&Electricity meter&0.1&Appliance&1&Serial&Apparent power\\ \hline
 \end{table*}
 
 \subsection{Communication and Computation Infrastructure}
-In our experience we found that using a desktop computer for collecting data from sensors would be an overkill in terms of cost, processing power and physical space used. Although microcontrollers are cheap and occupy little space, they do not expose enough abstractions for high level programming and are often difficult to debug and are inherently hard to multi task. We thus decided to use Single Board Computers (SBC's) for sensor data collection. We used Raspberry Pi\footnote{\url{www.raspberrypi.org}} (RPi) and Ionics Stratus\footnote{\url{www.ionics-ems.com/plugtop/stratus.html}} as our SBC's. These SBC's are available for about the same cost (25 \$) as microcontrollers. Moreover, they possess 700 MHz ARM processors and allow one to use Linux based distributions. Thus, one can use the full Linux stack and code in higher level languages such as Python. These SBC's run from SD cards and one can choose the SD card size based on usage. 
+In our experience we found that using a desktop computer for collecting data from sensors would be an overkill in terms of cost, processing power and physical space used. Although microcontrollers are cheap and occupy little space, they do not expose enough abstractions for high level programming and are often difficult to debug and are inherently hard to multi task. We thus decided to use Single Board Computers (SBC's) for sensor data collection. We used Raspberry Pi\footnote{\url{www.raspberrypi.org}} (RPi) and Ionics Stratus\footnote{\url{www.ionics-ems.com/plugtop/stratus.html}} as our SBC's. These SBC's are available for about the same cost (25 \$) as microcontrollers. Moreover, they possess 700 MHz ARM processors and support Linux based distributions. Thus, one can use the full Linux stack and code in higher level languages such as Python. These SBC's run from SD cards whose size can be chosen as per requirement. 
 
 We used a total of 6 SBC's of which 5 were RPi and 1 was Ionics Stratus plug computer. We used a 2 GHz Desktop PC running Linux as the main server where all the data was stored. The software stack running on the SBC's and how they interacted with the main server and collected data from different sensors is described below:
 
@@ -192,9 +192,9 @@ It must be noted that we used the same model- create new CSV periodically, uploa
 
 \noindent \textbf{Weather data collection:} Electricity failure  and reliable Internet are well known problems in India and are highlighted in \secref{sec:learning}. Owing to these problems, we chose to collect weather data from 3 different weather stations, in our collaborator's institute in the USA.
 
-In our deployment a lot of issues pertaining to SBC's were found. For instance, the OpenZWave program that we used would create log files for its own diagnostics. This eventually ate up the 512 MB flash drive space on the plug computer. We fixed this by deleting older logs. We also observed that the circuit for water meter was heating up RPi due to high current passing through the resistance. These led us to develop soft-sensor streams whereby we collected hard disk space, ping success, CPU utilized, RAM left, temperature of processor for all the computing devices including the server at regular intervals. These soft-sensor streams can be used for alerting mechanisms and can also be used for fault diagnoses. Similar soft-sensor streams have also been used in previous work\cite{hitchhiker_residential} where they used them for alerts.
+In our deployment a lot of issues pertaining to SBC's were found. For instance, the OpenZWave program that we used would create log files for its own diagnostics. This eventually ate up the 512 MB flash drive space on the plug computer. We fixed this by deleting older logs. This encouraged us to develop soft-sensor streams whereby we collected hard disk space, ping success, CPU utilized, RAM left, temperature of processor for all the computing devices including the server at regular intervals. These soft-sensor streams can be used for alerting mechanisms and can also be used for fault diagnosis. Similar soft-sensor streams have also been used in previous work\cite{hitchhiker_residential} where they used them for alerts.
 
-We found that one WiFi router will not suffice for a 3 storey building. This has also been reported in previous work on residential deployments\cite{hitchhiker_residential}. We thus used 3 routers, where the router on the first floor acted as the host and routers on ground and second floor were bridged to it. More details regarding the need of multiple routers and network availability in homes is described in \secref{sec:learning}.
+We found that one WiFi router will not suffice for a 3 storey building. This has also been reported in previous work on residential deployments\cite{hitchhiker_residential}. We thus used 3 routers, where the router on the first floor acted as the host and routers on ground and second floor were bridged to it. More details regarding the need of multiple routers and network availability in homes is described in \secref{sec:learning} and \secref{sec:common}.
 
 
 
@@ -207,6 +207,12 @@ Various middleware systems such as sMAP\cite{smap}, Building Depot\cite{building
     \includegraphics[scale=0.20]{./figures/architecture.jpg}    
     \caption{\paradigm}   
     \label{fig:architecture}   
+\end{figure}
+
+\begin{figure}     
+    \includegraphics[scale=0.15]{./figures/electricity_distribution.jpg}    
+    \caption{Different resolutions of measuring electricity consumption in home}   
+    \label{fig:electricity_distribution}   
 \end{figure}
 
 Web applications running on the server allowed a home user to locally visualize his data from multiple streams. Further, data from the server can be copied to cloud based servers such as Dropbox where applications such as analytics, alerts can be done, allowing outside users and specifically researchers to keep an eye on the deployment sitting in their labs. \figref{fig:architecture} explains \paradigms architecture. The salient features of our architecture are as follows:
@@ -280,6 +286,7 @@ Homes have poor connectivity. This forced us to develop a different paradigm whi
 \noindent \textbf{Lack of quality measurement devices commonly found in US and Europe:} ZWave sensors for Indian frequency (865.2 MHz) are not available. Thus, we imported from European frequency (868.4 MHz) based ZWave multisensors and plug load monitors. Import duty and shipment delays make them an expensive choice. As explained above, ZWave based plug load monitors could not be used in our deployments, since they need to be explicitly turned ON. Further other alternatives like Current Cost based CT's would involve exposing live wire from appliances, an option which was rejected by home occupants. Thus, we had to resort to jPlug, which is a prototype solution.
 
 \section{Hitchiker's guide revisited}
+\label{sec:common}
 In this section, we discuss similarities between our deployment and those explained in previous work. We further explain how we tackled these issues. Some prominent similarities are:
 
 \noindent \textbf{Homes are hazardous environments:} We observed that one of our multisensor would fail after power outage. Initially, we felt that the sensor was faulty, but when other sensors showed the same behaviour in the same location. We figured that this behaviour was due to the fact that this multisensor was put on inverter point (battery backup) and would not go down even on power outage. Thus, when power resumed, ZWave controller was not able to add this multisensor to its network. We resolved this by putting the multisensor at a non-inverter point. We also observed that one of the multisensor always indicated motion. We were able to solve this problem primarily by replacing its power supply. However, within a week this problem resurfaced. We believe it is due to faulty power supply in that room. The home occupants did not allow a thorough investigation of that electrical socket and we had to do away with that data.
@@ -288,7 +295,7 @@ In this section, we discuss similarities between our deployment and those explai
 
 \noindent \textbf{Aesthetics matter:} As stated in previous work, sensor LED's can be bothersome to home occupants, particularly in the night. Our 33 sensor deployment had introduced more than 50 LED's in the home. \figref{fig:led} shows our sensor LED's blinking in the night. For our current deployment, choosing appropriate sensor location sufficed. However, for future such deployments, we intend to build better casing. Also, the home occupants complained of buzz like sound coming from the desktop server that we had put. We figured that this noise was due to the fact that its CPU was clogged due to dust. This is another unique aspect introduced in the Indian setting. Thus, any long lived deployment should have routine maintenance.
 
-\noindent \textbf{Homes are not designed for sensing:} We observed that the data collected from our ground floor MCB's (5 in number) was noisy. This was due to the fact that the MCB's are very close to each other and this causes interference in our CT monitoring circuit. However, on the 3 MCB's on the first floor, there was adequate gap amongst MCB's and data was of good quality. We thus believe that homes are not designed for sensing and one should be prepared to lose some data quality due to that.
+\noindent \textbf{Homes are not designed for sensing:} We observed that the data collected from our ground floor MCB's (5 in number) was noisy. This was due to the fact that the MCB's are very close (shown in \figref{fig:ct_interference}) to each other and this causes interference in our CT monitoring circuit. However, on the 3 MCB's on the first floor, there was adequate gap amongst MCB's and data was of good quality. We thus believe that homes are not designed for sensing and one should be prepared to lose some data quality due to that.
 
 \noindent \textbf{Redundancy-Accounting for sensor failure:} During our deployment 3 jPlugs and 1 multisensor stopped functioning properly. Fortunately, we had accounted for such failure and had additional sensors ready. We believe that one should beforehand  account for sensor failure in residential deployments.
 
@@ -309,24 +316,6 @@ In this section, we discuss similarities between our deployment and those explai
 
 \end{figure}
 
-\begin{itemize}
-\item LED in night \figref{fig:led}
-\item Noise- Noisy SMPS due to dust. Unique to our setting. Figure from FunF showing sound level before and after cleaning.
-\end{itemize}
-
-Simplify the architecture
-We used Load-Store-Forward. Describe this in more detail and relate to earlier n/w connectivity.
-Also when number of systems is so large, simple CSV uploading is the best mechanism.
-
-Wherever possible use Ethernet with repeaters. Also, RPi are known to have problems with WiFi.
-
-Importance of meta data and calibration
-Figure showing power consumption of ref. after repair
-Figure showing different measurements for same appliance
-Figure showing voltage fluctuations
-
-Provision for more sensors than actual number required. x jplug, y multisensor failed due to ..
-Non availability of sensors in local markets
 
 
 \begin{figure*} 
@@ -378,31 +367,6 @@ Non availability of sensors in local markets
    
 \end{figure}
 
-\section{Case Studies}
-In this section we present some case studies from the data collected in this deployment.
-\subsection{Correlating Events and Activity Detection}
-In this section we show how multi-modal data can be used for activity recognition. Following plots show the same.
-
-
-\subsection{Water-Energy Nexus}
-\subsubsection{Water Filter}
-In this section we find out the effective cost of 1 litre of water. RO is known to waste a lot of water. From the water meter we observe the amount of water consumed to fill 1 litre of water. We also see the corresponding power draw of the RO. Thus, we can see that water has energy embedded in it.
-
-\subsubsection{Electric Motor}
-Another unique aspect of our setting is the use of electric motor to pump water. Figure showing 1 litre events before motor was turned on and figure showing 1 litre events after motor is turned on.
-Figure showing power consumption incurred by the use of motor.
-
-\subsection{Energy conscious habits}
-Figure showing how i turn the AC at 16 degrees and turn it off before going to sleep.
-
-Running the ref. in least cool cooling mode and the impact it has.
-
-\subsection{NILM}
-Will be tough to do in timeframe.
-
-To highlight any thing or add new stuff write like this in red
-
-\redcolor{This is my comment. I would also do ... and put this image and put this table and so on and so forth}
 
 \section{Conclusions and Future Work}
 
