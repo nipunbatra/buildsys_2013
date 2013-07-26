@@ -273,11 +273,22 @@ Homes have poor connectivity. This forced us to develop a different paradigm whi
 	
 \noindent \textbf{Importance of meta data collection:} We collected metadata associated with electrical appliances throughout our deployment. We collected parameters such as appliance name, age, mode of usage (for instance air conditioner set temperature). We believe this detailed metadata can enhance NILM and can provide useful insights for conserving electricity. For instance, in one of the home refrigerator was sent for repairing on 2$^{nd}$ July. \figref{fig:before_repair} and \figref{fig:after_repair} show the active power consumption before and after repair. We found that after repair the refrigerator was configured in coolest mode (lowest temperature), while before repairing, it was configured in least coolest mode (highest temperature). After repair the refrigerator was found to be consuming 1KWh more. Moreover, its duty cycle pattern was modified significantly. This metadata can be useful to NILM approaches which model appliance usage duration as one of their parameters.
 
+\noindent \textbf{Load specifics:} Electrical load setting in India are different from that in the US and Europe. There are no automated loads. HVAC systems are decentralized. Thus, air conditioning is at room level and water heating is done using geysers at bathroom levels. From our deployments we observed that air conditioners and geysers account for upto 70\% and 50\% of overall home electricity in summers and winters respectively. Thus, any small improvement in efficiency of these two appliance can significantly lower the home electricity consumption.
+
+\noindent There are also special appliances such as water motor and water filter, owing to which there is energy embedded in water. Water motor, earlier described in section \secref{sec:sensing}, is used to pump water upto water tank on roof. It was observed that without motor it took 8 seconds to fill 1 liter of water into the tank and after switching on the motor it took 4 seconds. Also, water filter 
+
+\noindent \textbf{Lack of quality measurement devices commonly found in US and Europe:} ZWave sensors for Indian frequency (865.2 MHz) are not available. Thus, we imported from European frequency (868.4 MHz) based ZWave multisensors and plug load monitors. Import duty and shipment delays make them an expensive choice. As explained above, ZWave based plug load monitors could not be used in our deployments, since they need to be explicitly turned ON. Further other alternatives like Current Cost based CT's would involve exposing live wire from appliances, an option which was rejected by home occupants. Thus, we had to resort to jPlug, which is a prototype solution.
+
+\section{Hitchiker's guide revisited}
+In this section, we discuss similarities between our deployment and those explained in previous work. We further explain how we tackled these issues. Some prominent similarities are:
+
+\noindent \textbf{Homes are hazardous environments:} We observed that one of our multisensor would fail after power outage. Initially, we felt that the sensor was faulty, but when other sensors showed the same behaviour in the same location. We figured that this behaviour was due to the fact that this multisensor was put on inverter point (battery backup) and would not go down even on power outage. Thus, when power resumed, ZWave controller was not able to add this multisensor to its network. We resolved this by putting the multisensor at a non-inverter point. 
+
 \begin{figure}
 \subfloat[\scriptsize Before repair]{
     \label{fig:before_repair}
     \includegraphics[scale=0.12]{./figures/before_repair.png}}
-     \subfloat[\scriptsize Electricity failure durations ]{
+     \subfloat[\scriptsize After repair ]{
         \label{fig:after_repair}
         \includegraphics[scale=0.12]{./figures/after_repair.png}}
        
