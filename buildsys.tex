@@ -276,21 +276,58 @@ Web applications running on the server allowed a home user to locally visualize 
 \label{sec:learning}
 In this section we discuss some of the key unique aspects brought forward from our deployment, which are as follows:
 
+\begin{figure*} 
+    
+    \subfloat[\scriptsize Power outage vs Time]{
+    \label{fig:failure_time}
+    \includegraphics[scale=0.15]{./figures/electricity.png}}
+    \hspace{1mm}
+     \subfloat[\scriptsize Power outage durations ]{
+        \label{fig:failure_duration}
+        \includegraphics[scale=0.15]{./figures/failure_durations.png}}
+       \hspace{1mm}
+     \subfloat[\scriptsize Power outage by hour of day]{
+             \label{fig:failure_hour}
+             \includegraphics[scale=0.15]{./figures/outage_by_hour.png}}
+              \vspace{-4mm}
+             \newline
+            
+          \subfloat[\scriptsize Voltage fluctuations in a typical day. Rated voltage is 230 V]{
+                  \label{fig:voltage}
+                  \includegraphics[scale=0.15]{./figures/voltage.png}}
+          \subfloat[\scriptsize Frequency fluctuations in a typical day. Rated frequency is 50 Hz]{
+                            \label{fig:frequency}
+                            \includegraphics[scale=0.15]{./figures/frequency.png}}
+          \subfloat[\scriptsize Observed voltage just before power outage during night hours (10 PM to 1 AM). Rated voltage is 230 V]{
+                            \label{fig:voltage_before_outage}
+                            \includegraphics[scale=0.15]{./figures/voltage_before_outage.png}}
+   
+    \caption{Unreliable grid}
 
+    \label{fig:unreliable}
+
+\end{figure*}
 \noindent \textbf{Unreliable grid is commonplace:} Load shedding or rolling blackout are common in developing countries, owing to several reasons such as improper infrastructure management, high demand and low electricity production. Power cuts are more common in summers when load is higher due to usage of air conditioners. As a result, voltage fluctuations or brownouts are also common.
 
-\noindent We collected various statistics from our deployment which illustrate these aspects. \figref{fig:failure_duration} shows power cut in number of hours per day during a two month period in summer of 2013. Electricity outage for upto 12 hours has been reported on some days. \figref{fig:failure_duration} shows the duration in minutes of power outages. 107 power outages were found in 61 day period from May to July. While the average power outage lasted about 1 hours, there were outages lasting upto 9 hours. \figref{fig:failure_hour} shows the power outage distribution by hour of the day. It can be seen that there are maximum outages around 10 AM in the morning and around midnight. These times correspond to office time and night time when air conditioners in home are on. We believe that this indicates heavy load on the grid. \figref{fig:voltage} shows the voltage fluctuations in a typical day, where it can be seen that voltage is fluctuating from 180 to 250 Volts. We can observe that voltage drops during peak load hours. This is in coherence with previous work\cite{nplug}, which hypothesized that frequency and voltage indicate load on the grid. \figref{fig:frequency} shows fluctuation in frequency in a typical day.
+\noindent We collected various statistics from our deployment which illustrate these aspects. \figref{fig:failure_duration} shows power cut in number of hours per day during a two month period in summer of 2013. Electricity outage for upto 12 hours has been reported on some days. \figref{fig:failure_duration} shows the duration in minutes of power outages. 107 power outages were found in 61 day period from May to July. While the average power outage lasted about 1 hours, there were outages lasting upto 9 hours. \figref{fig:failure_hour} shows the power outage distribution by hour of the day. It can be seen that there are maximum outages around 10 AM in the morning and around midnight. These times correspond to office time and night time when air conditioners in home are on. We believe that this indicates heavy load on the grid. \figref{fig:voltage} shows the voltage fluctuations in a typical day, where it can be seen that voltage is fluctuating from 180 to 250 Volts. We can observe that voltage drops during peak load hours. \figref{fig:voltage_before_outage} shows that voltage just before power outage in night hours (10 PM to 1 AM), when load is expected to be maximum. We can observe that voltage is well below rated voltage of 230 V. This is in coherence with previous work\cite{nplug}, which hypothesized that frequency and voltage indicate load on the grid. \figref{fig:frequency} shows fluctuation in frequency in a typical day.
 
 \noindent Due to unreliable nature of grid, we ensured that all our systems were capable of automatically starting after a power outage. We put our scripts for data collection and upload in Linux startup script. This provided us another advantage. If we observed that a system was down, we could just ask the home occupant to repower the system again. This ensured that there was minimal data loss till the time our researchers could visit the site and repair the fault.
 
-\redcolor{To add: Box plot for voltage and frequency just before a power outage}
-
+\begin{figure}
+\subfloat[\scriptsize \% internet packet drop vs time]{
+    \label{fig:network}
+    \includegraphics[scale=0.115]{./figures/network.png}}
+        \subfloat[\scriptsize \% internet packet drop distribution]{
+        \label{fig:network_hist}
+        \includegraphics[scale=0.115]{./figures/network_hist.png}}
+  \caption{Unreliable internet}
+  
+      \label{fig:unreliable_internet}
+\end{figure}
 
 \noindent \textbf{Unreliable internet connectivity:} While India has one of the fastest growing internet population, only 11\% of the total population is connected to internet, the corresponding figure in US is 78\%\cite{meyer}. Average connection speed in India is 1.3 Mbps, the corresponding numbers in developed countries are in excess of 10 Mbps\cite{state_of_internet}. Even though the condition of internet has vastly improved in the previous few years, from practical experience, we have found it to unreliable. We found internet would be unavailable several times during the day and sometimes it would be too slow. This was a prime motivation behind local storage and periodic data upload, which we have proposed in \paradigm. We found that eventually all the data gets synced up to the main server and from there to the cloud over the internet. We thus believe that for deployments where internet is unreliable, architectures such as \paradigms should be adopted.
 
-\noindent To illustrate the need for \paradigms, we collected network statistics from our deployments. We sent a packet consisting of 15 internet ping requests every 15 seconds and reported packet drop. \figref{fig:network} shows that packet drop of upto 25\% was observed on certain days. The average packet drop was around 6\% per day.
-
-\redcolor{To add: Histogram and hourly distribution of n/w failure to make it more consistent with unreliable grid}
+\noindent To illustrate the need for \paradigms, we collected network statistics from our deployments. We sent a packet consisting of 15 internet ping requests every 15 seconds and reported packet drop. \figref{fig:network} shows that packet drop of upto 25\% was observed on certain days. The average packet drop was around 6\% per day. \figref{fig:network_hist} shows a histogram plot of \% packet drop. It can be seen that on 1/6 fraction of total days, \% packet loss is greater than 10\%.
 
 
 \begin{figure}
@@ -362,37 +399,9 @@ In this section, we discuss similarities between our deployment and those explai
 
 
 
-\begin{figure*} 
-    
-    \subfloat[\scriptsize Power outage vs Time]{
-    \label{fig:failure_time}
-    \includegraphics[scale=0.15]{./figures/electricity.png}}
-    \hspace{1mm}
-     \subfloat[\scriptsize Power outage durations ]{
-        \label{fig:failure_duration}
-        \includegraphics[scale=0.15]{./figures/failure_durations.png}}
-       \hspace{1mm}
-     \subfloat[\scriptsize Power outage by hour of day]{
-             \label{fig:failure_hour}
-             \includegraphics[scale=0.15]{./figures/outage_by_hour.png}}
-              \vspace{-4mm}
-             \newline
-            
-          \subfloat[\scriptsize Voltage fluctuations in a typical day. Rated voltage is 230 V]{
-                  \label{fig:voltage}
-                  \includegraphics[scale=0.15]{./figures/voltage.png}}
-          \subfloat[\scriptsize Frequency fluctuations in a typical day. Rated frequency is 50 Hz]{
-                            \label{fig:frequency}
-                            \includegraphics[scale=0.15]{./figures/frequency.png}}
-          \subfloat[\scriptsize \% internet packet drop]{
-                            \label{fig:network}
-                            \includegraphics[scale=0.15]{./figures/network.png}}
-   
-    \caption{Unreliable internet and grid}
 
-    \label{fig:unreliable}
 
-\end{figure*}
+
 
 \begin{figure}     
     \subfloat[\scriptsize Glowing LED's in night]{
