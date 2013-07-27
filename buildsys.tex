@@ -85,7 +85,7 @@ Residential deployments can provide detailed insights about occupant behavior (s
 
  Most of the previous deployments have been done in the context of developed countries. However, it is equally important to understand building energy consumption in developing countries such as India, where there is electricity deficit and new buildings are being constructed at a rapid rate, adding to electricity demand. The peak demand deficit in India was reported to be 10.3\% in the year 2010-2011\cite{india_energy_book}. Also, 19 million square meters of residential building space was added in 2004-2005\cite{evans09india}.
 
-We have been involved in such deployments in Indian context for more than a year whereby we have until now instrumented - 25 homes with smart meters, a smart campus with sensors for ambient monitoring in a research wing and energy meters in university dorms.
+We have been involved in such deployments in Indian context for more than a year whereby we have until now instrumented - 25 homes with smart meters, a smart campus with sensors for ambient monitoring in a research wing and energy meters in institute dorms.
 In this paper we discuss an extensive ongoing deployment in one of the homes in Delhi, India. This home is instrumented with - smart electricity and water meters, plug level load monitoring for major appliances in the home, ambient environment across every room etc. To the best of our knowledge, this is first such extensive deployment outside any developed country. We discuss in detail characteristics of our deployment that are different from those observed in other deployments in the past, such as unreliable nature of grid and internet connectivity. We also discuss common issues in residential deployments, which had been highlighted in previous work and how we tackled them. Our deployment was maintained as an open source project clearly showing the issues faced and how these were addressed. Unlike many of the past deployments, detailed metadata logs are also provided. 
 
 \section{Related Work}
@@ -123,7 +123,7 @@ Due to prohibitive cost and difficulty in procurement of digital water meters in
 
 \noindent \textbf{Ambient conditions monitoring:} We used ZWave based HomeSeer HSM100\footnote{\url{www.homeseer.com/pdfs/guides/HSM100_Release_Notes.pdf}} multisensors for monitoring motion, light and temperature across 5 rooms in the home. Till date, to the best of our knowledge, no commercial ZWave based sensor is available working on Indian frequency (865.2 MHz). We correspondingly imported EU frequency (868.4 MHz) devices and used it for ambient monitoring. For these HSM100, motion is reported in an event-driven manner (i.e. whenever there is change in motion status, a reading is reported) and temperature and light are polled at 1 Hz. We also placed 1 Android phone at a fixed location in each room and ran FunF journal application\footnote{\url{http://www.funf.org/journal.html}} to log ambient parameters such as light and sound level every 30 seconds for 5 seconds.
 
-\noindent \textbf{Miscellaneous:} Android phones, in addition to measuring ambient conditions, were also used to scan and log Bluetooth, WiFi and GSM networks. All home occupants were requested to keep the Bluetooth on during the duration of the experiment. The network scanning was done every 1 minute and is stored locally on the SD card. External weather conditions, such as temperature, humidity and wind speed, were also logged using publicly available API's from weather monitoring stations\footnote{Forecast, World Weather, Open Weather Map}.
+\noindent \textbf{Miscellaneous:} Android phones, in addition to measuring ambient conditions, were also used to scan and log Bluetooth, WiFi and GSM networks. All home occupants were requested to keep the Bluetooth on during the duration of the experiment. The network scanning was done every 1 minute and is stored locally on the SD card. External weather conditions, such as temperature, humidity and wind speed, were also logged every 10 minutes using publicly available API's from weather monitoring stations\footnote{Forecast, World Weather, Open Weather Map}.
 %\footnote{Forecast: \url{www.forecast.io}, World Weather: \url{www.worldweatheronline.com}, Open Weather Map: \url{www.openweathermap.org}}
 Additionally, network traffic was sensed to monitor connectivity and signal strength. Such miscellaneous data collection, together with detailed electrical consumption, water consumption and ambient information, can be used for multiple applications including energy-apportionment (i.e. assigning energy usage to different occupants within the home), localization and correlating energy usage with outside temperature.
 
@@ -166,7 +166,7 @@ Current Cost&Electricity meter&1/6&Appliance&1&Serial&Apparent power\\ \hline
 \end{table*}
 
 \subsection{Communication and Computation Infrastructure}
-Multitude of sensing infrastructure, as described in \secref{}, involves multitude of communication channels as well. Different computing platforms - microcontrollers, Single Board Computers (SBC's) (e.g. Raspberry Pi\footnote{\url{www.raspberrypi.org}} (RPi) and Ionics Stratus\footnote{\url{www.ionics-ems.com/plugtop/stratus.html}}) and desktops are used for data collection.  
+Multitude of sensing infrastructure, as described in \secref{sec:sensing}, involves multitude of communication channels as well. Different computing platforms - microcontrollers, Single Board Computers (SBC's) (e.g. Raspberry Pi\footnote{\url{www.raspberrypi.org}} (RPi) and Ionics Stratus\footnote{\url{www.ionics-ems.com/plugtop/stratus.html}}) and desktops are used for data collection.  
 %In our experience we found that using a desktop computer for collecting data from individual sensors would be an overkill in terms of cost, processing power and physical space used. Although microcontrollers are cheap and occupy little space, they do not expose enough abstractions for high level programming, are often difficult to debug and are inherently hard to multi task. We thus decided to use Single Board Computers (SBC's) for sensor data collection. We used Raspberry Pi\footnote{\url{www.raspberrypi.org}} (RPi) and Ionics Stratus\footnote{\url{www.ionics-ems.com/plugtop/stratus.html}} based SBC's. 
 SBC's served as a good low cost alternative (25 \$) constituting 700 MHz ARM processors, support for Linux based distributions and allow for coding in higher level languages such as Python. %These SBC's run from SD cards whose size can be chosen as per requirement. 
 
@@ -202,7 +202,7 @@ Similar to prior research, reporting WiFi discontinuity in homes in the USA~\cit
 Various middleware systems such as sMAP\cite{smap}, Building Depot\cite{buildingdepot} and SensorAct\cite{Arjunan12} have been proposed in the past for sensor data collection. However, we found that they are not fine tuned to our needs arising from faulty internet, power failures, etc. Moreover, these systems provide a lot more features than we intend to use. Thus, based on our experience and previous work\cite{hitchhiker_residential}, where importance of simplifying the architecture are proposed, we propose \paradigm. \paradigms involves two main ideas- local storage (on SBC's) and periodic data upload (from SBC to server, and from server to cloud). As explained above, we used SBC's to collect data from sensors. This data was \textbf{locally stored} in form of comma separated value files (CSV) and was \textbf{periodically uploaded} to the main desktop server. In case the upload failed, it was retried the next time again. Each SBC had sufficient flash based local storage to accommodate sensor data for a few days. 
 
 \begin{figure}     
-    \includegraphics[scale=0.15]{./figures/architecture.jpg}    
+    \centering \includegraphics[scale=0.13]{./figures/architecture.jpg}    
     \caption{\paradigm}   
     \label{fig:architecture}   
 \end{figure}
@@ -378,20 +378,20 @@ In this section, we discuss similarities between our deployment and previous wor
 \begin{figure}[t!]  
 \subfloat[\scriptsize Ground floor WiFi Heatmap without additional router]{
 	 \label{fig:ground_without_router}
-    \includegraphics[scale=0.10]{./figures/ground_without_router.png}}
+    \includegraphics[scale=0.085]{./figures/ground_without_router.png}}
     \hspace{1mm}
     \subfloat[\scriptsize Ground floor WiFi Heatmap with additional router]{
     	 \label{fig:ground_with_router}
-        \includegraphics[scale=0.10]{./figures/ground_with_router.png}}
+        \includegraphics[scale=0.085]{./figures/ground_with_router.png}}
         \vspace{-3mm}
        \newline
       \subfloat[\scriptsize Second floor WiFi Heatmap without additional router]{
       	 \label{fig:second_without_router}
-          \includegraphics[scale=0.10]{./figures/without_.png}}
+          \includegraphics[scale=0.085]{./figures/without_.png}}
           \hspace{1mm}
           \subfloat[\scriptsize Second floor WiFi Heatmap with additional router]{
           	 \label{fig:second_with_router}
-              \includegraphics[scale=0.10]{./figures/with_.png}} 
+              \includegraphics[scale=0.085]{./figures/with_.png}} 
     \caption{WiFi signal without placing additional routers on different floors is poor. The greener the region, the better the signal strength for the heatmap.}   
       
 \end{figure}
@@ -406,15 +406,15 @@ In this section, we discuss similarities between our deployment and previous wor
 \begin{figure}     
     \subfloat[\scriptsize Glowing LED's in night]{
         \label{fig:led}
-        \includegraphics[scale=0.018]{./figures/led.jpg}}
-        \hspace{0.1mm}
+        \includegraphics[scale=0.017]{./figures/led.jpg}}
+        \hspace{0.02mm}
          \subfloat[\scriptsize Wire snag leading to data loss ]{
             \label{fig:snag}
-            \includegraphics[scale=0.018]{./figures/snag.jpg}}
-%                    \hspace{0.1mm}
+            \includegraphics[scale=0.017]{./figures/snag.jpg}}
+                    \hspace{0.02mm}
         \subfloat[\scriptsize Closely placed MCB's causing interference in CT monitroing circuit ]{
                     \label{fig:ct_interference}
-                    \includegraphics[scale=0.018]{./figures/ct_interference.jpg}}
+                    \includegraphics[scale=0.017]{./figures/ct_interference.jpg}}
     \caption{Common problems in residential deployments}   
     \label{fig:home}
    
@@ -422,9 +422,11 @@ In this section, we discuss similarities between our deployment and previous wor
 
 
 \section{Conclusions and Future Work}
-In this paper, we presented our deployment experiences from more than an year of . We specifically present unique challenges pertaining to residential deployments in developing countries like India. Some of these key challenges are: unreliable nature of electrical grid, unreliable internet, . These differences motivated us to develop our sensing architecture- \paradigms, which accounts for these pitfalls by introducing local storage and periodic upload. To the best of our knowledge, this is the first extensive residential deployment in a developing country.
+In this paper, we present our experiences in an extensive residential deployment monitoring electrical, water and ambient parameters in Delhi, India. To the best of our knowledge, this is the first extensive residential deployment in a developing country. We present key differences between developing and developed countries, in terms of residential deployments. Some of these key differences are: unreliable nature of electrical grid, unreliable internet, different set and nature of electrical loads, concept of overhead water tanks. We verify most of the learnings pertaining to residential deployments presented in previous literature. Some key aspects include: poor wireless connectivity and the importance of aesthetics.
 
-We are in the process of moving the deployment to more homes. In the near future, we intend to develop event based multi modal analysis techniques for extracting more out the variety of data streams that we have collected.
+Frequent power outages and unreliable internet motivated us to develop our sensing architecture: \paradigms, which accounts for these pitfalls by introducing local storage and periodic upload. Such architectures can be of particular importance in context of developing countries. 
+
+We are in the process of installing our sensors across multiple faculty residences in our institute. We plan to carry out longer duration deployments which capture seasonal variations. We are also developing a billing application for providing detailed electricity usage information to home owners. We plan to perform NILM and provide the home occupants with detailed electricity consumption breakdown.
 \balance
 \bibliographystyle{abbrv}
 \bibliography{references} 
