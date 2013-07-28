@@ -20,6 +20,10 @@
 \usepackage{multirow}
 \usepackage{xcolor,colortbl}
 
+\newcommand{\denselistbib}{
+  \itemsep -.6pt\topsep-4pt\partopsep-4pt
+}
+
 \newcommand{\paradigm}{Sense-Local Store-Upload}
 
 \newcommand{\paradigms}{Sense-Local Store-Upload~}
@@ -28,7 +32,7 @@
 \definecolor{Gray}{gray}{0.91}
 \newcolumntype{a}{>{\columncolor{Gray}}c}
 
-\numberofauthors{2}
+\numberofauthors{1}
 
 \author{
 %
@@ -37,14 +41,14 @@
 % e-mail address. Additionally, tag each line of
 % affiliation/address with \affaddr, and tag the
 %% e-mail address with \email.
-\alignauthor Alice Security \\
-        \affaddr{Department of Computer Science}\\
-        \affaddr{University of Southern California}\\
-       \email{alice@example.edu}
-\alignauthor Bob Privacy \\
-    \affaddr{Networked Embedded Systems Group}\\
-    \affaddr{Swedish Institute of Computer Science}\\
-    \email{bob@example.se}
+\alignauthor Anonymous \\
+%        \affaddr{Department of Computer Science}\\
+%        \affaddr{University of Southern California}\\
+       \email{xyz@zyz.edu}
+%\alignauthor Bob Privacy \\
+%    \affaddr{Networked Embedded Systems Group}\\
+%    \affaddr{Swedish Institute of Computer Science}\\
+%    \email{bob@example.se}
 }
 
 \title{Its Different: Hitchiker’s Tryst with Energy Consumption Patterns in India}
@@ -82,12 +86,21 @@ We have been involved in such deployments in Indian context for more than an yea
 In this paper, we discuss an extensive ongoing deployment in one of the homes in Delhi, India. This home is instrumented with - smart electricity and water meters, plug level load monitoring for major appliances in the home, ambient environment across every room etc. To the best of our knowledge, this is first such extensive deployment outside any developed country. We discuss in detail the unique characteristics of our deployment, such as unreliable nature of grid and internet connectivity. We also discuss common issues in residential deployments, which had been highlighted in previous work and how we tackled them. Our deployment was maintained as an open source project, clearly showing the issues faced and how these were addressed. Unlike many of the past deployments, detailed metadata logs, such as appliance make, mode of operation, etc. are also provided. 
 
 \section{Related Work}
+Building deployments have been studied in the recent past with the goal of computational sustainability. Office and campus deployments presented in previous work \cite{yuvraj_dashboard,yuvraj_ipsn,batra} have shown the scope for significantly reducing HVAC and plug load energy consumption in respective settings. In-situ residential deployments have also been studied in the recent past, and several of them have highlighted the unique challenges involved in residential sensing.
+
+In the early 1990’s Hart laid the foundations of NILM in his seminal work on the subject. Since then, several residential deployments have specifically targeted residential sensing for NILM and as a consequence home electricity datasets have been released in the public. Kolter et al.~\cite{redd} performed deployments in 6 homes in Boston (US) in 2011, with collected data spanning upto 19 days in some homes. Their deployment involved monitoring household electricity at the meter, circuit and appliance level using COTS . Their dataset (REDD) has become a pioneer in NILM datasets and to date has been cited 55 times, which clearly suggests the impact such deployments carry. Anderson et al.~\cite{blued_cmu} performed a week long residential deployment, specifically focusing on collecting fully labeled high frequency electrical data at various resolutions and released BLUED dataset. 
+Barker et al. ~\cite{smart} have performed deployments across three homes and have collected information across varying modalities including, but limited to, electricity monitoring, door and motion status, weather monitoring, renewable electricity generation. They have shown the wide variety of applications pertaining to residential deployment, such as: peak demand flattening~\cite{smartcap}, cost optimization using variable electricity pricing~\cite{smartcharge} , using electricity storage in homes and renewable generation~\cite{cloudy}. Further, they have highlighted the value of additional information which can be obtained by correlating across multiple sensing modalities.
+
+Hnat et al.~\cite{hitchhiker_residential} have provide a detailed guide into residential deployments and have provided lessons learnt from residential deployments across multiple homes for several years. They have proposed various applications of such detailed sensing including identifying activities of daily life (ADLs). Previous residential deployments have also led to smarter appliances such as smart thermostat~\cite{smart_thermostat}, which builds probabilistic models on data collected from door and motions sensors, to build a more occupant centric and electricity efficient thermostat.
+
+All of the deployments discussed above are in the context of developed countries. While residential deployments anywhere across the world are challenging, our deployments highlight some unique challenges limited to developing countries. Some of these challenges in our setting include, but are not limited to, unreliable grid, unreliable internet and difficulty in procuring quality COTS.
 
 \section{Deployment Overview}
 Over the past year, we have performed extensive sensor deployment for ambient monitoring in research environment and smart meters across more than 25 homes in India. Building upon these experiences, we undertook a detailed deployment, constituting 33 sensors measuring electricity, water and ambient parameters across different resolution, in one of the homes in Delhi, India during June-July 2013. Primary objective for this deployment was to bring forth the differences in the Indian context, as compared to the context of developed countries along the dimensions of - 1. The ecosystem of available sensing options that restrict the possible deployments; 2. Energy and water consumption patterns; and 3. Grid and network reliability. We believe that this discussion will enrich the existing research in building energy domain, which has only leveraged deployments and data collection in the context of developed countries, for wider applicability across different contexts. \figref{fig:overall} shows the deployment of these sensors in a 3 storey home, together with 5 single board computers and 3 routers for computing and communication. We now provide detailed description for our deployment.
 
 \begin{figure}     
-    \includegraphics[scale=0.19]{./figures/overall_deployment.jpg}    
+    \includegraphics[scale=0.19]{./figures/overall_deployment.jpg}
+    \vspace{-6mm}    
     \caption{Schematic showing overall home deployment}   
     \label{fig:overall}
 \end{figure}
@@ -99,7 +112,7 @@ For sensing, we took a ``leave no stone unturned'' approach, where  we chose to 
 \noindent\textbf{Electricity monitoring:} %A typical home electricity setup involves a meter which is installed by utility companies and measures overall electricity usage. Further electric cabling is divided into various Miniature Circuit Breakers (MCB's) which control separate circuits. Typical installations involve putting a separate MCB for each heavy load (such as air conditioners) and clubbing various lights, fans and other smaller loads into separate MCB's. Further each individual appliance is controlled via a switch. There are two types of appliances- i) plug loads like refrigerator and electric iron, which need to be physically ``plugged" into the sockets; ii) loads like lights and fans, which do not need to be ``plugged" in by the user and can directly be switched on or off. We highlight the above described home electricity distribution in \figref{fig:electricity_distribution}. 
 We chose to monitor electricity consumption across different resolutions - electricity meter monitoring the consumption at the home aggregate level, Current Transformers (CTs) monitoring current for Miniature Circuit Breakers (MCB's) (each connected to a combination of appliances) and plug level monitors for consumption monitoring of plug load based appliance (see \figref{fig:electricity_distribution} for illustration). 
 
-\begin{enumerate}
+\begin{enumerate}\denselistbib
 \item \textbf{Meter level:} Schneider Electric EM6400\footnote{\url{www.goo.gl/01edPS}} smart meter is used to instrument the main power supply (see \figref{fig:em6400} showing EM6400 smart meter deployed in the electricity panel). %While cheaper variants from the same company were available, we chose to use EM6400 as it also provides reactive power. This additional information has been known to be useful for NILM applications~\cite{hart}. 
 30:5 ratio CT was used on the power mains coming from the grid to ensure that the load current is within the permissible limits (5 A) of the meter. All the necessary parameters including voltage, current, frequency, phase angle, and power (apparent, real, reactive) were read at 1 Hz using Modbus over RS485-serial link provided by EM6400. Based on our experience, we believe that the support required for large scale smart metering deployments, exists in the Indian context. 
 
