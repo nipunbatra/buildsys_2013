@@ -46,15 +46,31 @@
 % e-mail address. Additionally, tag each line of
 % affiliation/address with \affaddr, and tag the
 %% e-mail address with \email.
-\alignauthor Nipun Batra, Manoj Gulati, Amarjeet Singh \\
+\alignauthor XYZ \\
 %        \affaddr{Department of Computer Science}\\
-\affaddr{Indraprastha Institute of Information Technology, Delhi}\\
-\email{\{nipunb,manojg,amarjeet\}@iiitd.ac.in}
+\affaddr{Some institute}\\
+\email{xyz@xyz.com}
 \alignauthor Manoj Gulati \\
 %    \affaddr{Networked Embedded Systems Group}\\
     \affaddr{IIIT Delhi}\\
     \email{manojg@iiitd.ac.in}
 }
+%\author{
+%%
+%% The command \alignauthor (no curly braces needed) should
+%% precede each author name, affiliation/snail-mail address and
+%% e-mail address. Additionally, tag each line of
+%% affiliation/address with \affaddr, and tag the
+%%% e-mail address with \email.
+%\alignauthor Nipun Batra, Manoj Gulati, Amarjeet Singh \\
+%%        \affaddr{Department of Computer Science}\\
+%\affaddr{Indraprastha Institute of Information Technology, Delhi}\\
+%\email{\{nipunb,manojg,amarjeet\}@iiitd.ac.in}
+%\alignauthor Manoj Gulati \\
+%%    \affaddr{Networked Embedded Systems Group}\\
+%    \affaddr{IIIT Delhi}\\
+%    \email{manojg@iiitd.ac.in}
+%}
 \vspace{-3mm}
 \title{Its Different: Insight into home energy consumption in India}
 \vspace{-3mm}
@@ -146,7 +162,7 @@ Motivated by prior electricity consumption deployments, we also chose to monitor
     \label{fig:water_meter}
         \includegraphics[scale=0.027]{./figures/water_meter_2.jpg}}
         \hspace{1mm}
-     \subfloat[\scriptsize Android phone and Homeseer ZWave multisensor used to measure ambient parameters]{
+     \subfloat[\scriptsize Android phone and Express Control ZWave multisensor used to measure ambient parameters]{
         \label{fig:ambient}
             \includegraphics[scale=0.027]{./figures/ambient_2.jpg}}
             \hspace{1mm}
@@ -188,7 +204,7 @@ Motivated by prior electricity consumption deployments, we also chose to monitor
 
 EM6400& COTS (India)&1 Hz&Home&1&RS 485 Serial&Voltage, Current, Frequency, Phase, Power (Active, Reactive and Apparent), Energy\\ \hline
 Aquamet multijet & COTS (India) &5 Hz&Main supply and tank&2&4-20 mA output to GPIO &10 liter pulse for tank output and 1 liter pulse for main supply\\ \hline
-Homeseer HSM100 &COTS (Imported)&Light, temperature: 1 Hz; Motion: event based &Room &6&ZWave&Light, temperature and motion\\ \hline
+Express Controls HSM100 &COTS (Imported)&Light, temperature: 1 Hz; Motion: event based &Room &6&ZWave&Light, temperature and motion\\ \hline
 Android phones &COTS (India) & Audio, light: 5 seconds every 30 seconds; Network scanning: once every 60 seconds&Room&5&Manual transfer&Audio features, light, nearby Bluetooth, cell-tower, WiFi\\ \hline
 CT Monitor&Prototype &20 Hz&MCB&8&Serial&RMS Current \\\hline
 jPlug& Prototype &1 Hz &Appliance&10&WiFi&Voltage, Current, Frequency, Power (Active and Apparent), Energy, Phase\\ \hline	
@@ -216,7 +232,7 @@ Current Cost&COTS (Imported)& Once every 6 seconds &Appliance&1&Serial&Apparent 
 Due to prohibitive cost and procurement difficulty for digital water meters in India, we chose to use Zenner Aquameter's multijet\footnote{\url{www.aquametwatermeters.com/multijet.html}}, a pulse output based water meters. Output pulse is generated through a 4-20 mA current loop, commonly used for analog signaling in industrial process control instruments. For the water meter connected to the utility, over a 0.5 inch diameter pipe, a pulse is generated for every 1 liter of water consumption. Water meter connected to the outlet of storage tank, with 1.25 inch diameter, generates a pulse every 10 liters of water consumption. %generating a pulse every few liters. The precision is based on the quality of the sensor and the diameter of the water pipe. The water meter we used for overhead tank gives a pulse every 10 liters, whereas the one used for inlet supply from utility gives a pulse every 1 liter. These pulses can be measured using the circuit diagram for 4 ma loop shown in ... 
 \figref{fig:water_meter} shows the water meter deployed inline at the overhead tank.
 
-\noindent \textbf{Ambient monitoring:} We used ZWave based HomeSeer HSM100\footnote{\url{www.homeseer.com/pdfs/guides/HSM100_Release_Notes.pdf}} multisensors for monitoring motion, light and temperature across 5 rooms in the home. Till date, to the best of our knowledge, no commercial ZWave based sensor is available working on Indian frequency (865.2 MHz). We correspondingly imported EU frequency (868.4 MHz) devices and used it for ambient monitoring. For these HSM100, motion is reported in an event-driven manner (i.e. whenever there is change in motion status, a reading is reported) and temperature and light are polled at 1 Hz. We also placed 1 Android phone at a fixed location in each room and ran FunF journal application\footnote{\url{http://www.funf.org/journal.html}} to log ambient parameters such as light and sound level every 30 seconds for 5 seconds.
+\noindent \textbf{Ambient monitoring:} We used ZWave based Express Controls HSM100\footnote{\url{www.wiki.linuxmce.org/index.php/Express_Controls_EZMmotion_(HSM_100)}} multisensors for monitoring motion, light and temperature across 5 rooms in the home. Till date, to the best of our knowledge, no commercial ZWave based sensor is available working on Indian frequency (865.2 MHz). We correspondingly imported EU frequency (868.4 MHz) devices and used it for ambient monitoring. For these HSM100, motion is reported in an event-driven manner (i.e. whenever there is change in motion status, a reading is reported) and temperature and light are polled at 1 Hz. We also placed 1 Android phone at a fixed location in each room and ran FunF journal application\footnote{\url{http://www.funf.org/journal.html}} to log ambient parameters such as light and sound level every 30 seconds for 5 seconds.
 
 \noindent \textbf{Miscellaneous:} Android phones, in addition to measuring ambient conditions, were also used to scan and log Bluetooth, WiFi and GSM networks. All home occupants were requested to keep the Bluetooth, for their personal phone, on during the duration of the experiment. The network scanning was done every 1 minute and is stored locally on the SD card. External weather conditions, such as temperature, humidity and wind speed, were also logged every 10 minutes using publicly available APIs from weather monitoring stations\footnote{Forecast, World Weather, Open Weather Map}.
 %\footnote{Forecast: \url{www.forecast.io}, World Weather: \url{www.worldweatheronline.com}, Open Weather Map: \url{www.openweathermap.org}}
