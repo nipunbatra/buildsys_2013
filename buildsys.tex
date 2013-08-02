@@ -73,15 +73,17 @@
 }
 \vspace{-3mm}
 \title{Its Different: Insight into home energy consumption in India}
-\vspace{-3mm}
+\vspace{-10mm}
 \crdata{978-1-4503-1169-4}
 \conferenceinfo{Buildsys'13,} {November 11--15, 2013, Rome, Italy.}
 \CopyrightYear{2013}
 
 \begin{document}
 
+\vspace{-20mm}
 \maketitle
-\vspace{-10mm}
+
+
 \begin{abstract}
 Residential buildings contribute significantly to the overall energy usage across the world. Residential deployments provide insights into home energy consumption and occupant behavior, thus paving the way for building systems that can reduce energy consumption. Much of the prior work in residential deployments is from the developed countries. However, developing countries such as India present unique opportunities to evaluate the scalability of existing research in diverse settings. Building upon more than a year of experience in sensor network deployments, we undertake an extensive deployment in one home in Delhi, measuring electrical, water and ambient parameters. 
 
@@ -334,12 +336,18 @@ Middleware systems such as sMAP~\cite{smap}, BuildingDepot~\cite{buildingdepot} 
     \label{fig:unreliable}
 
 \end{figure*}
-\begin{figure} 
-\vspace{-4mm}    
-     \includegraphics[scale=0.13]{./figures/architecture.jpg}  
-    \vspace{-2mm}  
-    \caption{\paradigm}   
-    \label{fig:architecture}   
+\begin{figure}
+\vspace{-8mm}
+\subfloat[\scriptsize \paradigm]{
+    \label{fig:architecture}
+    \includegraphics[scale=0.13]{./figures/architecture.jpg}}
+        \subfloat[\scriptsize Amount of data (worth seconds) collected per day from water meter. Data worth 86400 seconds is expected per day. Note that limits on yaxis are raised to ensure that power outage and software losses are visible]{
+        \label{fig:architecture_efficacy}
+        \includegraphics[scale=0.125]{./figures/data_loss.png}}
+        \vspace{-3mm}
+  \caption{\paradigms architecture and its impact on ensuring no data loss}
+  \vspace{-2mm}
+   
 \end{figure}
 
 
@@ -503,13 +511,15 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 \section{Conclusions and Future Work}
 In this paper, we present our experiences with an extensive residential deployment monitoring electrical, water and ambient parameters in Delhi, India. To the best of our knowledge, this is the first extensive residential deployment in a developing country. We present key aspects of our deployment and discuss the corresponding impact on the design of building monitoring and control systems that aim to scale across diverse contexts offered in the developing and the developed countries. Some of the unique aspects, impacting the systems development in building energy domain, include - unreliable nature of electrical grid, unreliable network connectivity, different set and nature of electrical loads, water-embedded energy within a home and limited availability of robust COTS infrastructure. We further discussed the similarities in our learning with prior work (done in the USA), demystifying the home environment for energy and water related deployments in the Indian context. %importance of poor wireless connectivity in homes and the importance of aesthetics.
 
-Frequent power outages and unreliable internet motivated us to develop the proposed sensing architecture: \selstups, which accounts for these pitfalls by introducing local storage and periodic upload. Such an architecture can be of particular importance in the context of building monitoring and control systems suitable for the developing countries. 
+Frequent power outages and unreliable internet motivated us to develop the proposed sensing architecture: \selstup, which accounts for these pitfalls by introducing local storage and periodic upload. Such an architecture can be of particular importance in the context of building monitoring and control systems suitable for the developing countries. 
 
 We are in the process of installing our sensors across multiple other homes in Delhi. Data from the deployment will be released for public use after necessary post processing and filtering, to ensure privacy and appropriate usage. We further plan to carry out longer duration deployments capturing seasonal variations in energy usage patterns. %and after that we wish to release our data set in the public. 
 %We are also developing a billing application for providing detailed electricity usage information to home owners. 
 %We plan to perform NILM and provide the home occupants with detailed electricity consumption breakdown.
 
 \balance
+
 \bibliographystyle{abbrv}
 \bibliography{references} 
+
 \end{document}
