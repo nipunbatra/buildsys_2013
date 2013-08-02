@@ -525,7 +525,29 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
    \vspace{-3mm}
 \end{figure}
 \section{Dataset and code release}
-Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 day. This dataset is of the first of it's kind, across the world, where events corresponding to electricity, water and ambient sensors are timestamp recorded. We manually annotate the power consumed for each of the x appliances in their different states in the home. We similarly measure the time taken for each of the y water fixture to consume 10 liters, with the knob fully open. We further provide a detailed metadata log of all electrical appliances, including, but not limited to, estimate date of purchase, mapping to MCB, star-rating, rated power. We intend to release more such fully labeled data in the future, but owing to privacy concerns, we limit the current fully labeled dataset to 1 day from this home. While the accompanying switch had been to our disadvantage in measuring short duration appliance usage, it provides us an advantage over the data collected in developed countries setting. By virtue of switch control, atleast the ON-OFF events can be clearly demarcated.
+Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 day. This dataset is of the first of it's kind, across the world, where events corresponding to electricity, water and ambient sensors are timestamp recorded. We manually annotate the power consumed for each of the x appliances in their different states in the home. We similarly measure the time taken for each of the y water fixture to consume 10 liters, with the knob fully open. We further provide a detailed metadata log of all electrical appliances, including, but not limited to, estimate date of purchase, mapping to MCB, star-rating, rated power. We intend to release more such fully labeled data in the future, but owing to privacy concerns, we limit the current fully labeled dataset to 1 day from this home. While the accompanying switch had been to our disadvantage in measuring short duration appliance usage, it provides us an advantage over the data collected in developed countries setting. By virtue of switch control, atleast the ON-OFF events can be clearly demarcated. 
+
+\begin{table}
+\tabcolsep=0.015cm
+\vspace{-4mm}
+\caption{First floor water fixtures labeled metadata}
+\vspace{-4mm}
+\label{tab:water_consmuption_labeled}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Sno&Type&Consumption&Purpose&Location\\
+\hline
+1&Flush&10 liters per flush; 210&Toilet&Bathroom\\
+ &&seconds for flush tank to refill&flushing&cum toilet\\ \hline
+2&Tap&17.5 l/minute&Washing clothes&Washing area\\ \hline
+3&Tap&5 l/minute&Washing hands&Washbasin\\ \hline
+4&Tap&7 l/minute&Bathing&Bathroom\\ \hline
+5&Tap&1 l/minute&Bathroom cleaning&Bathroom\\ \hline
+6&Tap&13.2 l/minute&Gardening&Veranda\\ \hline
+
+\end{tabular}
+\end{table}
 
 We also publicly release the details of our software and hardware components.
 
