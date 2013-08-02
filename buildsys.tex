@@ -24,6 +24,10 @@
   \itemsep -.6pt\topsep-4pt\partopsep-20pt
 }
 
+\usepackage{enumitem}
+
+%\setlist{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
+
 \newcommand{\paradigm}{Sense-Local Store-Upload}
 \newcommand{\selstup}{SeLStUp}
 
@@ -35,6 +39,16 @@
 \newcolumntype{a}{>{\columncolor{Gray}}c}
 
 \setlength{\belowcaptionskip}{-12pt}
+
+%\setlength{\parskip}{0pt}
+%\setlength{\parsep}{0pt}
+%\setlength{\headsep}{0pt}
+%\setlength{\topskip}{0pt}
+%\setlength{\topmargin}{0pt}
+%\setlength{\topsep}{0pt}
+%\setlength{\partopsep}{0pt}
+%\linespread{0.5}
+
 
 
 \numberofauthors{1}
@@ -72,7 +86,7 @@
     \email{manojg@iiitd.ac.in}
 }
 \vspace{-3mm}
-\title{Its Different: Insight into home energy consumption in India}
+\title{It's Different: Insights into home energy consumption in India}
 \vspace{-10mm}
 \crdata{978-1-4503-1169-4}
 \conferenceinfo{Buildsys'13,} {November 11--15, 2013, Rome, Italy.}
@@ -80,7 +94,7 @@
 
 \begin{document}
 
-\vspace{-20mm}
+
 \maketitle
 
 
@@ -117,16 +131,16 @@ To the best of our knowledge, this is the first such extensive deployment outsid
 \section{Related Work}
 Building deployments have been studied in the past with the goal of improving the building energy efficiency. Office and campus deployments presented in previous work \cite{yuvraj_ipsn,batra} have shown the scope for significantly reducing HVAC and plug load energy consumption in respective settings. Residential deployments have been studied in the past highlighting the unique challenges involved in residential sensing.
 
-Several residential deployments have specifically targeted residential sensing for modeling and inference, specifically pertaining to Non Intrusive Load Monitoring (NILM). Kolter et al.~\cite{redd} performed deployments across 6 homes in Boston (US) in 2011, with collected data spanning up to 19 days in some homes. They monitored household electricity at the meter, circuit and appliance level using Commercial Off-the-shelf Systems(COTS). Their dataset (REDD) has been frequently used to validate NILM research and to date has been cited 55 times, clearly suggesting the impact of such deployments. Anderson et al.~\cite{blued_cmu} performed a week long residential deployment, specifically focusing on collecting fully labeled high frequency electrical data at various resolutions and released BLUED dataset. Our data, in comparison, is for a much longer duration (spanning 61 days at the time of writing) and uses a mix of COTS and customized hardware (due to non-availability of COTS, for everything we wanted to monitor, in the Indian context)
+Several residential deployments have specifically targeted residential sensing for modeling and inference, specifically pertaining to Non Intrusive Load Monitoring (NILM). Kolter et al.~\cite{redd} performed deployments across 6 homes in Boston (US) in 2011, with collected data spanning up to 19 days in some homes. They monitored household electricity at the meter, circuit and appliance level using commercial off-the-shelf(COTS) devices. Their dataset (REDD) has been frequently used to validate NILM research and to date has been cited 55 times, clearly suggesting the impact of such deployments. Anderson et al.~\cite{blued_cmu} performed a week long residential deployment, specifically focusing on collecting fully labeled high frequency electrical data and released BLUED dataset. Our data, in comparison, is for a much longer duration (spanning 61 days at the time of writing) and uses a mix of COTS and customized hardware (due to non-availability of COTS, for everything we wanted to monitor, in the Indian context).
 
-Barker et al.~\cite{smart} performed deployments across three homes and have collected information across varying modalities including, but limited to, electricity monitoring, door and motion status, weather monitoring, renewable electricity generation. They illustrated the wide applicability of the data from their residential deployment, including peak demand flattening~\cite{smartcap} and cost optimization using variable electricity pricing~\cite{smartcharge}. They further highlighted the value of additional information obtained by correlating across multiple sensing modalities. Motivated by this work, we decided to monitor the ambient parameters, in addition to monitoring electrical and water consumption at different granularity.
+Barker et al.~\cite{smart} performed deployments across three homes and have collected information across varying modalities including, but limited to, electricity consumption, occupancy, weather and renewable electricity generation. They illustrated the wide applicability of the data from their residential deployment, including peak demand flattening~\cite{smartcap} and cost optimization using variable electricity pricing~\cite{smartcharge}. They further highlighted the value of additional information obtained by correlating across multiple sensing modalities. Motivated by this work, we decided to monitor the ambient parameters, in addition to monitoring electrical and water consumption at different granularity.
 
 Hnat et al.~\cite{hitchhiker_residential} provide a detailed guide into residential deployments and provided lessons learned from residential deployments across multiple homes for several years. They proposed various applications of such detailed sensing including identifying activities of daily life (ADLs). While providing unique aspects of our deployment, we further establish the commonalities in our deployment with the learning discussed in their work. %Previous residential deployments have also led to smarter appliances such as smart thermostat~\cite{smart_thermostat}, which builds probabilistic models on data collected from door and motion sensors, to build an electricity efficient thermostat.
 All of the deployments discussed above are in the context of developed countries. While residential deployments anywhere across the world are challenging, our deployments highlight some unique challenges specific to developing countries. Some of these challenges in our setting include, but are not limited to, unreliable grid, unreliable internet and difficulty in procuring quality COTS.
 
 \section{Deployment Overview}
 %Over the past year, we have performed extensive sensor deployment for ambient monitoring in research environment and smart meters across more than 25 homes in India. 
-Our deployment constitutes 33 sensors measuring electricity, water and ambient parameters at different resolution, in one of the homes in Delhi, India during June-July 2013. Primary objective for this deployment was to bring forth the differences in the Indian context, as compared to the context of developed countries along the dimensions of - 1. The ecosystem of available sensing options that restrict the possible deployments; 2. Energy and water consumption patterns; and 3. Grid and network reliability. \figref{fig:overall} shows the deployment of these sensors in a 3 storey home, together with the required computing and communication infrastructure. %5 single board computers and 3 routers for computing and communication. We now provide detailed description for our deployment.
+Our deployment constitutes 33 sensors measuring electricity, water and ambient parameters at different granularities, in a home in Delhi, India during May-July 2013. Primary objective for this deployment was to bring forth the differences in the Indian context, as compared to the context of developed countries along the dimensions of - 1. The ecosystem of available sensing options that restrict the possible deployments; 2. Energy and water consumption patterns; and 3. Grid and network reliability. \figref{fig:overall} shows the deployment of these sensors in a 3 storey home, together with the required computing and communication infrastructure. %5 single board computers and 3 routers for computing and communication. We now provide detailed description for our deployment.
 
 \begin{figure} 
 	\vspace{-5mm}    
@@ -138,10 +152,10 @@ Our deployment constitutes 33 sensors measuring electricity, water and ambient p
 
 \subsection{Sensing Infrastructure}
 \label{sec:sensing}
-For sensing, we took a ``leave no stone unturned'' approach, where  we chose to monitor as many physical parameters (ambient conditions, electricity usage and water usage) and non-physical parameters (such as network strength and network connectivity) as possible. We, however, chose to deploy these sensors in a way that home users can continue their daily routines without getting affected. Constrained by the limited options available in the Indian context, our sensors constitute COTS (procured from both within and outside India) and custom built hardware. %Detailed description of the sensors used for monitoring various parameters are explained next.
+For sensing, we took a ``leave no stone unturned'' approach, where  we chose to monitor as many physical parameters (ambient conditions, electricity usage and water usage) and non-physical parameters (such as network strength and network connectivity) as possible. We took care to deploy these sensors in a way that residents can continue their daily routines without added inconvenience. Constrained by the limited options available in the Indian context, our sensors constitute COTS (procured from both within and outside India) and custom built hardware. %Detailed description of the sensors used for monitoring various parameters are explained next.
 
 \noindent\textbf{Electricity monitoring:} %A typical home electricity setup involves a meter which is installed by utility companies and measures overall electricity usage. Further electric cabling is divided into various Miniature Circuit Breakers (MCB's) which control separate circuits. Typical installations involve putting a separate MCB for each heavy load (such as air conditioners) and clubbing various lights, fans and other smaller loads into separate MCB's. Further each individual appliance is controlled via a switch. There are two types of appliances- i) plug loads like refrigerator and electric iron, which need to be physically ``plugged" into the sockets; ii) loads like lights and fans, which do not need to be ``plugged" in by the user and can directly be switched on or off. We highlight the above described home electricity distribution in \figref{fig:electricity_distribution}. 
-Motivated by prior electricity consumption deployments, we also chose to monitor electricity consumption across different resolutions - electricity meter monitoring the consumption at the home aggregate level, Current Transformers (CTs) monitoring current for Miniature Circuit Breakers (MCBs) (each connected to a combination of appliances) and plug level monitors for consumption monitoring of plug load based appliance (see \figref{fig:electricity_distribution} for illustration). 
+Motivated by prior electricity consumption deployments, we also chose to monitor electricity consumption across different granularities- electricity meter monitoring the consumption at the home aggregate level, current transformers (CTs) monitoring current for miniature circuit breakers (MCBs) (each connected to a combination of appliances) and plug level monitors for monitoring plug load based appliance (see \figref{fig:electricity_distribution} for illustration). 
 \begin{figure*}[t!] 
     \vspace{-11mm}
     \subfloat[\scriptsize EM6400 Smart Meter]{
@@ -186,11 +200,12 @@ Motivated by prior electricity consumption deployments, we also chose to monitor
 
 \begin{enumerate}\denselistbib
 \item \textbf{Meter level:} Schneider Electric EM6400\footnote{\url{www.goo.gl/01edPS}} smart meter is used to instrument the main power supply (see \figref{fig:em6400}).% showing EM6400 smart meter deployed in the electricity panel). %While cheaper variants from the same company were available, we chose to use EM6400 as it also provides reactive power. This additional information has been known to be useful for NILM applications~\cite{hart}. 
-~A 30:5 ratio CT was used on the power mains coming from the grid to ensure that the load current is transformed within the permissible limits (5 A) of the meter. All the necessary parameters including voltage, current, frequency and power (apparent, real, reactive) were read at 1 Hz using Modbus over RS485-serial link provided by EM6400. A robust deployment was easily undertaken by a paid electrician thus demonstrating that the support required for large scale smart metering deployments exists in the Indian context. 
+%~A 30:5 ratio CT was used on the power mains coming from the grid to ensure that the load current is transformed within the permissible limits (5 A) of the meter. 
+~Necessary parameters including voltage, current, frequency and power (apparent, real, reactive) were read at 1 Hz using Modbus over RS485-serial link provided by EM6400. A robust deployment was easily undertaken by a paid electrician thus demonstrating that the support required for large scale smart metering deployments exists in the Indian context. 
 
-\item \textbf{Circuit level:} Split CTs, clamped to individual MCBs, are used for monitoring circuit level current. Since no commercial solution was easily available in India for panel level monitoring, a low cost microcontroller platform is used to collect Analog output from CTs at 125 KHz, calculate the RMS value and communicate it over serial UART interface (\figref{fig:ct} captures CTs monitoring 3 MCBs on the first floor MCB box) to a single board computer. A total of 8 CTs were used to monitor different MCB circuits on the first and the second floor.
+\item \textbf{Circuit level:} Split-core CTs, clamped to individual MCBs, are used for monitoring circuit level current. Since no commercial solution was easily available in India for panel level monitoring, we used a low cost microcontroller platform to measure current output from CTs at 125 KHz, calculate the RMS value and communicate it over serial UART interface (\figref{fig:ct} illustrates CTs monitoring 3 MCBs on the first floor MCB box) to a single board computer. A total of 8 CTs were used to monitor different MCB circuits on the first and the second floor.
 
-\item \textbf{Appliance level:} Similar to circuit level monitors, there are no good commercial options for plug level monitors in Indian context. Correspondingly, we worked with our collaborators who in-house developed jPlug\footnote{A variant of nPlug~\cite{nplug}} to measure individual appliance power consumption. Ten jPlugs were used to monitor different plug-load based appliances across the home. jPlug sits in between an appliance and the socket and provides multiple parameters (including voltage, current, phase angle and frequency) at 1 Hz resolution. We also used Current Cost based CT to measure the power consumption for electric motor (used to pump water), which is not a plug-load, but has a significant power consumption (approx. 700 Watts). jPlug and Current Cost CT deployment are shown in \figref{fig:jplug} and \figref{fig:cc} respectively. jPlug makes a HTTP POST connection to log measured parameters. Current Cost exposes apparent power data over the USB port. 
+\item \textbf{Appliance level:} Similar to circuit level monitors, there are no good commercial options for plug level monitors in Indian context. Correspondingly, we worked with our collaborators who in-house developed jPlug\footnote{A variant of nPlug~\cite{nplug}} to measure individual appliance power consumption. Ten jPlugs were used to monitor different plug-load based appliances across the home. jPlug sits in between an appliance and the socket and provides multiple parameters (including voltage, current, phase angle and frequency) at 1 Hz resolution. We also used Current Cost based CT to measure the power consumption for electric motor (used to pump water), which is not a plug-load, but has a significant power consumption (approx. 700 Watts). jPlug and Current Cost CT deployment are shown in \figref{fig:jplug} and \figref{fig:cc} respectively. jPlug uploads measurement data using HTTP POST. Current Cost exposes apparent power data over the USB port. 
 \end{enumerate}
 \begin{table*}[t!]
 \footnotesize
@@ -219,24 +234,24 @@ Current Cost&COTS (Imported)& Once every 6 seconds &Appliance&1&Serial&Apparent 
 \end{table*}
 \begin{figure} 
 \vspace{-2mm} 
-\subfloat[\scriptsize Different resolutions of measuring electricity consumption in home: meter, circuit and appliance]{
+\subfloat[\scriptsize Different granularities of measuring electricity consumption in home: meter, circuit and appliance]{
 	 \label{fig:electricity_distribution}
     \includegraphics[scale=0.14]{./figures/electricity_distribution.jpg}}
     \hspace{1mm}
-    \subfloat[\scriptsize Different resolutions of measuring water consumption in home: inlet supply from utility, outlet supply from tank]{
+    \subfloat[\scriptsize Different granularities of measuring water consumption in home: inlet supply from utility, outlet supply from tank]{
     	 \label{fig:water_distribution}
         \includegraphics[scale=0.14]{./figures/water_distribution.jpg}}
         \vspace{-3mm}
-   \caption{Electricity and water flow inside a home and different resolutions at which these parameters can be monitored.}   
+   \caption{Electricity and water flow inside a home and different granularities at which these parameters can be monitored.}   
       
 \end{figure}
 \noindent \textbf{Water monitoring:} There are a few differences in home water distribution in India when compared to developed countries. Due to non availability of 24x7 water supply, overhead water tanks (typically 1000 liters capacity) are used to store water, when available, and supply it for home activities throughout the day. Due to low water pressure, electric motors are used to pump the water for storage for the times when the supply is available. %Thus, the flow of water in a home can be summarized as follows: 1) Water from utility comes to the home; 2) Electric motor is used to aid in pumping the water up to the tank; 3) Water flows downward from the tank whenever water is consumed. 
 \figref{fig:water_distribution} illustrates the water flow distribution, together with the placement of water meters. One water meter is placed at the inlet (coming from the utility) and another one at the outlet from the water tank (flowing downwards). %to capture the incoming (from utility) and outgoing (from tank) water consumption. 
 
-Due to prohibitive cost and procurement difficulty for digital water meters in India, we chose to use Zenner Aquameter's multijet\footnote{\url{www.aquametwatermeters.com/multijet.html}}, a pulse output based water meters. Output pulse is generated through a 4-20 mA current loop, commonly used for analog signaling in industrial process control instruments. For the water meter connected to the utility, over a 0.5 inch diameter pipe, a pulse is generated for every 1 liter of water consumption. Water meter connected to the outlet of storage tank, with 1.25 inch diameter, generates a pulse every 10 liters of water consumption. %generating a pulse every few liters. The precision is based on the quality of the sensor and the diameter of the water pipe. The water meter we used for overhead tank gives a pulse every 10 liters, whereas the one used for inlet supply from utility gives a pulse every 1 liter. These pulses can be measured using the circuit diagram for 4 ma loop shown in ... 
+Due to prohibitive cost and procurement difficulty for digital water meters in India, we chose to use Zenner Aquameter's multijet\footnote{\url{www.aquametwatermeters.com/multijet.html}}. The multijet uses pulse output generated through a 4-20 mA current loop. Pulse output is commonly used for analog signaling in industrial process control instruments. For the water meter connected to the utility, over a 0.5 inch diameter pipe, a pulse is generated for every 1 liter of water consumption. Water meter connected to the outlet of storage tank, with 1.25 inch diameter, generates a pulse every 10 liters of water consumption. %generating a pulse every few liters. The precision is based on the quality of the sensor and the diameter of the water pipe. The water meter we used for overhead tank gives a pulse every 10 liters, whereas the one used for inlet supply from utility gives a pulse every 1 liter. These pulses can be measured using the circuit diagram for 4 ma loop shown in ... 
 \figref{fig:water_meter} shows the water meter deployed inline at the overhead tank.
 
-\noindent \textbf{Ambient monitoring:} We used ZWave based Express Controls HSM100\footnote{\url{www.wiki.linuxmce.org/index.php/Express_Controls_EZMmotion_(HSM_100)}} multisensors for monitoring motion, light and temperature across 5 rooms in the home. Till date, to the best of our knowledge, no commercial ZWave based sensor is available working on Indian frequency (865.2 MHz). We correspondingly imported EU frequency (868.4 MHz) devices and used it for ambient monitoring. For these HSM100, motion is reported in an event-driven manner (i.e. whenever there is change in motion status, a reading is reported) and temperature and light are polled at 1 Hz. We also placed 1 Android phone at a fixed location in each room and ran FunF journal application\footnote{\url{http://www.funf.org/journal.html}} to log ambient parameters such as light and sound level every 30 seconds for 5 seconds.
+\noindent \textbf{Ambient monitoring:} We used ZWave based Express Controls HSM100\footnote{\url{http://goo.gl/Bszg0u}} multisensors for monitoring motion, light and temperature across 5 rooms in the home. Till date, to the best of our knowledge, no commercial ZWave based sensor is available working on Indian frequency (865.2 MHz). We correspondingly imported EU frequency (868.4 MHz) devices and used it for ambient monitoring. For these HSM100, motion is reported in an event-driven manner (i.e. whenever there is change in motion status, a reading is reported) and temperature and light are polled at 1 Hz. We also placed 1 Android phone at a fixed location in each room and ran FunF journal application\footnote{\url{http://www.funf.org/journal.html}} to log ambient parameters such as light and sound level every 30 seconds for 5 seconds.
 
 \noindent \textbf{Miscellaneous:} Android phones, in addition to measuring ambient conditions, were also used to scan and log Bluetooth, WiFi and GSM networks. All home occupants were requested to keep the Bluetooth, for their personal phone, on during the duration of the experiment. The network scanning was done every 1 minute and is stored locally on the SD card. External weather conditions, such as temperature, humidity and wind speed, were also logged every 10 minutes using publicly available APIs from weather monitoring stations\footnote{Forecast, World Weather, Open Weather Map}.
 %\footnote{Forecast: \url{www.forecast.io}, World Weather: \url{www.worldweatheronline.com}, Open Weather Map: \url{www.openweathermap.org}}
@@ -245,10 +260,11 @@ Complete sensing infrastructure, used in our deployment, is summarized in \tabre
 
 
 \subsection{Communication and Computation}
-Multitude of sensing infrastructure, as described in \secref{sec:sensing}, involves multitude of communication channels as well. Different computing platforms - microcontrollers, Single Board Computers (SBCs) (e.g. Raspberry Pi\footnote{\url{www.raspberrypi.org}} (RPi) and Ionics Stratus\footnote{\url{www.ionics-ems.com/plugtop/stratus.html}}) and desktops are used for data collection.  
+Our sensing infrastructure, described in \secref{sec:sensing}, involves multitude of communication channels. Different computing platforms - microcontrollers, single board computers (SBCs) (e.g. Raspberry Pi\footnote{\url{www.raspberrypi.org}} (RPi) and Ionics Stratus\footnote{\url{www.ionics-ems.com/plugtop/stratus.html}}) and desktops are used for data collection.  
 %In our experience we found that using a desktop computer for collecting data from individual sensors would be an overkill in terms of cost, processing power and physical space used. Although microcontrollers are cheap and occupy little space, they do not expose enough abstractions for high level programming, are often difficult to debug and are inherently hard to multi task. We thus decided to use Single Board Computers (SBC's) for sensor data collection. We used Raspberry Pi\footnote{\url{www.raspberrypi.org}} (RPi) and Ionics Stratus\footnote{\url{www.ionics-ems.com/plugtop/stratus.html}} based SBC's. 
 SBCs served as a good low cost alternative (25 \$) constituting 700 MHz ARM processors, support for Linux based distributions and allow for coding in higher level languages such as Python. %These SBC's run from SD cards whose size can be chosen as per requirement. 
-We used 5 RPi and 1 Ionics Stratus plug computer as SBCs and a 2 GHz Desktop PC running Linux, as the main server where all the data was stored. %The software stack running on the SBC's and how they interacted with the main server and collected data from different sensors is described below:
+We used 5 RPi and 1 Ionics Stratus plug computer as SBCs and a 2 GHz Desktop PC running Linux, as the main local server.
+% where all the data was stored. %The software stack running on the SBC's and how they interacted with the main server and collected data from different sensors is described below:
 
 One RPi was connected to EM6400 using RS485-USB converter. We developed a custom Python program based on pyModbus\footnote{\url{www.github.com/bashwork/pymodbus}} to collect the desired parameters. %library which would serially read 80 registers, using Modbus protocol, to compute 40 electrical parameters as described in \tabref{tab:sensing}. 
 All the collected parameters, together with the UTC timestamp is %stored in a local CSV file. A new CSV was created every 15 minutes. A background program would periodically try to upload CSV files older than 15 minutes, to the main server, where the data is pushed in MySQL database. This architecture for data collection - creating a new CSV periodically, uploading older CSV periodically to main server where the data is then pushed into MySQL, is used for all of our sensors connected to SBCs. We call this model 
@@ -275,14 +291,14 @@ A web daemon, running on the server, listened to the HTTP post request from jPlu
 %\noindent \textbf{Android data collection:} We used FunF journal which would store data inside phone's SD card. We would take a dump once every 15 days and empty the SD card for further data collection.
 
 
-A lot of issues, pertaining to SBCs, were observed in our deployment. As an example, the OpenZWave program that we used created log files for its own diagnostics, that eventually consumed the 512 MB flash drive space on the plug computer. This was fixed eventually by deleting older logs. Such problems encouraged us to develop soft-sensor streams, whereby we collected hard disk space, ping success, CPU utilization, remaining RAM space and temperature of the processor, for all the computing devices including the server at regular intervals. These soft-sensor streams can be used for offline analysis as well as for real time alerting and fault diagnosis. Similar soft-sensor streams have also been used in the previous work~\cite{hitchhiker_residential} for raising alerts.
+A lot of issues, pertaining to SBCs, were observed in our deployment. As an example, the OpenZWave program that we used created log files for its own diagnostics, that eventually consumed the 512 MB flash drive space on the plug computer. This was fixed eventually by deleting older logs. Such problems encouraged us to develop soft-sensor~\cite{softgreen} streams, whereby we collected hard disk space, ping success, CPU utilization, remaining RAM space and temperature of the processor, for all the computing devices including the server at regular intervals. These soft-sensor streams can be used for offline analysis as well as for real time alerting and fault diagnosis. Similar soft-sensor streams have also been used in the previous work~\cite{hitchhiker_residential} for raising alerts.
 
 Similar to prior research, reporting WiFi discontinuity in homes in the USA~~\cite{hitchhiker_residential}, we also observed that one WiFi router did not provide complete coverage for our 3 storey home. We thus used 3 Netgear JNR1010\footnote{\url{www.support.netgear.com/product/JNR1010}} routers, where the router on the first floor acted as the host and the routers on the ground and the second floor were bridged to it. %More details regarding the need of multiple routers and network availability in homes is described in \secref{sec:learning} and \secref{sec:common}.
 
 
-\subsection{System Architecture}	
+\section{System Architecture}	
 \label{sec:architecture}
-Middleware systems such as sMAP~\cite{smap}, BuildingDepot~\cite{buildingdepot} and SensorAct~\cite{Arjunan12} have been proposed in the past for sensor data collection. However, we found that they are not fine tuned to our needs arising from specific deployment context e.g. faulty internet and repeated power failures. Motivated by our experience as well as previous work from other researchers~\cite{hitchhiker_residential}, where importance of simplifying the architecture are proposed, we propose \paradigms (\selstup) model. \selstups involves two main ideas- local storage (on SBCs) and periodic data upload (from SBC to server, and from server to cloud). Data collected from the sensors was \textbf{locally stored} in the form of comma separated value files (CSV), in SBCs and \textbf{periodically uploaded} to the main desktop server. In case the upload failed, it was retried after a fixed time duration. Each SBC was provisioned with sufficient flash based local storage to accommodate sensor data for a few days, to account for persistent upload failure.
+Middleware systems such as sMAP~\cite{smap}, BuildingDepot~\cite{buildingdepot} and SensorAct~\cite{Arjunan12} have been proposed in the past for sensor data collection. However, we found that they do not sufficiently address the requirements of our deployment context e.g. faulty internet and repeated power failures. Motivated by our experience as well as previous work from other researchers~\cite{hitchhiker_residential}, where importance of simplifying the architecture are proposed, we propose \paradigms (\selstup) model. \selstups involves two main ideas- local storage (on SBCs) and periodic data upload (from SBC to server, and from server to cloud). Data collected from the sensors was \textbf{locally stored} in the form of comma separated value files (CSV), in SBCs and \textbf{periodically uploaded} to the main desktop server. In case the upload failed, it was retried after a fixed time duration. Each SBC was provisioned with sufficient flash based local storage to accommodate sensor data for a few days, to account for persistent upload failure.
 \begin{figure*}[t!] 
     \vspace{-11mm}
     \hspace{-2mm}
@@ -352,13 +368,15 @@ Middleware systems such as sMAP~\cite{smap}, BuildingDepot~\cite{buildingdepot} 
 
 
 
-Web applications running on the server allowed a home user to locally visualize her data from multiple sensing streams. Further, data from the server was replicated on to a cloud server, allowing outside users and specifically researchers to remotely visualize the data. \figref{fig:architecture} illustrates the \selstups architecture. The salient features of our architecture are:
+Web applications running on the server allowed a home user to locally visualize her data from multiple sensing streams. Data from the server was periodically replicated to a cloud server, allowing researchers to remotely visualize the data and maintain the deployment. \figref{fig:architecture} illustrates the \selstups architecture. The salient features of our architecture are:
 
-\begin{itemize}
-\item \textbf{Decoupled sensing and data uploading:} ensuring that an error in data uploading does not impact the sensing and vice versa, avoiding data loss due to network (even local in-home WiFi) failure. The design choice of decoupling comes from the well established principles of software engineering.
-\item \textbf{Minimal internet requirement:} Internet is required \textbf{only} when outside researchers wish to view and analyze collected data in near realtime. Internet failure does not have any impact on robust sensor data collection. The periodic nature of our uploads ensured that data would be uploaded whenever internet is back. Local storage, on SBC, further ensures reliable data collection, even in the cases of server failure. %Further, there is no data loss even if the server goes down for some time, due to local storage.
-\item \textbf{Reduced load on server:} Periodic upload of data (in larger volumes) results in reduced computation and bandwidth requirements for the SBCs and the server. While it comes at the cost of increased storage requirements on SBCs, our analysis shows that 1 GB of local storage will suffice for most of the practical scenarios. %, we did not need to provision for more than 1 GB.
-\end{itemize}
+
+\noindent \textbf{Decoupled sensing and data uploading:} ensuring that an error in data uploading does not impact the sensing and vice versa, avoiding data loss due to network (even local in-home WiFi) failure. The design choice of decoupling comes from the well established principles of software engineering.
+
+\noindent \textbf{Minimal internet requirement:} Internet is required \textbf{only} when outside researchers wish to view and analyze collected data in near-realtime. Internet failure does not have any impact on robust sensor data collection. The periodic nature of our uploads ensured that data would be uploaded whenever internet is back. Local storage, on SBC, further ensures reliable data collection, even in the cases of server failure. %Further, there is no data loss even if the server goes down for some time, due to local storage.
+
+\noindent \textbf{Reduced load on server:} Periodic upload of data (in larger volumes) results in reduced computation and bandwidth requirements for the SBCs and the server. While it comes at the cost of increased storage requirements on SBCs, our analysis shows that 1 GB of local storage will suffice for most of the practical scenarios. %, we did not need to provision for more than 1 GB.
+
 
 
 
@@ -368,13 +386,13 @@ We now discuss some of the key unique aspects brought forward from our deploymen
 
 
 
-\noindent \textbf{Unreliable grid is commonplace:} Load shedding or rolling blackout is a commonplace in the developing countries. %owing to several reasons such as improper infrastructure management, high demand and low electricity production. 
+\noindent \textbf{Unreliable electrical grid:} Load shedding or rolling blackout is commonplace in the developing countries. %owing to several reasons such as improper infrastructure management, high demand and low electricity production. 
 Specifically in India, power outages are common in summers when the load is high due to excessive usage of air conditioners. Excessive load and poor infrastructure also leads to significant fluctuations in the supply voltage. %As a result, voltage fluctuations or brownouts are also common.
 
 Various statistics, collected from our deployment, further establish these aspects. We used several sources, such as, Unix \emph{last} command on the desktop server, common missing data duration from multiple sensors, to find power outages reliably. \figref{fig:failure_time} shows power outages in number of hours per day during June-July 2013. One of the days experienced power outage for up to 12 hours (the situation is worse outside of the major cities in India, with electricity coming only for a few hours every day). \figref{fig:failure_duration} shows the power outage duration distribution in minutes of power outages. A total of 107 power outages were reported in the 61 day period. While the average power outage lasted about 1 hour, there were outages lasting upto 9 hours. \figref{fig:failure_hour} shows the power outage distribution by hour of the day, showing maximum outages around 10 AM in the morning and around midnight. These times correspond to office time and night time when air conditioners in offices or homes are turned on leading to excessive demand on the grid. \figref{fig:frequency_box} and \figref{fig:voltage_box} show frequency and voltage fluctuations for a week in June. \figref{fig:voltage} shows voltage fluctuating between 180 and 250 Volts on a particular day.
 
 %\figref{fig:voltage} shows the voltage fluctuations, between 180 and 250 Volts, as observed on a typical day. \redcolor{Is it really a typical day? Can you do a box plot for voltage fluctuations for maybe one of the weeks - that will probably have more impact.} 
-Significant amount of NILM literature uses current data, as measured at different resolutions, for disaggregation. This has an inherent assumption of almost fixed voltage from the grid. \emph{Observed voltage fluctuations motivate two important aspects - 1. Load measurement devices should measure both current and voltage and not only current as is done in many of the CT based devices; and 2. When performing disaggregation, normalization to account for voltage fluctuations (as was proposed in the original NILM work~\cite{hart}) is important.}
+Significant amount of NILM literature uses current data, as measured at different granularities, for disaggregation. This has an inherent assumption of almost fixed voltage from the grid. \emph{Observed voltage fluctuations motivate two important aspects - 1. Load measurement devices should measure both current and voltage and not only current as is done in many of the CT based devices; and 2. When performing disaggregation, normalization to account for voltage fluctuations (as was proposed in the original NILM work~\cite{hart}) is important.}
 %We observe that voltage drops during the peak load hours. 
 \figref{fig:voltage_before_outage} shows that voltage just before the power outage (for a selected sample of outages occurring in the  from 10 PM to 1 AM). We observe that the voltage is well below the rated voltage of 230 V. This is in coherence with previous work~\cite{nplug}, which hypothesized that frequency and voltage measured at the home level are potential indicators of the load on the grid.
 
@@ -506,6 +524,10 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
     \label{fig:home}
    \vspace{-3mm}
 \end{figure}
+\section{Dataset and code release}
+Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 day. This dataset is of the first of it's kind, across the world, where events corresponding to electricity, water and ambient sensors are timestamp recorded. We manually annotate the power consumed for each of the x appliances in their different states in the home. We similarly measure the time taken for each of the y water fixture to consume 10 liters, with the knob fully open. We further provide a detailed metadata log of all electrical appliances, including, but not limited to, estimate date of purchase, mapping to MCB, star-rating, rated power. We intend to release more such fully labeled data in the future, but owing to privacy concerns, we limit the current fully labeled dataset to 1 day from this home. While the accompanying switch had been to our disadvantage in measuring short duration appliance usage, it provides us an advantage over the data collected in developed countries setting. By virtue of switch control, atleast the ON-OFF events can be clearly demarcated.
+
+We also publicly release the details of our software and hardware components.
 
 
 \section{Conclusions and Future Work}
