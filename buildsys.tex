@@ -39,22 +39,6 @@
 
 \numberofauthors{1}
 \vspace{-3mm}
-\author{
-%
-% The command \alignauthor (no curly braces needed) should
-% precede each author name, affiliation/snail-mail address and
-% e-mail address. Additionally, tag each line of
-% affiliation/address with \affaddr, and tag the
-%% e-mail address with \email.
-\alignauthor XYZ \\
-%        \affaddr{Department of Computer Science}\\
-\affaddr{Some institute}\\
-\email{xyz@xyz.com}
-\alignauthor Manoj Gulati \\
-%    \affaddr{Networked Embedded Systems Group}\\
-    \affaddr{IIIT Delhi}\\
-    \email{manojg@iiitd.ac.in}
-}
 %\author{
 %%
 %% The command \alignauthor (no curly braces needed) should
@@ -62,15 +46,31 @@
 %% e-mail address. Additionally, tag each line of
 %% affiliation/address with \affaddr, and tag the
 %%% e-mail address with \email.
-%\alignauthor Nipun Batra, Manoj Gulati, Amarjeet Singh \\
+%\alignauthor XYZ \\
 %%        \affaddr{Department of Computer Science}\\
-%\affaddr{Indraprastha Institute of Information Technology, Delhi}\\
-%\email{\{nipunb,manojg,amarjeet\}@iiitd.ac.in}
+%\affaddr{Some institute}\\
+%\email{xyz@xyz.com}
 %\alignauthor Manoj Gulati \\
 %%    \affaddr{Networked Embedded Systems Group}\\
 %    \affaddr{IIIT Delhi}\\
 %    \email{manojg@iiitd.ac.in}
 %}
+\author{
+%
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+%% e-mail address with \email.
+\alignauthor Nipun Batra, Manoj Gulati, Amarjeet Singh \\
+%        \affaddr{Department of Computer Science}\\
+\affaddr{Indraprastha Institute of Information Technology, Delhi}\\
+\email{\{nipunb,manojg,amarjeet\}@iiitd.ac.in}
+\alignauthor Manoj Gulati \\
+%    \affaddr{Networked Embedded Systems Group}\\
+    \affaddr{IIIT Delhi}\\
+    \email{manojg@iiitd.ac.in}
+}
 \vspace{-3mm}
 \title{Its Different: Insight into home energy consumption in India}
 \vspace{-3mm}
@@ -81,11 +81,13 @@
 \begin{document}
 
 \maketitle
-
+\vspace{-10mm}
 \begin{abstract}
-Residential buildings contribute significantly to the the overall energy usage across the world. Residential deployments provide insights into home energy consumption and occupant behavior, thus paving the way for building systems that can reduce energy consumption. Much of the prior work in residential deployments is from the developed countries. However, countries such as India present several unique aspects that can help evaluate the scalability of existing research to diverse settings. Building upon more than a year of experience in sensor network deployments, we undertake an extensive deployment in one of the homes in Delhi, measuring electrical, water and ambient parameters. 
+Residential buildings contribute significantly to the overall energy usage across the world. Residential deployments provide insights into home energy consumption and occupant behavior, thus paving the way for building systems that can reduce energy consumption. Much of the prior work in residential deployments is from the developed countries. However, developing countries such as India present unique opportunities to evaluate the scalability of existing research in diverse settings. Building upon more than a year of experience in sensor network deployments, we undertake an extensive deployment in one home in Delhi, measuring electrical, water and ambient parameters. 
 
-We discuss the architectural implications on the deployment systems that can be used for monitoring and control in the context of developing counties, such as India. Addressing the unreliable nature of electrical grid and internet in such settings, we present \emph{\paradigms} architecture suited to the context of deployments in developing countries. While providing several unique aspects, our deployment further validates the common considerations from similar residential deployments done in the western context. We believe that the discussion in this paper will help in developing building monitoring and control systems that can scale across diverse deployment scenarios, prevailing in the developed and the developing countries.
+We discuss the architectural implications on the deployment systems that can be used for monitoring and control in the context of developing countries. Addressing the unreliable nature of electrical grid and internet in such settings, we present \emph{\paradigms} architecture.
+% suited to the context of deployments in developing countries.
+While providing several unique aspects, our deployment further validates the common considerations from similar residential deployments done in the Western context. We believe that the discussion in this paper will help in the development of building monitoring and control systems, that can scale across diverse deployment scenarios, prevailing in both developed and the developing countries.
 \end{abstract}
 
 % A category with the (minimum) three required fields
@@ -115,7 +117,7 @@ Building deployments have been studied in the past with the goal of improving th
 
 Several residential deployments have specifically targeted residential sensing for modeling and inference, specifically pertaining to Non Intrusive Load Monitoring (NILM). Kolter et al.~\cite{redd} performed deployments across 6 homes in Boston (US) in 2011, with collected data spanning up to 19 days in some homes. They monitored household electricity at the meter, circuit and appliance level using Commercial Off-the-shelf Systems(COTS). Their dataset (REDD) has been frequently used to validate NILM research and to date has been cited 55 times, clearly suggesting the impact of such deployments. Anderson et al.~\cite{blued_cmu} performed a week long residential deployment, specifically focusing on collecting fully labeled high frequency electrical data at various resolutions and released BLUED dataset. Our data, in comparison, is for a much longer duration (spanning 61 days at the time of writing) and uses a mix of COTS and customized hardware (due to non-availability of COTS, for everything we wanted to monitor, in the Indian context)
 
-Barker et al.~\cite{smart} performed deployments across three homes and have collected information across varying modalities including, but limited to, electricity monitoring, door and motion status, weather monitoring, renewable electricity generation. They illustrated the wide applicability of the data from their residential deployment, including peak demand flattening~\cite{smartcap} and cost optimization using variable electricity pricing~\cite{smartcharge}. They further highlighted the value of additional information obtained by correlating across multiple sensing modalities. Motivated by this work, we decided to monitor the ambient parameters at a high resolution, in addition to monitoring electrical and water consumption at different granularity.
+Barker et al.~\cite{smart} performed deployments across three homes and have collected information across varying modalities including, but limited to, electricity monitoring, door and motion status, weather monitoring, renewable electricity generation. They illustrated the wide applicability of the data from their residential deployment, including peak demand flattening~\cite{smartcap} and cost optimization using variable electricity pricing~\cite{smartcharge}. They further highlighted the value of additional information obtained by correlating across multiple sensing modalities. Motivated by this work, we decided to monitor the ambient parameters, in addition to monitoring electrical and water consumption at different granularity.
 
 Hnat et al.~\cite{hitchhiker_residential} provide a detailed guide into residential deployments and provided lessons learned from residential deployments across multiple homes for several years. They proposed various applications of such detailed sensing including identifying activities of daily life (ADLs). While providing unique aspects of our deployment, we further establish the commonalities in our deployment with the learning discussed in their work. %Previous residential deployments have also led to smarter appliances such as smart thermostat~\cite{smart_thermostat}, which builds probabilistic models on data collected from door and motion sensors, to build an electricity efficient thermostat.
 All of the deployments discussed above are in the context of developed countries. While residential deployments anywhere across the world are challenging, our deployments highlight some unique challenges specific to developing countries. Some of these challenges in our setting include, but are not limited to, unreliable grid, unreliable internet and difficulty in procuring quality COTS.
@@ -184,7 +186,7 @@ Motivated by prior electricity consumption deployments, we also chose to monitor
 \item \textbf{Meter level:} Schneider Electric EM6400\footnote{\url{www.goo.gl/01edPS}} smart meter is used to instrument the main power supply (see \figref{fig:em6400}).% showing EM6400 smart meter deployed in the electricity panel). %While cheaper variants from the same company were available, we chose to use EM6400 as it also provides reactive power. This additional information has been known to be useful for NILM applications~\cite{hart}. 
 ~A 30:5 ratio CT was used on the power mains coming from the grid to ensure that the load current is transformed within the permissible limits (5 A) of the meter. All the necessary parameters including voltage, current, frequency and power (apparent, real, reactive) were read at 1 Hz using Modbus over RS485-serial link provided by EM6400. A robust deployment was easily undertaken by a paid electrician thus demonstrating that the support required for large scale smart metering deployments exists in the Indian context. 
 
-\item \textbf{Circuit level:} Split CTs, clamped to individual MCBs, are used for monitoring circuit level current. Since no commercial solution was easily available in India for panel level monitoring, a low cost microcontroller platform is used to collect Analog output from CTs at 125 KHz, calculate the RMS value and communicate it over serial UART interface (\figref{fig:ct} captures CTs monitoring 3 MCBs on the first floor MCB box) to a single board computer. A total of 8 CTs were used to monitor different MCB circuits on the first and the second floor in the home.
+\item \textbf{Circuit level:} Split CTs, clamped to individual MCBs, are used for monitoring circuit level current. Since no commercial solution was easily available in India for panel level monitoring, a low cost microcontroller platform is used to collect Analog output from CTs at 125 KHz, calculate the RMS value and communicate it over serial UART interface (\figref{fig:ct} captures CTs monitoring 3 MCBs on the first floor MCB box) to a single board computer. A total of 8 CTs were used to monitor different MCB circuits on the first and the second floor.
 
 \item \textbf{Appliance level:} Similar to circuit level monitors, there are no good commercial options for plug level monitors in Indian context. Correspondingly, we worked with our collaborators who in-house developed jPlug\footnote{A variant of nPlug~\cite{nplug}} to measure individual appliance power consumption. Ten jPlugs were used to monitor different plug-load based appliances across the home. jPlug sits in between an appliance and the socket and provides multiple parameters (including voltage, current, phase angle and frequency) at 1 Hz resolution. We also used Current Cost based CT to measure the power consumption for electric motor (used to pump water), which is not a plug-load, but has a significant power consumption (approx. 700 Watts). jPlug and Current Cost CT deployment are shown in \figref{fig:jplug} and \figref{fig:cc} respectively. jPlug makes a HTTP POST connection to log measured parameters. Current Cost exposes apparent power data over the USB port. 
 \end{enumerate}
@@ -214,7 +216,7 @@ Current Cost&COTS (Imported)& Once every 6 seconds &Appliance&1&Serial&Apparent 
 \vspace{-4mm}
 \end{table*}
 \begin{figure} 
-%\vspace{-2mm} 
+\vspace{-2mm} 
 \subfloat[\scriptsize Different resolutions of measuring electricity consumption in home: meter, circuit and appliance]{
 	 \label{fig:electricity_distribution}
     \includegraphics[scale=0.14]{./figures/electricity_distribution.jpg}}
@@ -281,46 +283,60 @@ Similar to prior research, reporting WiFi discontinuity in homes in the USA~~\ci
 Middleware systems such as sMAP~\cite{smap}, BuildingDepot~\cite{buildingdepot} and SensorAct~\cite{Arjunan12} have been proposed in the past for sensor data collection. However, we found that they are not fine tuned to our needs arising from specific deployment context e.g. faulty internet and repeated power failures. Motivated by our experience as well as previous work from other researchers~\cite{hitchhiker_residential}, where importance of simplifying the architecture are proposed, we propose \paradigms (\selstup) model. \selstups involves two main ideas- local storage (on SBCs) and periodic data upload (from SBC to server, and from server to cloud). Data collected from the sensors was \textbf{locally stored} in the form of comma separated value files (CSV), in SBCs and \textbf{periodically uploaded} to the main desktop server. In case the upload failed, it was retried after a fixed time duration. Each SBC was provisioned with sufficient flash based local storage to accommodate sensor data for a few days, to account for persistent upload failure.
 \begin{figure*}[t!] 
     \vspace{-11mm}
+    \hspace{-2mm}
     \subfloat[\scriptsize Power outage vs Time]{
     \label{fig:failure_time}
-    \includegraphics[scale=0.14]{./figures/electricity.png}}
-    \hspace{1mm}
+    \includegraphics[scale=0.12]{./figures/electricity.png}}
+    \hspace{-1mm}
      \subfloat[\scriptsize Power outage duration ]{
         \label{fig:failure_duration}
-        \includegraphics[scale=0.14]{./figures/failure_durations.png}}
-       \hspace{1mm}
+        \includegraphics[scale=0.12]{./figures/failure_durations.png}}
+       \hspace{-1mm}
      \subfloat[\scriptsize Power outage by hour of day]{
              \label{fig:failure_hour}
-             \includegraphics[scale=0.14]{./figures/outage_by_hour.png}}
+             \includegraphics[scale=0.12]{./figures/outage_by_hour.png}}
+%             \hspace{-1mm}
+       \subfloat[\scriptsize Voltage fluctuations in a week in our deployment]{
+                                             \label{fig:voltage_box}
+                                             \includegraphics[scale=0.13]{./figures/voltage_box.png}}
+         \hspace{1mm}
+               \subfloat[\scriptsize Voltage fluctuations in a week in SMART* dataset]{
+                                                     \label{fig:voltage_box_us}
+                                                     \includegraphics[scale=0.13]{./figures/us_voltage_box.png}}
               \vspace{-4mm}
-             \newline
-            
-          \subfloat[\scriptsize Voltage fluctuations in a typical day. Rated voltage is 230 V]{
+               \hspace{-2mm}
+             \newline      
+                  
+          \subfloat[\scriptsize Voltage fluctuations on one of the days in our deployment]{
                   \label{fig:voltage}
-                  \includegraphics[scale=0.14]{./figures/voltage.png}}
+                  \includegraphics[scale=0.12]{./figures/voltage.png}}
+                  \hspace{-1mm} 
+            \subfloat[\scriptsize Voltage fluctuations on one of the days in SMART* dataset]{
+                              \label{fig:voltage_us}
+                              \includegraphics[scale=0.12]{./figures/us_voltage.png}}
                   \hspace{1mm}
-          \subfloat[\scriptsize Frequency fluctuations in a week. Rated frequency is 50 Hz]{
+          \subfloat[\scriptsize Observed voltage just before power outage during night hours (10 PM to 1 AM)]{
+                                      \label{fig:voltage_before_outage}
+                                      \includegraphics[scale=0.12]{./figures/voltage_before_outage.png}}
+          \subfloat[\scriptsize Frequency fluctuations in a week in our deployment]{
                             \label{fig:frequency_box}
-                            \includegraphics[scale=0.14]{./figures/frequency_box.png}}
-                            \hspace{1mm}
-           \subfloat[\scriptsize Voltage fluctuations in a week. Rated voltage is 230 V]{
-                                       \label{fig:voltage_box}
-                                       \includegraphics[scale=0.14]{./figures/voltage_box.png}}
-                                       \hspace{1mm}
-          \subfloat[\scriptsize Observed voltage just before power outage during night hours (10 PM to 1 AM). Rated voltage is 230 V]{
-                            \label{fig:voltage_before_outage}
-                            \includegraphics[scale=0.14]{./figures/voltage_before_outage.png}}
+                            \hspace{2mm}
+                            \includegraphics[scale=0.135]{./figures/frequency_box.png}}
+		\subfloat[\scriptsize Frequency fluctuations in a week in SMART* dataset]{
+		                            \label{fig:frequency_box_us}
+		                            \includegraphics[scale=0.135]{./figures/us_frequency_box.png}}                           
+          
                             
      \vspace{-3mm}
    
-    \caption{Unreliable grid}
+    \caption{Unreliable grid. Rated voltage in India and US are 230V and 120V respectively. Rated frequency in India and US are 50Hz and 60Hz respectively}
 
     \label{fig:unreliable}
 
 \end{figure*}
 \begin{figure} 
 \vspace{-4mm}    
-    \centering \includegraphics[scale=0.13]{./figures/architecture.jpg}  
+     \includegraphics[scale=0.13]{./figures/architecture.jpg}  
     \vspace{-2mm}  
     \caption{\paradigm}   
     \label{fig:architecture}   
@@ -443,7 +459,7 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
     \subfloat[\scriptsize Ground floor WiFi Heatmap with additional router]{
     	 \label{fig:ground_with_router}
         \includegraphics[scale=0.085]{./figures/ground_with_router.png}}
-        \vspace{-3mm}
+        \vspace{-3.5mm}
        \newline
       \subfloat[\scriptsize Second floor WiFi Heatmap without additional router]{
       	 \label{fig:second_without_router}
