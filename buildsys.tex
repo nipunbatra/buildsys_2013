@@ -313,7 +313,7 @@ A web daemon, running on the server, listened to the HTTP post request from jPlu
 
 A lot of issues, pertaining to SBCs, were observed in our deployment. As an example, the OpenZWave program that we used created log files for its own diagnostics, that eventually consumed the 512 MB flash drive space on the plug computer. This was fixed eventually by deleting older logs. Such problems encouraged us to develop soft-sensor~\cite{softgreen} streams, whereby we collected hard disk space, ping success, CPU utilization, remaining RAM space and temperature of the processor, for all the computing devices including the server at regular intervals. These soft-sensor streams can be used for offline analysis as well as for real time alerting and fault diagnosis. Similar soft-sensor streams have also been used in the previous work~\cite{hitchhiker_residential} for raising alerts.
 
-Similar to prior research, reporting WiFi discontinuity in homes in the USA~~\cite{hitchhiker_residential}, we also observed that one WiFi router did not provide complete coverage for our 3 storey home. We thus used 3 Netgear JNR1010\footnote{\url{www.support.netgear.com/product/JNR1010}} routers, where the router on the first floor acted as the host and the routers on the ground and the second floor were bridged to it. %More details regarding the need of multiple routers and network availability in homes is described in \secref{sec:learning} and \secref{sec:common}.
+Similar to prior research, reporting WiFi discontinuity in homes in the USA~\cite{hitchhiker_residential}, we also observed that one WiFi router did not provide complete coverage for our 3 storey home. We thus used 3 Netgear JNR1010\footnote{\url{www.support.netgear.com/product/JNR1010}} routers, where the router on the first floor acted as the host and the routers on the ground and the second floor were bridged to it. %More details regarding the need of multiple routers and network availability in homes is described in \secref{sec:learning} and \secref{sec:common}.
 
 \vspace{-1mm}
 \section{System Architecture}	
@@ -458,8 +458,8 @@ We observed internet was either unavailable or had a slow intermittent connectiv
 %\noindent To measure the network connectivity, we collected network statistics by performing 15 internet ping requests every 15 seconds and collected the statistics on packet drop. \figref{fig:network} shows that packet drop of up to 22\% was observed on certain days. The average packet drop per day was approx. 6\%. \figref{fig:network_hist} shows a CDF plot of \% packet drop. It can be seen that approx. one-fifths of total days reported greater than 10\% packet loss. 
 
 
-\begin{figure}
-\vspace{-4mm}
+\begin{figure}[t!]
+\vspace{-2mm}
 \subfloat[\scriptsize Before repair]{
     \label{fig:before_repair}
     \includegraphics[scale=0.1]{./figures/before_repair.png}}
@@ -538,7 +538,7 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 6&Tap&13.2 l/minute&Gardening&Veranda\\ \hline
 
 \end{tabular}
-\vspace{-6mm}
+%\vspace{-6mm}
 \end{table}
 \begin{figure}[t!]  
 \vspace{-2mm}
@@ -579,7 +579,7 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 
 
 
-\begin{figure}     
+\begin{figure}[t!]     
     \subfloat[\scriptsize Glowing LEDs in night]{
         \label{fig:led}
         \includegraphics[scale=0.017]{./figures/led.jpg}}
@@ -598,11 +598,13 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 \end{figure}
 \vspace{-1mm}
 \section{Dataset and code release}
-Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 day. This dataset is of the first of it's kind, across the world, where events corresponding to electricity, water and ambient sensors are timestamp recorded. We manually annotate the power consumed for each of the x appliances in their different states in the home. We similarly measure the amount of water consumed in 1 minute by each of the y water fixtures. \tabref{tab:water_consumption_labeled} shows the consumption pattern of water fixtures on the first floor. We further provide a detailed metadata log of all electrical appliances, including, but not limited to, estimate date of purchase, mapping to MCB, star-rating, rated power. We intend to release more such fully labeled data in the future, but owing to privacy concerns, we limit the current fully labeled dataset to 1 day from this home. While the accompanying switch had been to our disadvantage in measuring short duration appliance usage, it provides us an advantage over the data collected in developed countries setting. By virtue of switch control, atleast the ON-OFF events can be clearly demarcated. Thus, in some sense, our entire electrical dataset is event labeled. 
+Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 day. This dataset is of the first of it's kind, across the world, where events corresponding to electricity, water and ambient sensors are timestamp recorded. We manually annotate the power consumed for each of the x appliances in their different states in the home. We similarly measure the amount of water consumed in 1 minute by each of the y water fixtures. \tabref{tab:water_consumption_labeled} shows the consumption pattern of water fixtures on the first floor. We further provide a detailed metadata log of all electrical appliances, including, but not limited to, estimate date of purchase, mapping to MCB, star-rating, rated power. 
+%We intend to release more such fully labeled data in the future, but owing to privacy concerns, we limit the current fully labeled dataset to 1 day from this home. 
+While the accompanying switch had been to our disadvantage in measuring short duration appliance usage, it ensures that appliance ON-OFF events can be observed using jPlug data. 
 
 \begin{figure} 
 	\vspace{-5mm}    
-    \centering\includegraphics[scale=0.19]{./figures/label.png}
+    \centering\includegraphics[scale=0.18]{./figures/label.png}
 	\vspace{-2mm}    
     \caption{Labeled dataset} 
 %    \vspace{-2mm}  
