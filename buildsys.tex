@@ -115,6 +115,7 @@ While providing several unique aspects, our deployment further validates the com
 
 \keywords{Deployment, Buildings, Smart Homes, Sensor Networks}
 
+\vspace{-2mm}
 \section{Introduction}
 \label{sec:intro}
 \looseness -1 Buildings (both residential and commercial) account for significant proportion (more than 30\%) of overall energy consumption globally~\cite{evans09india}. %The contribution of buildings to overall energy usage for different countries is as follows- Australia: 20\%, China: 34\%, India: 47\%, Japan: 33\% and USA: 29\%. 
@@ -128,6 +129,7 @@ We have been involved in sensor network deployments in the Indian context for mo
 
 \looseness -1 To the best of our knowledge, this is the first such extensive deployment outside any developed country. We discuss in detail the unique aspects of our deployment, that are characteristic of systems and infrastructure pertaining to building energy in developing countries. We further discuss common aspects in residential deployments, highlighted in previous work, and how we addressed them. Our deployment was maintained as an open source project, clearly illustrating the issues faced and how these were addressed. Unlike many of the past deployments, detailed metadata logs, such as appliance make and mode of operation, are also provided. We believe that the unique aspects of the building energy infrastructure, as discussed in this work, will enrich the existing research in building energy domain, which has only leveraged deployments and data collection in the context of developed countries, for wider applicability across different contexts. \redcolor{I think we should explicitly enumerate our main contributions}
 
+\vspace{-1mm}
 \section{Related Work}
 \looseness -1 Building deployments have been studied in the past with the goal of improving the building energy efficiency. Office and campus deployments presented in previous work \cite{yuvraj_ipsn,batra} have shown the scope for significantly reducing HVAC and plug load energy consumption in respective settings. Residential deployments have been studied in the past highlighting the unique challenges involved in residential sensing.
 
@@ -138,6 +140,7 @@ We have been involved in sensor network deployments in the Indian context for mo
 Hnat et al.~\cite{hitchhiker_residential} provide a detailed guide into residential deployments and provided lessons learned from residential deployments across multiple homes for several years. They proposed various applications of such detailed sensing including identifying activities of daily life (ADLs). While providing unique aspects of our deployment, we further establish the commonalities in our deployment with the learning discussed in their work. %Previous residential deployments have also led to smarter appliances such as smart thermostat~\cite{smart_thermostat}, which builds probabilistic models on data collected from door and motion sensors, to build an electricity efficient thermostat.
 All of the deployments discussed above are in the context of developed countries. While residential deployments anywhere across the world are challenging, our deployments highlight some unique challenges specific to developing countries. Some of these challenges in our setting include, but are not limited to, unreliable grid, unreliable internet and difficulty in procuring quality COTS.
 
+\vspace{-1mm}
 \section{Deployment Overview}
 %Over the past year, we have performed extensive sensor deployment for ambient monitoring in research environment and smart meters across more than 25 homes in India. 
 Our deployment constitutes 33 sensors measuring electricity, water and ambient parameters at different granularity, in a home in Delhi, India during May-July 2013. Primary objective for this deployment was to bring forth the differences in the Indian context, as compared to the context of developed countries along the dimensions of - 1. The ecosystem of available sensing options that restrict the possible deployments; 2. Energy and water consumption patterns; and 3. Grid and network reliability. \figref{fig:overall} shows the deployment of these sensors in a 3 storey home, together with the required computing and communication infrastructure. %5 single board computers and 3 routers for computing and communication. We now provide detailed description for our deployment.
@@ -201,18 +204,18 @@ Motivated by prior electricity consumption deployments, we also chose to monitor
 \end{figure*}
 
 \begin{enumerate}\denselistbib
-\vspace{-1mm}\item \textbf{Meter level:} Schneider Electric EM6400\footnote{\url{www.goo.gl/01edPS}} smart meter is used to instrument the main power supply (see \figref{fig:em6400}).% showing EM6400 smart meter deployed in the electricity panel). %While cheaper variants from the same company were available, we chose to use EM6400 as it also provides reactive power. This additional information has been known to be useful for NILM applications~\cite{hart}. 
+\vspace{-1.5mm}\item \textbf{Meter level:} Schneider Electric EM6400\footnote{\url{www.goo.gl/01edPS}} smart meter is used to instrument the main power supply (see \figref{fig:em6400}).% showing EM6400 smart meter deployed in the electricity panel). %While cheaper variants from the same company were available, we chose to use EM6400 as it also provides reactive power. This additional information has been known to be useful for NILM applications~\cite{hart}. 
 %~A 30:5 ratio CT was used on the power mains coming from the grid to ensure that the load current is transformed within the permissible limits (5 A) of the meter. 
 ~Necessary parameters including voltage, current, frequency and power (apparent, real, reactive) were read at 1 Hz using Modbus over RS485-serial link provided by EM6400. A robust deployment was easily undertaken by a paid electrician thus demonstrating that the support required for large scale smart metering deployments exists in the Indian context. 
 
-\vspace{-1mm} \item \textbf{Circuit level:} Split-core CTs, clamped to individual MCBs, are used for monitoring circuit level current. Since no commercial solution was easily available in India for panel level monitoring, we used a low cost microcontroller platform to measure current output from CTs at 125 KHz, calculate the RMS value and communicate it over serial UART interface (\figref{fig:ct} illustrates CTs monitoring 3 MCBs on the first floor MCB box) to a single board computer. A total of 8 CTs were used to monitor different MCB circuits in the home.
+\vspace{-1.5mm} \item \textbf{Circuit level:} Split-core CTs, clamped to individual MCBs, are used for monitoring circuit level current. Since no commercial solution was easily available in India for panel level monitoring, we used a low cost microcontroller platform to measure current output from CTs at 125 KHz, calculate the RMS value and communicate it over serial UART interface (\figref{fig:ct} illustrates CTs monitoring 3 MCBs on the first floor MCB box) to a single board computer. A total of 8 CTs were used to monitor different MCB circuits in the home.
 
-\vspace{-1mm} \item \textbf{Appliance level:} Similar to circuit level monitors, there are no good commercial options for plug level monitors in Indian context. Correspondingly, we worked with our collaborators who in-house developed jPlug\footnote{A variant of nPlug~\cite{nplug}} to measure individual appliance power consumption. Ten jPlugs were used to monitor different plug-load based appliances across the home. jPlug sits in between an appliance and the socket and provides multiple parameters (including voltage, current, phase and frequency) at 1 Hz. We also used Current Cost based CT to measure the power consumption for electric motor (used to pump water), which is not a plug-load, but has a significant power consumption (approx. 700 Watts). jPlug and Current Cost CT deployment are shown in \figref{fig:jplug} and \figref{fig:cc} respectively. jPlug uploads measurement data using HTTP POST. Current Cost exposes apparent power data over the USB port. 
+\vspace{-1.5mm} \item \textbf{Appliance level:} Similar to circuit level monitors, there are no good commercial options for plug level monitors in Indian context. Correspondingly, we worked with our collaborators who in-house developed jPlug\footnote{A variant of nPlug~\cite{nplug}} to measure individual appliance power consumption. Ten jPlugs were used to monitor different plug-load based appliances across the home. jPlug sits in between an appliance and the socket and provides multiple parameters (including voltage, current, phase and frequency) at 1 Hz. We also used Current Cost based CT to measure the power consumption for electric motor (used to pump water), which is not a plug-load, but has a significant power consumption (approx. 700 Watts). jPlug and Current Cost CT deployment are shown in \figref{fig:jplug} and \figref{fig:cc} respectively. jPlug uploads measurement data using HTTP POST. Current Cost exposes apparent power data over the USB port. 
 \end{enumerate}
 \begin{table*}[t!]
 \footnotesize
 \centering
-\vspace{-4mm}
+\vspace{-6mm}
 \caption{Details of sensing infrastructure used in our deployment}
 \vspace{-4mm}
 \label{tab:sensing}
@@ -300,7 +303,7 @@ A lot of issues, pertaining to SBCs, were observed in our deployment. As an exam
 
 Similar to prior research, reporting WiFi discontinuity in homes in the USA~~\cite{hitchhiker_residential}, we also observed that one WiFi router did not provide complete coverage for our 3 storey home. We thus used 3 Netgear JNR1010\footnote{\url{www.support.netgear.com/product/JNR1010}} routers, where the router on the first floor acted as the host and the routers on the ground and the second floor were bridged to it. %More details regarding the need of multiple routers and network availability in homes is described in \secref{sec:learning} and \secref{sec:common}.
 
-
+\vspace{-1mm}
 \section{System Architecture}	
 \label{sec:architecture}
 Middleware systems such as sMAP~\cite{smap}, BuildingDepot~\cite{buildingdepot} and SensorAct~\cite{Arjunan12} have been proposed in the past for sensor data collection. However, we found that they do not sufficiently address the requirements of our deployment context e.g. faulty internet and repeated power failures. Motivated by our experience as well as previous work from other researchers~\cite{hitchhiker_residential}, where importance of simplifying the architecture are proposed, we propose \paradigms (\selstup) model. \selstups involves two main ideas- local storage (on SBCs) and periodic data upload (from SBC to server, and from server to cloud). Data collected from the sensors was \textbf{locally stored} in the form of comma separated value files (CSV), in SBCs and \textbf{periodically uploaded} to the main desktop server. In case the upload failed, it was retried after a fixed time duration. Each SBC was provisioned with sufficient flash based local storage to accommodate sensor data for a few days, to account for persistent upload failure.
@@ -385,7 +388,7 @@ Web applications running on the server allowed residents to locally visualize th
 In our experience, we found that the novel features of \selstups prevented data loss due to internet, server downtime, etc. We had accidentally killed the server script for taking CSV data from RPis collecting water data. However, when we rectified that, within 1 hour all the data for previous 1 week, which had been locally stored on the RPi was eventually collected on the server. \figref{fig:architecture_efficacy} shows the amount of data collected from the water meter during that week.\redcolor{possibly remove the figure, eats up space and does not add much value beyond explanation; moreover can be confusing to the reviewer sparking doubts}
 
 
-
+\vspace{-1mm}
 \section{How is this deployment different?}
 \label{sec:learning}
 We now discuss some of the key unique aspects brought forward from our deployment. 
@@ -469,7 +472,7 @@ Correspondingly, \emph{building monitoring and control systems for the Indian co
 \noindent \textbf{Lack of COTS devices made for Indian settings:} As reported earlier in \secref{sec:sensing}, due to non availability of ZWave sensors for Indian frequency, we imported European frequency based multisensors and plug load monitors. Import duty and shipment delays make them an expensive choice. Further, to avoid the peak switching current, the default state of the plug monitors was off (when powered manually from the switch). This implied that unless they are switched on from the software (or with a separate ZWave based switch), they will not turn on the appliance. Since many of the loads in the Indian context are not always on and are controlled via plug sockets, such plug sockets did not result in seamless usage. Correspondingly, we did not use ZWave based plug load monitors in our deployments as they had to be manually turned on after a power outage, which is common. %Also, solutions for panel level monitoring are not easily available in India.
 % Further, other alternatives like Current Cost based CT's involve exposing live wire from appliances, an option which was rejected by home occupants. Also, Current Cost based Individual Appliance Monitors (IAM) provide only apparent power and energy at low frequency. 
 Correspondingly, we had to resort to prototype solutions for appliance and circuit level monitoring.
-
+\vspace{-1mm}
 \section{Hitchhiker's guide revisited}
 \label{sec:common}
 While there are several unique observations from our deployment, there exists multiple similarities with prior deployment experiences, most specifically- ``The Hitchhiker's Guide to Successful Residential Sensing Deployments"~\cite{hitchhiker_residential}. Some prominent similarities are:
@@ -544,6 +547,7 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
     \label{fig:home}
    \vspace{-3mm}
 \end{figure}
+\vspace{-1mm}
 \section{Dataset and code release}
 Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 day. This dataset is of the first of it's kind, across the world, where events corresponding to electricity, water and ambient sensors are timestamp recorded. We manually annotate the power consumed for each of the x appliances in their different states in the home. We similarly measure the amount of water consumed in 1 minute by each of the y water fixtures. \tabref{tab:water_consumption_labeled} shows the consumption pattern of water fixtures on the first floor. We further provide a detailed metadata log of all electrical appliances, including, but not limited to, estimate date of purchase, mapping to MCB, star-rating, rated power. We intend to release more such fully labeled data in the future, but owing to privacy concerns, we limit the current fully labeled dataset to 1 day from this home. While the accompanying switch had been to our disadvantage in measuring short duration appliance usage, it provides us an advantage over the data collected in developed countries setting. By virtue of switch control, atleast the ON-OFF events can be clearly demarcated. Thus, in some sense, our entire electrical dataset is event labeled. 
 
@@ -567,13 +571,14 @@ Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 
 6&Tap&13.2 l/minute&Gardening&Veranda\\ \hline
 
 \end{tabular}
+\vspace{-6mm}
 \end{table}
 
 \looseness -1 We publicly release our codebase which includes \selstups implementation, scripts for collecting data from different sensors, database schemas, soft-sensors, startup scripts and the fixes we developed for common problems on RPi. Our codebase and dataset\footnote{\url{http://github.com/nipunreddevil/Home_Deployment}} can be found on Github.
 
 \noindent 
 
-
+\vspace{-1mm}
 \section{Conclusions and Future Work}
 \looseness -1 In this paper, we present our experiences with an extensive residential deployment monitoring electrical, water and ambient parameters in Delhi, India. To the best of our knowledge, this is the first extensive residential deployment in a developing country. We present key aspects of our deployment and discuss the corresponding impact on the design of building monitoring and control systems that aim to scale across diverse contexts offered in the developing and the developed countries. Some of the unique aspects, impacting the systems development in building energy domain, include - unreliable electrical grid, unreliable network connectivity, differences in electrical loads, water-embedded energy within a home and limited availability of robust COTS infrastructure. We further discussed the similarities in our learning with prior work (done in the USA), demystifying the home environment for energy and water related deployments in the Indian context. %importance of poor wireless connectivity in homes and the importance of aesthetics.
 
@@ -584,7 +589,7 @@ We are in the process of installing our sensors across multiple other homes in D
 %We plan to perform NILM and provide the home occupants with detailed electricity consumption breakdown.
 
 \balance
-
+\vspace{-1mm}
 \bibliographystyle{abbrv}
 \bibliography{references} 
 
