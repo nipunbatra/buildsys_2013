@@ -40,7 +40,7 @@
 
 \setlength{\belowcaptionskip}{-12pt}
 
-%\setlength{\parskip}{0pt}
+\setlength{\parskip}{0pt}
 %\setlength{\parsep}{0pt}
 %\setlength{\headsep}{0pt}
 %\setlength{\topskip}{0pt}
@@ -149,7 +149,8 @@ Our deployment constitutes 33 sensors measuring electricity, water and ambient p
 	\vspace{-5mm}    
     \includegraphics[scale=0.19]{./figures/overall_deployment.jpg}
     \vspace{-10mm}    
-    \caption{Schematic showing overall home deployment}   
+    \caption{Schematic showing overall home deployment} 
+    \vspace{-2mm}  
     \label{fig:overall}
 \end{figure}
 
@@ -443,7 +444,7 @@ We observed internet was either unavailable or had a slow intermittent connectiv
    \vspace{-3mm}
     \caption{Refrigerator power consumption}
     \label{fig:metadata}
-    \vspace{-2mm}
+    \vspace{-4mm}
 
 \end{figure}
 	
@@ -490,7 +491,28 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 \noindent \textbf{Homes have poor connectivity:} During the preliminary phase of our deployment, we first tried to connect our sensors to the existing networking infrastructure in the home. Already existing WiFi router was on the first floor and we observed poor signal strength on the ground and the second floor. We used Ekahau Heat Mapper\footnote{\url{www.ekahau.com/products/heatmapper/overview.html}} to map WiFi signal strength. \figref{fig:ground_without_router} and \figref{fig:second_without_router} show the WiFi heatmap produced with the home router placed on the first floor. We observed that a lot of regions inside the home show poor signal strength. We bridged an additional router on the ground and the second floor with the existing first floor router. \figref{fig:ground_with_router} and \figref{fig:second_with_router} show the corresponding WiFi heatmaps produced after the introduction of bridged routers. Additional routers significantly improved WiFi coverage. 
 
 %\noindent Another important facet of deployments is that additional sensors introduced inside a home may choke up the network bandwidth. We observed this when we tried using imported WiFi based microcontrollers for sensing ambient conditions in our research wing. Research wing occupants complained of low network bandwidth available for their personal usage. Thus, we decided to use ZWave based multisensors for measuring ambient parameters for home deployment. Since ZWave based sensors worked on a different frequency (868.4 MHz) as WiFi(2.4 GHz), they did not cause interference. We believe that a careful mix of sensors working on different frequencies can be used to avoid interference issues.
+\begin{table*}
+\tabcolsep=0.015cm
+\vspace{-4mm}
+\caption{First floor water fixtures labeled metadata}
+\vspace{-4mm}
+\label{tab:water_consumption_labeled}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Sno.}&\textbf{Type}&\textbf{Consumption}&\textbf{Purpose}&\textbf{Location}\\
+\hline
+1&Flush&10 liters per flush; 210&Toilet&Bathroom\\
+ &&seconds for flush tank to refill&flushing&cum toilet\\ \hline
+2&Tap&17.5 l/minute&Washing clothes&Washing area\\ \hline
+3&Tap&5 l/minute&Washing hands&Washbasin\\ \hline
+4&Tap&7 l/minute&Bathing&Bathroom\\ \hline
+5&Tap&1 l/minute&Bathroom cleaning&Bathroom\\ \hline
+6&Tap&13.2 l/minute&Gardening&Veranda\\ \hline
 
+\end{tabular}
+\vspace{-6mm}
+\end{table*}
 \begin{figure}[t!]  
 \vspace{-2mm}
 \subfloat[\scriptsize Ground floor WiFi Heatmap without additional router]{
@@ -551,28 +573,14 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 \section{Dataset and code release}
 Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 day. This dataset is of the first of it's kind, across the world, where events corresponding to electricity, water and ambient sensors are timestamp recorded. We manually annotate the power consumed for each of the x appliances in their different states in the home. We similarly measure the amount of water consumed in 1 minute by each of the y water fixtures. \tabref{tab:water_consumption_labeled} shows the consumption pattern of water fixtures on the first floor. We further provide a detailed metadata log of all electrical appliances, including, but not limited to, estimate date of purchase, mapping to MCB, star-rating, rated power. We intend to release more such fully labeled data in the future, but owing to privacy concerns, we limit the current fully labeled dataset to 1 day from this home. While the accompanying switch had been to our disadvantage in measuring short duration appliance usage, it provides us an advantage over the data collected in developed countries setting. By virtue of switch control, atleast the ON-OFF events can be clearly demarcated. Thus, in some sense, our entire electrical dataset is event labeled. 
 
-\begin{table}
-\tabcolsep=0.015cm
-\vspace{-4mm}
-\caption{First floor water fixtures labeled metadata}
-\vspace{-4mm}
-\label{tab:water_consumption_labeled}
-\footnotesize
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-\textbf{Sno.}&\textbf{Type}&\textbf{Consumption}&\textbf{Purpose}&\textbf{Location}\\
-\hline
-1&Flush&10 liters per flush; 210&Toilet&Bathroom\\
- &&seconds for flush tank to refill&flushing&cum toilet\\ \hline
-2&Tap&17.5 l/minute&Washing clothes&Washing area\\ \hline
-3&Tap&5 l/minute&Washing hands&Washbasin\\ \hline
-4&Tap&7 l/minute&Bathing&Bathroom\\ \hline
-5&Tap&1 l/minute&Bathroom cleaning&Bathroom\\ \hline
-6&Tap&13.2 l/minute&Gardening&Veranda\\ \hline
-
-\end{tabular}
-\vspace{-6mm}
-\end{table}
+\begin{figure} 
+	\vspace{-5mm}    
+    \centering\includegraphics[scale=0.19]{./figures/label.png}
+	\vspace{-2mm}    
+    \caption{Labeled dataset} 
+%    \vspace{-2mm}  
+    \label{fig:overall}
+\end{figure}
 
 \looseness -1 We publicly release our codebase which includes \selstups implementation, scripts for collecting data from different sensors, database schemas, soft-sensors, startup scripts and the fixes we developed for common problems on RPi. Our codebase and dataset\footnote{\url{http://github.com/nipunreddevil/Home_Deployment}} can be found on Github.
 
