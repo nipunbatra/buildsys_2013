@@ -207,7 +207,7 @@ Motivated by prior electricity consumption deployments, we also chose to monitor
 
 \item \textbf{Circuit level:} Split-core CTs, clamped to individual MCBs, are used for monitoring circuit level current. Since no commercial solution was easily available in India for panel level monitoring, we used a low cost microcontroller platform to measure current output from CTs at 125 KHz, calculate the RMS value and communicate it over serial UART interface (\figref{fig:ct} illustrates CTs monitoring 3 MCBs on the first floor MCB box) to a single board computer. A total of 8 CTs were used to monitor different MCB circuits in the home.
 
-\item \textbf{Appliance level:} Similar to circuit level monitors, there are no good commercial options for plug level monitors in Indian context. Correspondingly, we worked with our collaborators who in-house developed jPlug\footnote{A variant of nPlug~\cite{nplug}} to measure individual appliance power consumption. Ten jPlugs were used to monitor different plug-load based appliances across the home. jPlug sits in between an appliance and the socket and provides multiple parameters (including voltage, current, phase and frequency) at 1 Hz resolution. We also used Current Cost based CT to measure the power consumption for electric motor (used to pump water), which is not a plug-load, but has a significant power consumption (approx. 700 Watts). jPlug and Current Cost CT deployment are shown in \figref{fig:jplug} and \figref{fig:cc} respectively. jPlug uploads measurement data using HTTP POST. Current Cost exposes apparent power data over the USB port. 
+\item \textbf{Appliance level:} Similar to circuit level monitors, there are no good commercial options for plug level monitors in Indian context. Correspondingly, we worked with our collaborators who in-house developed jPlug\footnote{A variant of nPlug~\cite{nplug}} to measure individual appliance power consumption. Ten jPlugs were used to monitor different plug-load based appliances across the home. jPlug sits in between an appliance and the socket and provides multiple parameters (including voltage, current, phase and frequency) at 1 Hz. We also used Current Cost based CT to measure the power consumption for electric motor (used to pump water), which is not a plug-load, but has a significant power consumption (approx. 700 Watts). jPlug and Current Cost CT deployment are shown in \figref{fig:jplug} and \figref{fig:cc} respectively. jPlug uploads measurement data using HTTP POST. Current Cost exposes apparent power data over the USB port. 
 \end{enumerate}
 \begin{table*}[t!]
 \footnotesize
@@ -220,7 +220,7 @@ Motivated by prior electricity consumption deployments, we also chose to monitor
 \begin{center}
 \begin{tabular}{|p{1.7cm}|p{2.0cm}|p{3.3cm}|p{1.5cm}|p{1.5cm}|p{2.0cm}|p{5.2cm}|}
 \hline
-\textbf{Sensor name} & \textbf{Procurement} & \textbf{Sampling frequency} & \textbf{Resolution} & \textbf{Quantity} & \textbf{Communication} & \textbf{Observed parameters}\\
+\textbf{Sensor name} & \textbf{Procurement} & \textbf{Sampling frequency} & \textbf{Granularity} & \textbf{Quantity} & \textbf{Communication} & \textbf{Observed parameters}\\
 \hline
 
 EM6400& COTS (India)&1 Hz&Home&1&RS 485 Serial&Voltage, Current, Frequency, Phase, Power (Active, Reactive and Apparent), Energy\\ \hline
