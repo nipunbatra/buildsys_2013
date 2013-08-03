@@ -409,7 +409,7 @@ Web applications running on the server allowed residents to locally visualize th
 \noindent \textbf{Reduced load on server:} Periodic upload of data (in larger volumes) results in reduced computation and bandwidth requirements for the SBCs and the server. 
 %While it comes at the cost of increased storage requirements on SBCs, our analysis shows that 1 GB of local storage will suffice for most of the practical scenarios. %, we did not need to provision for more than 1 GB.
 
-In our experience, we found that the novel features of \selstups prevented data loss due to internet, server downtime, etc. We had accidentally killed the server script for taking CSV data from RPis collecting water data. However, when we rectified that, within 1 hour all the data for previous 1 week, which had been locally stored on the RPi was eventually collected on the server. 
+We provide anecdotal evidence to illustrate how  \selstups helped in preventing data loss. We had accidentally killed the server script responsible for dumping water data. However, when we rectified that a week later, within 1 hour all the data for previous 1 week, which had been locally stored on the RPi was collected on the server. 
 
 %\figref{fig:architecture_efficacy} shows the amount of data collected from the water meter during that week.\redcolor{possibly remove the figure, eats up space and does not add much value beyond explanation; moreover can be confusing to the reviewer sparking doubts}
 
