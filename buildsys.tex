@@ -79,15 +79,14 @@
 \alignauthor Nipun Batra, Manoj Gulati, Amarjeet Singh \\
 %        \affaddr{Department of Computer Science}\\
 \affaddr{Indraprastha Institute of Information Technology, Delhi}\\
-\email{\{nipunb,manojg,amarjeet\}@iiitd.ac.in}
+\email{\{nipunb,manojg,amarjeet\}@iiitd.ac.in\vspace{-5mm}}
 \alignauthor Manoj Gulati \\
 %    \affaddr{Networked Embedded Systems Group}\\
     \affaddr{IIIT Delhi}\\
-    \email{manojg@iiitd.ac.in}
+    \email{manojg@iiitd.ac.in\vspace{-10mm}}
 }
 \vspace{-3mm}
-\title{It's Different: Insights into home energy consumption in India}
-\vspace{-10mm}
+\title{It's Different: Insights into home energy consumption in India\vspace{-3mm}}
 \crdata{978-1-4503-1169-4}
 \conferenceinfo{Buildsys'13,} {November 11--15, 2013, Rome, Italy.}
 \CopyrightYear{2013}
@@ -204,10 +203,11 @@ Motivated by prior electricity consumption deployments, we also chose to monitor
 
 \end{figure*}
 
-\begin{enumerate}\denselistbib
+\begin{enumerate}[leftmargin=1em]\denselistbib
 \vspace{-1.5mm}\item \textbf{Meter level:} Schneider Electric EM6400\footnote{\url{www.goo.gl/01edPS}} smart meter is used to instrument the main power supply (see \figref{fig:em6400}).% showing EM6400 smart meter deployed in the electricity panel). %While cheaper variants from the same company were available, we chose to use EM6400 as it also provides reactive power. This additional information has been known to be useful for NILM applications~\cite{hart}. 
 %~A 30:5 ratio CT was used on the power mains coming from the grid to ensure that the load current is transformed within the permissible limits (5 A) of the meter. 
-~Necessary parameters including voltage, current, frequency and power (apparent, real, reactive) were read at 1 Hz using Modbus over RS485-serial link provided by EM6400. A robust deployment was easily undertaken by a paid electrician thus demonstrating that the support required for large scale smart metering deployments exists in the Indian context. 
+~Necessary parameters including voltage, current, frequency, phase and power were read at 1 Hz using Modbus over RS485-serial link provided by EM6400. 
+%A robust deployment was easily undertaken by a paid electrician thus demonstrating that the support required for large scale smart metering deployments exists in the Indian context. 
 
 \vspace{-1.5mm} \item \textbf{Circuit level:} Split-core CTs, clamped to individual MCBs, are used for monitoring circuit level current. Since no commercial solution was easily available in India for panel level monitoring, we used a low cost microcontroller platform to measure current output from CTs at 125 KHz, calculate the RMS value and communicate it over serial UART interface (\figref{fig:ct} illustrates CTs monitoring 3 MCBs on the first floor MCB box) to a single board computer. A total of 8 CTs were used to monitor different MCB circuits in the home.
 
@@ -275,10 +275,10 @@ SBCs served as a good low cost alternative (25 \$) constituting 700 MHz ARM proc
 We used 5 RPi and 1 Ionics Stratus plug computer as SBCs and a 2 GHz Desktop PC running Linux, as the main local server.
 % where all the data was stored. %The software stack running on the SBC's and how they interacted with the main server and collected data from different sensors is described below:
 
-One RPi was connected to EM6400 using RS485-USB converter. We developed a custom Python program based on pyModbus\footnote{\url{www.github.com/bashwork/pymodbus}} to collect the desired parameters. %library which would serially read 80 registers, using Modbus protocol, to compute 40 electrical parameters as described in \tabref{tab:sensing}. 
+\looseness -1 One RPi was connected to EM6400 using RS485-USB converter. We developed a custom program based on pyModbus\footnote{\url{www.github.com/bashwork/pymodbus}} to collect the desired parameters. %library which would serially read 80 registers, using Modbus protocol, to compute 40 electrical parameters as described in \tabref{tab:sensing}. 
 All the collected parameters, together with the UTC timestamp is %stored in a local CSV file. A new CSV was created every 15 minutes. A background program would periodically try to upload CSV files older than 15 minutes, to the main server, where the data is pushed in MySQL database. This architecture for data collection - creating a new CSV periodically, uploading older CSV periodically to main server where the data is then pushed into MySQL, is used for all of our sensors connected to SBCs. We call this model 
 collected using \emph{\paradigms} (\selstup) model, described in detail in section \secref{sec:architecture}. On similar lines, USB output from Current Cost (providing data in xml format) is received on another RPi and is communicated to the desktop server. %goes through the \paradigms architecture for data collection. %A custom Python script will store data in CSV files every 15 minutes which is then uploaded by a separate background script. 
-Although Current Cost has its own cloud based APIs, we chose to collect data from it locally, in order to avoid data losses occurring due to network failures. 
+%Although Current Cost has its own cloud based APIs, we chose to collect data from it locally, in order to avoid data losses occurring due to network failures. 
 
 %\noindent \textbf{Current Cost data collection:} Although Current Cost has its own cloud based API's, we chose to collect data from it locally, in order to avoid data losses occurring due to network failures. Current Cost provides power data in xml format over the serial interface. We thus connected the USB cable-out from the Current Cost receiver to RPi and wrote a simple Python script to read data serially using pySerial\footnote{\url{www.pyserial.sourceforge.net}} and store it in a CSV file along with UTC timestamp. CSV creation and uploading to central server was done in a similar fashion as was done for EM6400.
 
@@ -288,7 +288,9 @@ GPIO headers on two more RPis were used to interface with each water meter respe
 %\noindent \textbf{MCB data collection:} Our custom built CT based monitor for collecting current data from different MCB's exposes data serially which is read using pySerial on a RPi and processed further using \paradigm.
 
 A web daemon, running on the server, listened to the HTTP post request from jPlugs and dumped the data in MySQL. Ionics Plug Computer was used to collect data from all the ZWave based sensors. We wrote custom wrappers around OpenZWave\footnote{\url{www.code.google.com/p/open-zwave}} to collect temperature and light information on per second basis, and motion information based on events. While the plug computer had an internal ZWave (the reason for which it was selected), its range was limited and did not cover all the ZWave sensors. Correspondingly, a ZWave controller was connected over USB with Ionics that provided reachability to all the ZWave devices. %and the data was processed further using \paradigm. 
-\figref{fig:plug} shows the plug computer collecting ambient sensor data from ZWave controller. A manual dump of locally collected data on each Android phone was performed every 15 days. Electricity failure and unreliable internet are well known problems in India and are highlighted in \secref{sec:learning}. Owing to these problems, we chose to collect weather data from 3 different weather stations, in one of the servers hosted by our collaborators in the USA. 
+\figref{fig:plug} shows the plug computer collecting ambient sensor data from ZWave controller. A manual dump of locally collected data on each Android phone was performed every 15 days.
+% We also collected weather data from 3 different weather stations.
+%Electricity failure and unreliable internet are well known problems in India and are highlighted in \secref{sec:learning}. Owing to these problems, we chose to collect weather data from 3 different weather stations, in one of the servers hosted by our collaborators in the USA. 
 
 
 %\noindent \textbf{jPlug appliance data collection:} jPlug makes a HTTP post every second with upto 10 electrical parameters. We saved this data directly on the server machine where a web daemon listened to requests from jPlug and dumped them in MySQL.
@@ -361,18 +363,30 @@ Middleware systems such as sMAP~\cite{smap}, BuildingDepot~\cite{buildingdepot} 
     \label{fig:unreliable}
 
 \end{figure*}
+
+% % % % % % % % % % % % % % % FIGURE CONTAINING ARCHITECTURE + # Data packets % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%\begin{figure}
+%\vspace{-8mm}
+%\subfloat[\scriptsize \paradigm]{
+%    \label{fig:architecture}
+%    \includegraphics[scale=0.13]{./figures/architecture.jpg}}
+%        \subfloat[\scriptsize Amount of data (worth seconds) collected per day from water meter. Data worth 86400 seconds is expected per day. Note that limits on yaxis are raised to ensure that power outage and software losses are visible]{
+%        \label{fig:architecture_efficacy}
+%        \includegraphics[scale=0.125]{./figures/data_loss.png}}
+%        \vspace{-3mm}
+%  \caption{\paradigms architecture and its impact on ensuring no data loss}
+%  \vspace{-2mm}
+%   
+%\end{figure}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
 \begin{figure}
-\vspace{-8mm}
-\subfloat[\scriptsize \paradigm]{
-    \label{fig:architecture}
-    \includegraphics[scale=0.13]{./figures/architecture.jpg}}
-        \subfloat[\scriptsize Amount of data (worth seconds) collected per day from water meter. Data worth 86400 seconds is expected per day. Note that limits on yaxis are raised to ensure that power outage and software losses are visible]{
-        \label{fig:architecture_efficacy}
-        \includegraphics[scale=0.125]{./figures/data_loss.png}}
-        \vspace{-3mm}
-  \caption{\paradigms architecture and its impact on ensuring no data loss}
-  \vspace{-2mm}
-   
+
+\centering \includegraphics[scale=0.13]{./figures/architecture.jpg}
+\vspace{-2mm}
+\caption{\paradigms architecture}
+\vspace{-2mm}
+\label{fig:architecture}
 \end{figure}
 
 
@@ -386,7 +400,9 @@ Web applications running on the server allowed residents to locally visualize th
 
 \noindent \textbf{Reduced load on server:} Periodic upload of data (in larger volumes) results in reduced computation and bandwidth requirements for the SBCs and the server. While it comes at the cost of increased storage requirements on SBCs, our analysis shows that 1 GB of local storage will suffice for most of the practical scenarios. %, we did not need to provision for more than 1 GB.
 
-In our experience, we found that the novel features of \selstups prevented data loss due to internet, server downtime, etc. We had accidentally killed the server script for taking CSV data from RPis collecting water data. However, when we rectified that, within 1 hour all the data for previous 1 week, which had been locally stored on the RPi was eventually collected on the server. \figref{fig:architecture_efficacy} shows the amount of data collected from the water meter during that week.\redcolor{possibly remove the figure, eats up space and does not add much value beyond explanation; moreover can be confusing to the reviewer sparking doubts}
+In our experience, we found that the novel features of \selstups prevented data loss due to internet, server downtime, etc. We had accidentally killed the server script for taking CSV data from RPis collecting water data. However, when we rectified that, within 1 hour all the data for previous 1 week, which had been locally stored on the RPi was eventually collected on the server. 
+
+%\figref{fig:architecture_efficacy} shows the amount of data collected from the water meter during that week.\redcolor{possibly remove the figure, eats up space and does not add much value beyond explanation; moreover can be confusing to the reviewer sparking doubts}
 
 
 \vspace{-1mm}
@@ -433,7 +449,7 @@ We observed internet was either unavailable or had a slow intermittent connectiv
 
 
 \begin{figure}
-\vspace{-1mm}
+\vspace{-4mm}
 \subfloat[\scriptsize Before repair]{
     \label{fig:before_repair}
     \includegraphics[scale=0.1]{./figures/before_repair.png}}
@@ -491,7 +507,7 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 \noindent \textbf{Homes have poor connectivity:} During the preliminary phase of our deployment, we first tried to connect our sensors to the existing networking infrastructure in the home. Already existing WiFi router was on the first floor and we observed poor signal strength on the ground and the second floor. We used Ekahau Heat Mapper\footnote{\url{www.ekahau.com/products/heatmapper/overview.html}} to map WiFi signal strength. \figref{fig:ground_without_router} and \figref{fig:second_without_router} show the WiFi heatmap produced with the home router placed on the first floor. We observed that a lot of regions inside the home show poor signal strength. We bridged an additional router on the ground and the second floor with the existing first floor router. \figref{fig:ground_with_router} and \figref{fig:second_with_router} show the corresponding WiFi heatmaps produced after the introduction of bridged routers. Additional routers significantly improved WiFi coverage. 
 
 %\noindent Another important facet of deployments is that additional sensors introduced inside a home may choke up the network bandwidth. We observed this when we tried using imported WiFi based microcontrollers for sensing ambient conditions in our research wing. Research wing occupants complained of low network bandwidth available for their personal usage. Thus, we decided to use ZWave based multisensors for measuring ambient parameters for home deployment. Since ZWave based sensors worked on a different frequency (868.4 MHz) as WiFi(2.4 GHz), they did not cause interference. We believe that a careful mix of sensors working on different frequencies can be used to avoid interference issues.
-\begin{table*}
+\begin{table}
 \tabcolsep=0.015cm
 \vspace{-4mm}
 \caption{First floor water fixtures labeled metadata}
@@ -512,7 +528,7 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 
 \end{tabular}
 \vspace{-6mm}
-\end{table*}
+\end{table}
 \begin{figure}[t!]  
 \vspace{-2mm}
 \subfloat[\scriptsize Ground floor WiFi Heatmap without additional router]{
@@ -579,7 +595,7 @@ Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 
 	\vspace{-2mm}    
     \caption{Labeled dataset} 
 %    \vspace{-2mm}  
-    \label{fig:overall}
+    \label{fig:labeled}
 \end{figure}
 
 \looseness -1 We publicly release our codebase which includes \selstups implementation, scripts for collecting data from different sensors, database schemas, soft-sensors, startup scripts and the fixes we developed for common problems on RPi. Our codebase and dataset\footnote{\url{http://github.com/nipunreddevil/Home_Deployment}} can be found on Github.
