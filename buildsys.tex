@@ -378,11 +378,11 @@ Web applications running on the server allowed residents to locally visualize th
 
 \noindent \textbf{Decoupled sensing and data uploading:} ensuring that an error in data uploading does not impact the sensing and vice versa, avoiding data loss due to network (even local in-home WiFi) failure. The design choice of decoupling comes from the well established principles of software engineering.
 
-\noindent \textbf{Minimal internet requirement:} Internet is required \textbf{only} when outside researchers wish to view and analyze collected data in near-realtime. Internet failure does not have any impact on robust sensor data collection. The periodic nature of our uploads ensured that data would be uploaded internet connectivity is re-established. Local storage, on SBC, further ensures reliable data collection, even in the cases of server failure. %Further, there is no data loss even if the server goes down for some time, due to local storage.
+\noindent \textbf{Minimal internet requirement:} Internet is required \textbf{only} when outside researchers wish to view data in near-realtime. Internet failure does not have any impact on robust sensor data collection. The periodic nature of our uploads ensured that data would be uploaded when internet connectivity is re-established. Local storage, on SBC, further ensures reliable data collection, even in the cases of server failure. %Further, there is no data loss even if the server goes down for some time, due to local storage.
 
 \noindent \textbf{Reduced load on server:} Periodic upload of data (in larger volumes) results in reduced computation and bandwidth requirements for the SBCs and the server. While it comes at the cost of increased storage requirements on SBCs, our analysis shows that 1 GB of local storage will suffice for most of the practical scenarios. %, we did not need to provision for more than 1 GB.
 
-In our experience, we found that the novel features of \selstups prevented data loss due to internet, server downtime, etc. We had accidentally killed the server script for taking CSV data from RPis collecting water data. However, when we rectified that, within 1 hour all the data for previous 1 week, which had been locally stored on the RPi was eventually collected on the server. \figref{fig:architecture_efficacy} shows the amount of data collected from the water meter during that week.
+In our experience, we found that the novel features of \selstups prevented data loss due to internet, server downtime, etc. We had accidentally killed the server script for taking CSV data from RPis collecting water data. However, when we rectified that, within 1 hour all the data for previous 1 week, which had been locally stored on the RPi was eventually collected on the server. \figref{fig:architecture_efficacy} shows the amount of data collected from the water meter during that week.\redcolor{possibly remove the figure, eats up space and does not add much value beyond explanation; moreover can be confusing to the reviewer sparking doubts}
 
 
 
@@ -566,7 +566,7 @@ Inspired by previous work~\cite{blued_cmu}, we release fully labeled data for 1 
 \end{tabular}
 \end{table}
 
-\looseness -1 We publicly release our codebase which includes \selstups implementation, scripts for collecting data from different sensors, database schemas, soft-sensors, startup scripts and the fixes we developed for common networking problems on RPi. Our codebase and dataset\footnote{\url{http://github.com/nipunreddevil/Home_Deployment}} can be found on Github.
+\looseness -1 We publicly release our codebase which includes \selstups implementation, scripts for collecting data from different sensors, database schemas, soft-sensors, startup scripts and the fixes we developed for common problems on RPi. Our codebase and dataset\footnote{\url{http://github.com/nipunreddevil/Home_Deployment}} can be found on Github.
 
 \noindent 
 
