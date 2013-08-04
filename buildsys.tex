@@ -37,7 +37,11 @@
 \newcommand{\pushline}{\Indp}
 \definecolor{Gray}{gray}{0.91}
 \newcolumntype{a}{>{\columncolor{Gray}}c}
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{\small{#1}}}}}
+\def\sharedaffiliation{\end{tabular}\newline\begin{tabular}{c}}
 
+\def\iiitd{\superscript{\dag}}
+\def\ucla{\superscript{\S}}
 \setlength{\belowcaptionskip}{-12pt}
 
 \setlength{\parskip}{0pt}
@@ -51,31 +55,21 @@
 
 
 
-\numberofauthors{2}
-\vspace{-3mm}
-%\author{
-%%
-%% The command \alignauthor (no curly braces needed) should
-%% precede each author name, affiliation/snail-mail address and
-%% e-mail address. Additionally, tag each line of
-%% affiliation/address with \affaddr, and tag the
-%%% e-mail address with \email.
-%\alignauthor XYZ \\
-%%        \affaddr{Department of Computer Science}\\
-%\affaddr{Some institute}\\
-%\email{xyz@xyz.com}
-%\alignauthor Manoj Gulati \\
-%%    \affaddr{Networked Embedded Systems Group}\\
-%    \affaddr{IIIT Delhi}\\
-%    \email{manojg@iiitd.ac.in}
-%}
+\numberofauthors{1}
+
 \author{
-\alignauthor Nipun Batra, Manoj Gulati, Amarjeet Singh \\
-       \affaddr{Indraprastha Institute of Information Technology, Delhi}\\
-      \email{\{nipunb,manojg,amarjeet\}\\@iiitd.ac.in}
-\alignauthor Mani B. Srivastava  \\
-       \affaddr{University of California, Los Angeles}\\
-      \email{mbs@ucla.edu}
+\alignauthor 
+	Nipun Batra\iiitd, 
+	Manoj Gulati\iiitd, 
+	Amarjeet Singh\iiitd, 
+	Mani B. Srivastava\ucla
+%\alignauthor Pandarasamy Arjunan\\
+\sharedaffiliation
+  \begin{tabular}{ccc}
+    \affaddr{{\iiitd}Indraprastha Institute of Information Technology{\ }} & & \affaddr{{\ucla}University of California{\ }} \\
+    \affaddr{Delhi, India}                  & & \affaddr{Los Angeles, United States} \\
+\email{\{nipunb,manojg,amarjeet\}@iiitd.ac.in} & & mbs@ucla.edu
+  \end{tabular}
 }
 \vspace{-3mm}
 \title{It's Different: Insights into home energy consumption in India\vspace{-3mm}}
@@ -543,28 +537,30 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 \noindent \textbf{Homes have poor connectivity:} During the preliminary phase of our deployment, we first tried to connect our sensors to the existing networking infrastructure in the home. Already existing WiFi router was on the first floor and we observed poor signal strength on the ground and the second floor. We used Ekahau Heat Mapper\footnote{\url{www.ekahau.com/products/heatmapper/overview.html}} to map WiFi signal strength. \figref{fig:ground_without_router} and \ref{fig:second_without_router} show the WiFi heatmap produced with the home router placed on the first floor. We observed that large regions inside the home show poor signal strength. We bridged additional routers on the ground and the second floor with the existing first floor router. \figref{fig:ground_with_router} and \ref{fig:second_with_router} show the corresponding WiFi heatmaps produced after the introduction of bridged routers. Additional routers significantly improved WiFi coverage across the home. 
 
 %\noindent Another important facet of deployments is that additional sensors introduced inside a home may choke up the network bandwidth. We observed this when we tried using imported WiFi based microcontrollers for sensing ambient conditions in our research wing. Research wing occupants complained of low network bandwidth available for their personal usage. Thus, we decided to use ZWave based multisensors for measuring ambient parameters for home deployment. Since ZWave based sensors worked on a different frequency (868.4 MHz) as WiFi(2.4 GHz), they did not cause interference. We believe that a careful mix of sensors working on different frequencies can be used to avoid interference issues.
-\begin{table}
-\tabcolsep=0.015cm
-\vspace{-4mm}
-\caption{First floor water fixtures labeled metadata}
-\vspace{-4mm}
-\label{tab:water_consumption_labeled}
-\footnotesize
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-\textbf{Sno.}&\textbf{Type}&\textbf{Consumption}&\textbf{Purpose}&\textbf{Location}\\
-\hline
-1&Flush&10 liters per flush; 210&Toilet&Bathroom\\
- &&seconds for flush tank to refill&flushing&cum toilet\\ \hline
-2&Tap&17.5 l/minute&Washing clothes&Washing area\\ \hline
-3&Tap&5 l/minute&Washing hands&Washbasin\\ \hline
-4&Tap&7 l/minute&Bathing&Bathroom\\ \hline
-5&Tap&1 l/minute&Bathroom cleaning&Bathroom\\ \hline
-6&Tap&13.2 l/minute&Gardening&Veranda\\ \hline
 
-\end{tabular}
-%\vspace{-6mm}
-\end{table}
+% % % % % % % % % % % % % % % % % % % % TABLE % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%\begin{table}
+%\tabcolsep=0.015cm
+%\vspace{-4mm}
+%\caption{First floor water fixtures labeled metadata}
+%\vspace{-4mm}
+%\label{tab:water_consumption_labeled}
+%\footnotesize
+%\begin{tabular}{|c|c|c|c|c|}
+%\hline
+%\textbf{Sno.}&\textbf{Type}&\textbf{Consumption}&\textbf{Purpose}&\textbf{Location}\\
+%\hline
+%1&Flush&10 liters per flush; 210&Toilet&Bathroom\\
+% &&seconds for flush tank to refill&flushing&cum toilet\\ \hline
+%2&Tap&17.5 l/minute&Washing clothes&Washing area\\ \hline
+%3&Tap&5 l/minute&Washing hands&Washbasin\\ \hline
+%4&Tap&7 l/minute&Bathing&Bathroom\\ \hline
+%5&Tap&1 l/minute&Bathroom cleaning&Bathroom\\ \hline
+%6&Tap&13.2 l/minute&Gardening&Veranda\\ \hline
+%
+%\end{tabular}
+%%\vspace{-6mm}
+%\end{table}
 \begin{figure}[t!]  
 \vspace{-2mm}
 \subfloat[\scriptsize Ground floor (without additional router)]{
@@ -632,7 +628,7 @@ We manually annotate the power consumed for each of the x appliances in their di
 
 \begin{figure} 
 	\vspace{-5mm}    
-    \centering\includegraphics[scale=0.16]{./figures/label.png}
+    \centering\includegraphics[scale=0.18]{./figures/label.png}
 	\vspace{-2mm}    
     \caption{Utility of labeled and multi-modal dataset} 
     \vspace{-2mm}  
@@ -651,7 +647,7 @@ We are in the process of installing our sensors across multiple other homes in D
 %We plan to perform NILM and provide the home occupants with detailed electricity consumption breakdown.
 
 \balance
-\vspace{-2mm}
+%\vspace{-2mm}
 \bibliographystyle{abbrv}
 \bibliography{references} 
 
