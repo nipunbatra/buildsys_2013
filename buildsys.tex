@@ -85,7 +85,7 @@
 
 \begin{abstract}
 \looseness -1 Residential buildings contribute significantly to the overall energy usage across the world. Real deployments, and collected data thereof, play a critical role in providing insights into home energy consumption and occupant behavior. %, thus paving the way for building systems that can reduce energy consumption. 
-Existing datasets from real residential deployments are all from the developed countries. Developing countries, such as India, present unique opportunities to evaluate the scalability of existing research in diverse settings. Building upon more than a year of experience in sensor network deployments, we undertake an extensive deployment in a home in Delhi, measuring electrical, water and ambient parameters. Our ongoing deployment was started on $25^{th}$ May 2013. Since then, 33 sensors have been collecting a total of approx. 400 MB of data daily across the aforementioned modalities.  We discuss the architectural implications on the deployment systems that can be used for monitoring and control in the context of developing countries. Addressing the unreliability of electrical grid and internet in such settings, we present \emph{\paradigms} architecture for robust data collection.
+Existing datasets from real residential deployments are all from the developed countries. Developing countries, such as India, present unique opportunities to evaluate the scalability of existing research in diverse settings. Building upon more than a year of experience in sensor network deployments, we undertake an extensive deployment in a home in Delhi, measuring electrical, water and ambient parameters. Our ongoing deployment was started on $25^{th}$ May 2013. Since then, 33 sensors have been collecting a total of approx. 400 MB of data daily, across the aforementioned modalities.  We discuss the architectural implications on the deployment systems that can be used for monitoring and control in the context of developing countries. Addressing the unreliability of electrical grid and internet in such settings, we present \emph{\paradigms} architecture for robust data collection.
 % suited to the context of deployments in developing countries.
 While providing several unique aspects, our deployment further validates the common considerations from similar residential deployments, discussed previously in the literature. %We discuss architectural implications towards development of building monitoring and control systems, that can scale across diverse deployment settings. %, prevailing in both developed and the developing countries.
 \end{abstract}
@@ -109,7 +109,7 @@ Information Technology (IT) such as cyber-physical systems, wireless sensor netw
 \looseness -1 Of particular importance are the systemic building deployments that can provide detailed insights about occupant behavior (specifically, Activities of Daily Living (ADLs)) and energy consumption. These deployments also provide data sets that can be leveraged for developing and testing suitable control strategies. These control strategies are otherwise complex to undertake in a real occupied building. In the recent past, several datasets, such as REDD~\cite{redd}, BLUED~\cite{blued_cmu}, Smart*~\cite{smart}, monitoring household electricity and ambient parameters, have been released publicly. Several building monitoring and control research has since used these datasets to prove the validity of their work for real life settings~\cite{parson2012_aaai,smartcap}.  
 
 \looseness -1 However, all of the previous deployments have been done in the context of developed countries. Developing countries, such as India, have higher electricity deficit, are adding new building space at a higher rate and constitute different infrastructure and energy consumption patterns. A deeper understanding of these different settings in developing countries can help in the development of systems that can scale across diverse settings in a robust manner. %, it is equally important to understand building energy consumption in developing countries such as India, where there is electricity deficit and new buildings are being constructed at a rapid rate, adding to electricity demand. The peak demand deficit in India was reported to be 10.3\% in the year 2010-2011~\cite{india_energy_book}. Also, 19 million square meters of residential building space was added in 2004-2005~\cite{evans09india}.
-We have been involved in sensor network deployments in the Indian context for more than a year~\cite{batra}, whereby, we have instrumented 25 homes with smart meters, a smart campus with sensors for ambient monitoring in a research wing and 52 smart meters in the institute dorms. In this paper, we discuss an extensive ongoing deployment in a home in Delhi, India, started on $25^{th}$ May 2013. Monitored parameters include electricity and water consumption at the meter level, plug level load monitoring for major appliances, and ambient parameters across every room. 33 sensors were used across the 3 storey home to measure the parameters mentioned above, collecting approx. 400 MB of data everyday.%, among others. 
+We have been involved in sensor network deployments in the Indian context for more than a year~\cite{batra}, whereby, we have instrumented 25 homes with smart meters, a smart campus with sensors for ambient monitoring in a research wing and 52 smart meters in the institute dorms. In this paper, we discuss an extensive ongoing deployment in a home in Delhi, India, started on $25^{th}$ May 2013. Monitored parameters include electricity and water consumption at the meter level, plug level load monitoring for major appliances, and ambient parameters across every room. We used 33 sensors across the 3 storey home to measure the parameters mentioned above, collecting approx. 400 MB data everyday.%, among others. 
 
 \looseness -1 To the best of our knowledge, this is the first such extensive deployment outside any developed country. We discuss, in detail, the unique aspects of our deployment that are also characteristic of buildings in the developing countries. Correspondingly, we provide insights into these aspects, of building systems, critical for robust data collection and control. We further discuss aspects of our deployment that were similar to those highlighted in the previous work on residential deployments. Our deployment was maintained as an open source project, clearly illustrating the issues faced and how these were addressed. Unlike many of the past deployments, detailed metadata logs, such as appliance make and mode of operation, are also provided. We believe that the unique aspects of the building energy infrastructure, as discussed in this work, will enrich the existing research in building energy domain, which has only leveraged deployments and data collection in the context of developed countries until now. %, for wider applicability across different contexts. 
 %\redcolor{I think we should explicitly enumerate our main contributions}
@@ -129,7 +129,7 @@ To the best of our knowledge, all the deployments discussed previously in the li
 Our deployment constitutes 33 sensors measuring electricity, water and ambient parameters at different granularity, in a home in Delhi, India during May-August 2013. Primary objective for this deployment was to bring forth the differences in the Indian context, as compared to the context of developed countries along the dimensions of - 1. The ecosystem of available sensing options that restrict the possible deployments; 2. Energy and water consumption patterns; and 3. Grid and network reliability. \figref{fig:overall} shows the deployment of these sensors in a 3 storey home, together with the required computing and communication infrastructure. %5 single board computers and 3 routers for computing and communication. We now provide detailed description for our deployment.
 
 \begin{figure} 
-	\vspace{-5mm}    
+	\vspace{-4mm}    
     \includegraphics[scale=0.19]{./figures/overall_deployment.jpg}
     \vspace{-10mm}    
     \caption{Schematic showing overall home deployment} 
@@ -144,7 +144,7 @@ For sensing, we took a ``leave no stone unturned'' approach, where  we chose to 
 \noindent\textbf{Electricity monitoring:} %A typical home electricity setup involves a meter which is installed by utility companies and measures overall electricity usage. Further electric cabling is divided into various Miniature Circuit Breakers (MCB's) which control separate circuits. Typical installations involve putting a separate MCB for each heavy load (such as air conditioners) and clubbing various lights, fans and other smaller loads into separate MCB's. Further each individual appliance is controlled via a switch. There are two types of appliances- i) plug loads like refrigerator and electric iron, which need to be physically ``plugged" into the sockets; ii) loads like lights and fans, which do not need to be ``plugged" in by the user and can directly be switched on or off. We highlight the above described home electricity distribution in \figref{fig:electricity_distribution}. 
 Motivated by prior electricity consumption deployments, we also chose to monitor electricity consumption across different granularity - electricity meter monitoring the consumption at the home aggregate level, current transformers (CTs) monitoring current for Miniature Circuit Breakers (MCBs) (each connected to a combination of appliances) and plug level monitors for monitoring plug load based appliances (see \figref{fig:electricity_distribution} for illustration). 
 \begin{figure*}[t!] 
-    \vspace{-12mm}
+    \vspace{-10.5mm}
     \subfloat[\scriptsize EM6400 Smart Meter]{
     \label{fig:em6400}
     \includegraphics[scale=0.027]{./figures/electric_meter_1.jpg}}
@@ -190,7 +190,7 @@ Motivated by prior electricity consumption deployments, we also chose to monitor
 \begin{enumerate}[leftmargin=1em]\denselistbib
 \vspace{-1.5mm}\item \looseness -2 \textbf{Meter level:} Modbus-serial enabled Schneider Electric EM6400\footnote{\url{www.goo.gl/01edPS}} meter was used to instrument the main power supply (see \figref{fig:em6400}). % showing EM6400 smart meter deployed in the electricity panel). %While cheaper variants from the same company were available, we chose to use EM6400 as it also provides reactive power. This additional information has been known to be useful for NILM applications~\cite{hart}. 
 %~A 30:5 ratio CT was used on the power mains coming from the grid to ensure that the load current is transformed within the permissible limits (5 A) of the meter. 
-Collected data includes voltage, current, frequency, phase and power, and is monitored at 1 Hz. 
+We collected data including voltage, current, frequency, phase and power at 1 Hz. 
 %The meter was deployed in March 2013 and is collecting data ever since. %through the extensive deployment phase as well. %using Modbus over RS485-serial link provided by EM6400. 
 %A robust deployment was easily undertaken by a paid electrician thus demonstrating that the support required for large scale smart metering deployments exists in the Indian context. 
 
@@ -206,7 +206,7 @@ jPlug measured multiple parameters including voltage, current, phase and frequen
 \begin{table*}[t!]
 \footnotesize
 \centering
-\vspace{-6mm}
+\vspace{-4mm}
 \caption{Details of sensing infrastructure used in our deployment}
 \vspace{-4mm}
 \label{tab:sensing}
@@ -230,7 +230,7 @@ Current Cost&COTS (Imported)& Once every 6 seconds &Appliance&1&Serial&Apparent 
 \end{table*}
 
 \begin{figure} 
-\vspace{-2mm} 
+\vspace{-4mm} 
 \subfloat[\scriptsize Different granularity of measuring electricity consumption in home: meter, circuit and appliance]{
 	 \label{fig:electricity_distribution}
     \includegraphics[scale=0.14]{./figures/electricity_distribution.jpg}}
@@ -264,7 +264,7 @@ Water meter connected to the utility, over a 0.5 inch diameter pipe, generates a
 
 Complete sensing infrastructure, used in our deployment, is summarized in \tabref{tab:sensing}.
 
-%\vspace{-1.5mm}
+\vspace{-1mm}
 \subsection{Communication and Computation}
 \label{sec:comm_comp}
 %Our sensing infrastructure, described in \secref{sec:sensing}, involves multitude of communication channels. 
@@ -309,7 +309,7 @@ In the course of our deployment we observed several issues pertaining to SBCs. A
 Similar to prior literature, reporting WiFi discontinuity in the homes in the USA~\cite{hitchhiker_residential}, we also observed that one WiFi router did not provide complete coverage for our deployment. We thus used 3 Netgear JNR1010\footnote{\url{www.support.netgear.com/product/JNR1010}} routers, where the router on the first floor acted as the host and the routers on the ground and the second floor were bridged to it. %More details regarding the need of multiple routers and network availability in homes is described in \secref{sec:learning} and \secref{sec:common}.
 
 \begin{figure*}[t!] 
-    \vspace{-12mm}
+    \vspace{-10.5mm}
     %\hspace{-2mm}
     \subfloat[\scriptsize Power outage vs Time]{
     \label{fig:failure_time}
@@ -523,7 +523,7 @@ We provide anecdotal evidence to illustrate utility of \selstups in preventing d
 We now present some of the prominent similarities, albeit with some additional unique perspectives, with prior deployment experiences, most specifically - ``The Hitchhiker's Guide to Successful Residential Sensing Deployments"~\cite{hitchhiker_residential}. 
 
 \noindent \textbf{Homes are hazardous environments:} We observed that one of our multisensors repeatedly failed after every power outage. %Initially, we felt that the sensor was faulty, but other multisensors also showed the same behavior in the same location. 
-We, eventually, figured that this behavior was due to the fact that this multisensor was put on the battery backup plug (commonly available in many homes to guard against intermittent power supply) and would not fail during the power outage. When the main power resumed, ZWave controller was not able to add this multisensor to its network. \redcolor{Add a reason for why this happened.} We resolved this by putting the multisensor on the main plug as well. %We also observed that one of the multisensor would always indicate motion. Initially we solved this problem by replacing its power supply. However, within a week, this problem resurfaced. We believe it is due to the faulty power supply in that room. The home occupants did not allow a thorough investigation of that electrical socket and we had to do away with that data.
+We, eventually, figured that this behavior was due to the fact that this multisensor was put on the battery backup plug (commonly available in many homes to guard against intermittent power supply) and would not fail during the power outage. When the main power resumed, ZWave controller was not able to add this multisensor to its network, as the multisensor had gone to \emph{sleep} in its absence and was assumed to be \emph{dead}. We resolved this by putting the multisensor on the main plug as well. %We also observed that one of the multisensor would always indicate motion. Initially we solved this problem by replacing its power supply. However, within a week, this problem resurfaced. We believe it is due to the faulty power supply in that room. The home occupants did not allow a thorough investigation of that electrical socket and we had to do away with that data.
 Although we used zip-ties extensively throughout the deployment to prevent hanging wires, we observed data loss in one of the ZWave multisensor and an Android phone, which went out of power due to wire snag (shown in \figref{fig:snag}). Even after a month of rigorous testing in the lab before we started the deployment, we raised 60 new service complaints, when we moved the deployment to the home. %This is a testimony that homes present unique challenges which can not be exactly emulated in laboratory settings.
 
 \noindent \textbf{Aesthetics matter:} As stated in the previous work, sensor LEDs can be bothersome to the occupants, particularly in the night. Our deployment introduced 63 LEDs in the home. \figref{fig:led} shows our sensor LEDs blinking in the night. Choosing appropriate sensor location sufficed for the current deployment. However, for the future, we intend to case the sensors appropriately to ensure that home occupants are not disturbed. The residents also complained of buzz like sound coming from our desktop server. This noise was due to the dust clogging in the desktop. Dust is a uniquely common aspect in the Indian setting. 
@@ -562,7 +562,7 @@ Although we used zip-ties extensively throughout the deployment to prevent hangi
 %%\vspace{-6mm}
 %\end{table}
 \begin{figure}[t!]  
-\vspace{-2mm}
+%\vspace{-2mm}
 \subfloat[\scriptsize Ground floor (without additional router)]{
 	 \label{fig:ground_without_router}
     \includegraphics[scale=0.05]{./figures/ground_without_router.png}}
@@ -627,11 +627,11 @@ We manually annotate the power consumed for each of the 63 appliances in their d
 %While the accompanying switch had been to our disadvantage in measuring short duration appliance usage, it ensures that appliance ON-OFF events can be observed using jPlug data. 
 
 \begin{figure} 
-	\vspace{-5mm}    
-    \centering\includegraphics[scale=0.175]{./figures/label.png}
+%	\vspace{-3mm}    
+    \centering\includegraphics[scale=0.142]{./figures/label_annotated.png}
 	\vspace{-2mm}    
     \caption{Utility of labeled and multi-modal dataset} 
-    \vspace{-2mm}  
+    \vspace{-3mm}  
     \label{fig:labeled}
 \end{figure}
 
